@@ -1,0 +1,33 @@
+{% extends 'web/base.html' %}
+
+{% block page_title %}Login{% endblock %}
+
+{% block body_class %}login{% endblock %}
+
+{% block header_menu %}{% endblock %}
+
+{% block page %}
+    <div class="page_section login">
+        <div class="page_section_inner">
+            <h2>{{ template_strings.login.header }}</h2>
+            <h3>{{ template_strings.login.welcome_message }}</h3>
+
+            {% include 'web/shared/errors.html' with errors=login_form.errors %}
+
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_row">
+                    <label>{{ template_strings.login.form_label_username }}</label>
+                    <input type="text" name="username" value="{{ login_form.username }}" />
+                </div>
+                <div class="form_row">
+                    <label>{{ template_strings.login.form_label_password }}</label>
+                    <input type="password" name="password" />
+                </div>
+                <div class="form_actions">
+                    <input type="submit" class="button" value="{{ template_strings.login.form_submit_button }}" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'web/base.html' %}
+
+{% block page_title %}Admin | Home {% endblock %}
+
+{% block body_class %}admin{% endblock %}
+
+{% block header_menu %}
+    {% include 'web/admin/shared/header_menu.html' %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>MetaLayer Admin</h2>
+            <h3>Choose the features to administer on this admin deployment</h3>
+            <div class="inner_section">
+                <h4>Companies</h4>
+                <h5>Companies Currently running on this deployment</h5>
+                <div class="table_height_limiter">
+                    <table>
+                        {% for company in companies %}
+                            <tr>
+                                <td>{{ company.display_name }}</td>
+                                <td class="actions">
+                                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" class="button">View Site</a>
+                                    <a href="/admin/companies/{{ company.id }}" class="button">Edit</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alert">
+                                        <p>There are currently no companies running on this deployment</p>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="actions">
+                    <a href="/admin/companies/new" class="button">Create a new company</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

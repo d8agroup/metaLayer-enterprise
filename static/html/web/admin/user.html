@@ -1,0 +1,34 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}Admin | User{% endblock %}
+
+{% block body_class %}admin{% endblock %}
+
+{% block header_menu %}
+    {% include 'web/admin/shared/header_menu.html' %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>Manager this User</h2>
+            {% include 'web/shared/errors.html' %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_row">
+                    <label>Users Email Address</label>
+                    <input type="text" name="email" value="{{ user.email }}" />
+                </div>
+                <div class="form_row">
+                    <label>Users Password</label>
+                    <input type="text" disabled="disabled" value="Password will be emails to the user" />
+                </div>
+                <div class="form_actions two_up">
+                    <a href="{% if 'next'|is_in:request.GET %}{{ request.GET.next }}{% else %}/admin{% endif %}" class="button">Cancel</a>
+                    <input type="submit" value="Save" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

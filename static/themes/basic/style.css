@@ -1,0 +1,14 @@
+/**********************************************************************************************************************/
+/* IMAGES                                                                                                             */
+/**********************************************************************************************************************/
+.header_logo { background:url('images/logo_metalayer_small_dark.jpg') 20px 8px no-repeat; }
+.body_background_image { background-image:url('images/background_page.png'); }
+
+
+/**********************************************************************************************************************/
+/* COLORS AND BORDERS                                                                                                 */
+/**********************************************************************************************************************/
+.header_background_color { background-color:#333; }
+.header_foreground_color { color:#FFF; }
+.body_background_color { background-color:#FFF; }
+.page_section { background-color:#FFF;}

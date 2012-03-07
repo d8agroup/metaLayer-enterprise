@@ -1,0 +1,87 @@
+/**********************************************************************************************************************/
+/* BASIC ELEMENT STYLING                                                                                              */
+/**********************************************************************************************************************/
+body {  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:80%; }
+a { cursor:pointer; text-decoration:none; color:inherit; font-weight:bold;}
+a:hover { text-decoration:underline; }
+
+
+/**********************************************************************************************************************/
+/* SITE WIDE UTILITY CLASSES                                                                                          */
+/**********************************************************************************************************************/
+.left { float:left; }
+.right { float:right; }
+.center.one_third { padding-left:33%;}
+.one_half { width:49%; }
+.one_third { width:33%; }
+.two_thirds { width:66%; }
+.fill_width { width:100%; }
+
+/**********************************************************************************************************************/
+/* SITE WIDE WIDGETS                                                                                                  */
+/**********************************************************************************************************************/
+.errors { width:95%; margin:10px auto 20px; border:2px solid #F60; background-color:#FFB; padding:10px; }
+.alert { width:95%; margin:10px auto 20px; border:2px solid #05A; background-color:#9FD; padding:10px; }
+.messages { width:900px; margin:10px auto; border:#d6dcd6 3px solid; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; background:#FFF; behavior:url(PIE.htc); box-shadow:0px 0px 8px #c7c7c7; -moz-box-shadow:0px 0px 8px #c7c7c7; -webkit-box-shadow:0px 0px 8px #c7c7c7;}
+.messages li { padding:20px 50px; font-size:110%; }
+.messages li.error { background:url('../../images/shared/caution.png') no-repeat 20px 13px; background-size:25px; }
+.messages li.info { background:url('../../images/shared/tick.png') no-repeat 20px 16px; background-size:22px; }
+
+form { width:90%; margin:10px auto; background-color:#FAFAFA; padding:10px; border:2px solid #DDD; }
+form .form_row, form .form_actions { margin:10px 0; }
+form .form_row label, form .form_row input[type=text], form .form_row input[type=password] { display:inline-block; width:47%;}
+form .form_actions { text-align:center;}
+form .form_actions .button { width:100%;}
+form .form_actions.two_up .button { width:48%; }
+
+/**********************************************************************************************************************/
+/* LAYOUT - HEADER                                                                                                    */
+/**********************************************************************************************************************/
+header { height:35px; width:100%; }
+header .inner { width:1000px; margin:0 auto;}
+header .header_logo { height:35px; }
+header .menu  { text-align:right; padding:10px}
+header .menu li { display:inline-block; margin-right:10px; }
+
+/**********************************************************************************************************************/
+/* LAYOUT - PAGE                                                                                                      */
+/**********************************************************************************************************************/
+#page { }
+#page .inner { width:900px; margin:0 auto; }
+
+/**********************************************************************************************************************/
+/* LAYOUT - PAGE SECTION                                                                                              */
+/**********************************************************************************************************************/
+.page_section { margin:10px 0; box-shadow:0px 0px 8px #c7c7c7; -moz-box-shadow:0px 0px 8px #c7c7c7; -webkit-box-shadow:0px 0px 8px #c7c7c7;}
+.page_section .page_section_inner { padding:20px;  }
+.page_section h2 { font-size:200%; margin:0 0 20px; }
+.page_section h3 { font-size:150%; margin:0 0 10px; }
+.page_section h3 .button.right { position:relative; bottom:7px;}
+.page_section h4 { font-size:120%; margin:0 0 10px; }
+
+
+/**********************************************************************************************************************/
+/* LOGIN PAGE                                                                                                         */
+/**********************************************************************************************************************/
+.login #page .inner { width:400px; margin-top:100px;}
+
+/**********************************************************************************************************************/
+/* COMPANY PAGES                                                                                                      */
+/**********************************************************************************************************************/
+.company h2 { border-bottom:1px solid #DDD;}
+
+/**********************************************************************************************************************/
+/* COMPANY HOME PAGE                                                                                                  */
+/**********************************************************************************************************************/
+.company.home .projects { padding:20px; margin-top:30px;}
+
+
+/**********************************************************************************************************************/
+/* ADMIN PAGEs                                                                                                         */
+/**********************************************************************************************************************/
+.admin .inner_section { padding:20px; }
+.admin .inner_section h4 { font-size:150%; margin:10px 0;}
+.admin .inner_section .table_height_limiter { max-height:200px; overflow:auto; border:1px solid #DDD; margin:10px 0;}
+.admin .inner_section table { width:90%; margin:10px auto;}
+.admin .inner_section table td { border-top:1px solid #DDD; border-bottom:1px solid #DDD; padding:10px 0;}
+.admin .inner_section table td.actions { text-align:right; width:200px;}

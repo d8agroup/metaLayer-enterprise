@@ -1,0 +1,59 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}{{ company.display_name }} | Home {% endblock %}
+
+{% block body_class %}company home{% endblock %}
+
+{% block header_menu %}
+    {% if user|is_company_admin:company %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% else %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>{{ company.display_name }}</h2>
+            <div class="clearfix fill_width">
+                <div class="left two_thirds">
+                    {% if user|is_company_admin:company %}
+                        <h3>
+                            Your Companies Projects
+                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/new" class="button right">
+                                Create a new project
+                            </a>
+                        </h3>
+                    {% else %}
+                        <h3>Your Projects</h3>
+                    {% endif %}
+                    <ul class="projects">
+                        {% for project in projects %}
+                            <li class="project corner">
+                                <h4>{{ project.display_name }}</h4>
+                                <h5>{{ project.description }}</h5>
+                                <div class="activity_graph">
+                                    activity graph to go here
+                                </div>
+                                <div class="actions">
+                                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.id }}">
+                                        view this project
+                                    </a>
+                                </div>
+                            </li>
+                        {% empty %}
+                            <li class="empty">
+                                <h4>Your company has no projects yet</h4>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="right one_third">
+                    Company wide activity list to go here
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
