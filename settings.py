@@ -226,3 +226,9 @@ VISUALIZATIONS_CONFIG = {
         'googleareachart'
     ]
 }
+
+import socket
+if socket.gethostname() in ['mattgriffiths']:
+    from settings_matt import *
+else:
+    from settings_dev import *
