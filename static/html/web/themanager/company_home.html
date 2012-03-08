@@ -31,14 +31,19 @@
                     {% endif %}
                     <ul class="projects">
                         {% for project in projects %}
-                            <li class="project corner">
+                            <li class="project corner project_on_company_home_page">
                                 <h4>{{ project.display_name }}</h4>
                                 <h5>{{ project.description }}</h5>
                                 <div class="activity_graph">
-                                    activity graph to go here
+                                    <img src="{{ STATIC_URL }}/images/themanager/mockup_activity_chart.png" />
                                 </div>
                                 <div class="actions">
-                                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.id }}">
+                                    {% if user|is_company_admin:company %}
+                                        <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/edit/{{ project.project_id }}">
+                                            edit this project
+                                        </a>
+                                    {% endif %}
+                                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.project_id }}">
                                         view this project
                                     </a>
                                 </div>

@@ -29,10 +29,13 @@ a:hover { text-decoration:underline; }
 
 form { width:90%; margin:10px auto; background-color:#FAFAFA; padding:10px; border:2px solid #DDD; }
 form .form_row, form .form_actions { margin:10px 0; }
-form .form_row label, form .form_row input[type=text], form .form_row input[type=password] { display:inline-block; width:47%;}
+form .form_row label, form .form_row input[type=text], form .form_row input[type=password] { display:inline-block; width:47%; padding:5px 0;}
+form .form_row .buttonset { display:inline-block;}
+form .form_row .buttonset label { width:inherit; padding:0;}
 form .form_actions { text-align:center;}
 form .form_actions .button { width:100%;}
 form .form_actions.two_up .button { width:48%; }
+
 
 /**********************************************************************************************************************/
 /* LAYOUT - HEADER                                                                                                    */
@@ -69,12 +72,26 @@ header .menu li { display:inline-block; margin-right:10px; }
 /* COMPANY PAGES                                                                                                      */
 /**********************************************************************************************************************/
 .company h2 { border-bottom:1px solid #DDD;}
+.company form { width:80%;}
 
 /**********************************************************************************************************************/
 /* COMPANY HOME PAGE                                                                                                  */
 /**********************************************************************************************************************/
 .company.home .projects { padding:20px; margin-top:30px;}
+.company.home .projects .project { height:110px; padding:20px;}
+.company.home .projects .project h4 { height:20px;}
+.company.home .projects .project h5 { height:15px;}
+.company.home .projects .project .activity_graph { height:40px; background-color:#555; margin:10px;}
+.company.home .projects .project .actions { text-align:right; }
+.company.home .projects .project .actions a { padding:0 5px;}
 
+/**********************************************************************************************************************/
+/* COMPANY VIEW PROJECT PAGE                                                                                          */
+/**********************************************************************************************************************/
+.company.view_project h5 { border-bottom:1px solid #DDD; padding-bottom:5px;}
+.company.view_project .members { margin:10px; border-bottom:1px solid #DDD; padding-bottom:10px;}
+.company.view_project .members li { display:inline-block; padding:5px;}
+.company.view_project .insights { margin:10px;}
 
 /**********************************************************************************************************************/
 /* ADMIN PAGEs                                                                                                         */

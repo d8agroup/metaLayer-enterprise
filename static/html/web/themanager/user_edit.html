@@ -1,0 +1,52 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}{{ company.display_name }} | Edit User{% endblock %}
+
+{% block body_class %}company edit_user{% endblock %}
+
+{% block header_menu %}
+    {% if user|is_company_admin:company %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% else %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>{{ company.display_name }}</h2>
+            {% if subject_user.id %}
+                <h3>{{ template_strings.manage_user.h3_edit }} {{ subject_user.email }}</h3>
+            {% else %}
+                <h3>{{ template_strings.manage_user.h3_create }}</h3>
+                <h5>{{ template_strings.manage_user.h5_create_email_messages }}</h5>
+            {% endif %}
+            {% include 'web/shared/errors.html' %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_row">
+                    <label>{{ template_strings.manage_user.form_label_username }}</label>
+                    <input type="text" name="email" value="{{ subject_user.email }}" />
+                </div>
+                <div class="form_row">
+                    <label>{{ template_strings.manage_user.form_label_first_name }}</label>
+                    <input type="text" name="first_name" value="{{ subject_user.first_name }}" />
+                </div>
+                <div class="form_row">
+                    <label>{{ template_strings.manage_user.form_label_last_name }}</label>
+                    <input type="text" name="last_name" value="{{ subject_user.last_name }}" />
+                </div>
+                <div class="form_actions two_up">
+                    {% if request.GET.next %}
+                        <a href="{{ request.GET.next }}" class="button">{{ template_strings.manage_user.form_action_cancel }}</a>
+                    {% else %}
+                        <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" class="button">{{ template_strings.manage_user.form_action_cancel }}</a>
+                    {% endif %}
+                    <input type="submit" value="{{ template_strings.manage_user.form_action_save }}" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

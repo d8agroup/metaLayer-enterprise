@@ -28,3 +28,7 @@ def is_in(value, list):
 @register.filter('is_company_admin')
 def is_company_admin(user, company):
     return user_is_company_admin(user, company)
+
+@register.filter('is_true')
+def is_true(value):
+    return value == True or value == 'True'

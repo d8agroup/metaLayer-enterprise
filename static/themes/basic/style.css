@@ -12,3 +12,4 @@
 .header_foreground_color { color:#FFF; }
 .body_background_color { background-color:#FFF; }
 .page_section { background-color:#FFF;}
+.project_on_company_home_page {color:#FFF; background-image: linear-gradient(bottom, rgb(13,16,20) 9%, rgb(39,42,46) 55%, rgb(67,72,74) 80%); background-image: -o-linear-gradient(bottom, rgb(13,16,20) 9%, rgb(39,42,46) 55%, rgb(67,72,74) 80%); background-image: -moz-linear-gradient(bottom, rgb(13,16,20) 9%, rgb(39,42,46) 55%, rgb(67,72,74) 80%); background-image: -webkit-linear-gradient(bottom, rgb(13,16,20) 9%, rgb(39,42,46) 55%, rgb(67,72,74) 80%); background-image: -ms-linear-gradient(bottom, rgb(13,16,20) 9%, rgb(39,42,46) 55%, rgb(67,72,74) 80%); background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.09, rgb(13,16,20)), color-stop(0.55, rgb(39,42,46)), color-stop(0.8, rgb(67,72,74)) );}

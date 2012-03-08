@@ -1,7 +1,7 @@
 import random
 import string
 from django.conf import settings
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import constants
 from emails.controllers import EmailController
@@ -28,7 +28,7 @@ class UserController(object):
         return False, [constants.TEMPLATE_STRINGS['login']['form_errors_user_type_not_supported']], None
 
     @classmethod
-    def CreateNewUserFromValues(cls, values):
+    def CreateNewUserFromValues(cls, values, company=None):
         passed, errors, clean_values = validate_user(values)
         if not passed:
             return False, errors
@@ -44,7 +44,7 @@ class UserController(object):
             user.last_name = clean_values['last_name']
         user.save()
 
-        email_controller = EmailController()
+        email_controller = EmailController(company)
         email_controller.send_new_user_created_email(user, user_password)
         return True, []
 
@@ -55,4 +55,16 @@ class UserController(object):
         except User.DoesNotExist:
             return None
         return user
+
+    @classmethod
+    def GetUserByEmail(cls, email):
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return None
+        return user
+
+    @classmethod
+    def LogoutUser(cls, request):
+        logout(request)
 

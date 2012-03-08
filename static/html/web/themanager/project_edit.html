@@ -1,0 +1,71 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}{{ company.display_name }} | Edit Project | {{ project.display_name }}{% endblock %}
+
+{% block body_class %}company edit_project{% endblock %}
+
+{% block header_menu %}
+    {% if user|is_company_admin:company %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% else %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>{{ company.display_name }}</h2>
+            <h3>{{ template_strings.manage_project.h3_edit }} {{ project.display_name }}</h3>
+            {% include 'web/shared/errors.html' %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_row">
+                    <label>{{ template_strings.manage_project.form_label_project_name }}</label>
+                    <input type="text" name="display_name" value="{{ project.display_name }}" />
+                </div>
+                <div class="form_row">
+                    <label>{{ template_strings.manage_project.form_label_project_description }}</label>
+                    <input type="text" name="description" value="{{ project.description }}" />
+                </div>
+{#                <div class="form_row yes_no">#}
+{#                    <label>Active?</label>#}
+{#                    <div class="radio_container buttonset">#}
+{#                        <input type="radio"#}
+{#                               name="active"#}
+{#                               value="True"#}
+{#                               id="active_yes"#}
+{#                               {% if project.active|is_true %}checked="checked"{% endif %} />#}
+{#                        <label for='active_yes'>yes</label>#}
+{#                        <input type="radio"#}
+{#                               name="active"#}
+{#                               value="False"#}
+{#                               id="active_no"#}
+{#                               {% if not project.active|is_true %}checked="checked"{% endif %} />#}
+{#                        <label for='active_no'>no</label>#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="form_row checkbox_list">
+                    <label>{{ template_strings.manage_project.form_label_project_members }}</label>
+                    {% for u in company_members %}
+                        <div class="checkbox_list_item">
+                            <input type="checkbox"
+                                   name="members"
+                                   value="{{ u.id }}"
+                                   {% if u.id|is_in:project.members %}checked="checked"{% endif %}/>
+                            {{ u.email }}
+                        </div>
+                    {% endfor %}
+                    <div class="add_item">
+                        <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new?next={{ request.get_full_path }}">{{ template_strings.manage_project.button_add_new_user }}</a>
+                    </div>
+                </div>
+                <div class="form_actions two_up">
+                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" class="button">{{ template_strings.manage_project.form_action_cancel }}</a>
+                    <input type="submit" value="{{ template_strings.manage_project.form_action_save }}" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

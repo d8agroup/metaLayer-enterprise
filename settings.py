@@ -172,5 +172,6 @@ LOGGING = {
 }
 
 LOGIN_AND_REDIRECTION_POLICIES = [
-    'superadminpolicy'
+    'superadminpolicy',
+    'companymemberpolicy',
 ]

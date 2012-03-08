@@ -1,0 +1,54 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}{{ company.display_name }} | Home {% endblock %}
+
+{% block body_class %}company view_project{% endblock %}
+
+{% block header_menu %}
+    {% if user|is_company_admin:company %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% else %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>{{ company.display_name }}</h2>
+            <div class="clearfix fill_width">
+                <div class="left two_thirds">
+                    <h3>{{ project.display_name }}</h3>
+                    <h5>{{ project.description }}</h5>
+                    <div class="members">
+                        <h4>{{ template_strings.view_project.members_header }}</h4>
+                        <ul>
+                            {% for m in project_members %}
+                                <li class="member">
+                                    {{ m.username }}
+                                </li>
+                            {% empty %}
+                                <li class="empty">
+                                    {{ template_strings.view_project.members_this_project_has_none }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="insights">
+                        <h4>
+                            {{ template_strings.view_project.insights_header }}
+                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.project_id }}/dashboard"
+                               class="button right">
+                                {{ template_strings.view_project.insights_create_button }}
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="right one_third">
+                    Project activity list to go here
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
