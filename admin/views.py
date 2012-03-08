@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
+from admin.utils import get_all_available_data_points, get_all_available_actions, get_all_available_outputs, get_all_available_visualizations
 from companies.controllers import CompaniesController
 from userprofiles.controllers import UserController
 
@@ -26,7 +27,11 @@ def companies(request, id):
     sorted(users, key=lambda u: u.id in company.administrators)
 
     template_data = {
-        'users': users
+        'users': users,
+        'data_points':[d.get_unconfigured_config() for d in get_all_available_data_points()],
+        'actions':[a.get_unconfigured_config() for a in get_all_available_actions()],
+        'outputs':[o.get_unconfigured_config() for o in get_all_available_outputs()],
+        'visualizations':[v.get_unconfigured_config() for v in get_all_available_visualizations()],
     }
 
     if request.method == 'POST':

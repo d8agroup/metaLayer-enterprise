@@ -54,7 +54,7 @@ def get_pretty_date(time=False):
 ################################################################################
 # DYNAMIC MODULE LOADED FUNCTIONS                                              #
 ################################################################################
-def dynamic_import(name):
+def my_import(name):
     mod = __import__(name)
     components = name.split('.')
     for comp in components[1:]:

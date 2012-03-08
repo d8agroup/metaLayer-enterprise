@@ -1,10 +1,9 @@
 import random
 import string
-from companies.forms import validate_company
+from companies.forms import validate_company, clean_and_validate_project_form
 from companies.models import Company, Project
 from companies.utils import user_is_company_admin
 import constants
-from themanager.forms import clean_and_validate_project_form
 
 class CompaniesController(object):
     @classmethod
@@ -115,4 +114,12 @@ class ProjectsController(object):
 
         company.save()
         return True, []
+
+    @classmethod
+    def AddInsightToProject(cls, company, project_id, insight_id):
+        company = CompaniesController.GetCompanyById(company.id)
+        project = [p for p in company.projects if p.project_id == project_id][0]
+        if insight_id not in project.insights:
+            project.insights.append(insight_id)
+        company.save()
 

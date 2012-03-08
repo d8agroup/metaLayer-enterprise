@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 import constants
 from emails.controllers import EmailController
 from userprofiles.forms import validate_user
-from utils import dynamic_import
+from utils import my_import
 
 class UserController(object):
     @classmethod
@@ -19,7 +19,7 @@ class UserController(object):
         login(request, user)
 
         for policy in settings.LOGIN_AND_REDIRECTION_POLICIES:
-            policy_module = dynamic_import('enterprise.userprofiles.loginandredirectionpolicies.%s' % policy)
+            policy_module = my_import('enterprise.userprofiles.loginandredirectionpolicies.%s' % policy)
             policy_function = getattr(policy_module, 'process_login_and_get_redirect')
             user_redirect = policy_function(request, user)
             if user_redirect:

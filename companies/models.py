@@ -8,6 +8,10 @@ class Company(models.Model):
     administrators = ListField()
     members = ListField()
     projects = ListField(EmbeddedModelField('Project'))
+    data_points_available = ListField()
+    actions_available = ListField()
+    outputs_available = ListField()
+    visualizations_available = ListField()
 
 class Project(models.Model):
     project_id = models.TextField()
@@ -16,3 +20,8 @@ class Project(models.Model):
     description = models.TextField()
     active = models.BooleanField(default=True)
     members = ListField()
+    data_points_available = ListField()
+    actions_available = ListField()
+    outputs_available = ListField()
+    visualizations_available = ListField()
+    insights = ListField()

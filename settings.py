@@ -9,8 +9,6 @@ EMAIL_HOST_USER = 'no-reply@metalayer.com'
 EMAIL_HOST_PASSWORD = '##M3taM3ta'
 EMAIL_PORT = 587
 
-SITE_HOST = 'localhost:8000'
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -31,6 +29,10 @@ DATABASES = {
 SITE_URLS = {
     'company_prefix':'company'
 }
+
+AUTH_PROFILE_MODULE = "userprofiles.UserProfile"
+
+INSIGHT_CATEGORIES = []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -128,10 +130,6 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'enterprise.urls'
 
-TEMPLATE_DIRS = (
-    '/home/matt/code/metaLayer/enterprise/static/html'
-)
-
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -146,32 +144,85 @@ INSTALLED_APPS = (
     'enterprise.userprofiles',
     'enterprise.customtags',
     'enterprise.emails',
+    'enterprise.imaging',
 )
 
-# A sample logging configuration. The only tangible logging
-# performed by this configuration is to send an email to
-# the site admins on every HTTP 500 error.
-# See http://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': False,
+    'disable_existing_loggers': True,
+    'root': {
+        'level': 'WARNING',
+        'handlers': ['sentry'],
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+    },
     'handlers': {
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler'
+        'sentry': {
+            'level': 'WARNING',
+            'class': 'raven.contrib.django.handlers.SentryHandler',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
         }
     },
     'loggers': {
-        'django.request': {
-            'handlers': ['mail_admins'],
-            'level': 'ERROR',
-            'propagate': True,
+        'django.db.backends': {
+            'level': 'WARNING',
+            'handlers': ['console'],
+            'propagate': False,
         },
-    }
+        'raven': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+        'sentry.errors': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False,
+        },
+    },
 }
+
 
 LOGIN_AND_REDIRECTION_POLICIES = [
     'superadminpolicy',
     'companymemberpolicy',
 ]
+
+SOLR_CONFIG = {
+    'default_page_size':100,
+    'solr_url':'http://50.57.164.216:8080/solr',
+    #'solr_url':'http://md.dev.01:8080/solr',
+    'solr_params':'wt=json&facet=on&sort=time+desc&rows=100&facet.mincount=1',
+    'solr_facets':{
+        'source_display_name':{
+            'display_name':'Source',
+            'enabled':True,
+            },
+        'channel_type':{
+            'display_name':'Type',
+            'enabled':True,
+            },
+        'tags':{
+            'display_name':'Tags',
+            'enabled':True,
+            }
+    }
+}
+
+VISUALIZATIONS_CONFIG = {
+    'visualization_display_hierarchy':[
+        'googlegeochart',
+        'd3cloud',
+        'googlelinechart',
+        'googlebarchart',
+        'googlepiechart',
+        'googleareachart'
+    ]
+}

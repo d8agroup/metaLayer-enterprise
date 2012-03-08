@@ -36,6 +36,10 @@ TEMPLATE_STRINGS = {
         'form_label_project_name':'Project Name',
         'form_label_project_description':'Project Description',
         'form_label_project_members':'Project Members',
+        'form_label_project_data_points':'Data Points available to this project',
+        'form_label_project_actions':'Actions available to this project',
+        'form_label_project_outputs':'Outputs available to this project',
+        'form_label_project_visualizations':'Visualizations available to this project',
         'form_action_cancel':'Cancel',
         'form_action_save':'Save',
         'button_add_new_user':'create a new user',
@@ -49,7 +53,9 @@ TEMPLATE_STRINGS = {
         'members_this_project_has_none':'This project has no members',
         'insights_header':'Project Insights',
         'insights_create_button':'Create a new insight',
-    }
+        'insights_edit_button':'View in dashboard mode',
+        'insights_remix_button':'Create new dashboard from this insight',
+   }
 
 }
 
