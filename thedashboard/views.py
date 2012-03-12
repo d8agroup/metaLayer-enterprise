@@ -1,4 +1,5 @@
 from threading import Thread
+from django.contrib import messages
 from django.shortcuts import render_to_response, redirect
 from django.views.decorators.cache import never_cache
 from django.http import HttpResponse
@@ -31,6 +32,10 @@ def async(gen):
 def dashboard_load(request, id):
     Logger.Info('%s - dashboard - started' % __name__)
     Logger.Debug('%s - dashboard - started with id:%s' % (__name__, id))
+    if not request.user or not request.user.is_authenticated():
+        Logger.Warn('%s - dashboard_load - dashboard load called with AnonymousUser' % __name__)
+        messages.error(request, 'Sorry, you must be logged in to access this insight.')
+        return redirect('/')
     dc = DashboardsController(request.user)
     db = dc.get_dashboard_by_id(id)
     Logger.Info('%s - dashboard - finished' % __name__)
@@ -90,8 +95,6 @@ def dashboard(request, id):
 def dashboard_get_all_widgets(request):
     Logger.Info('%s - dashboard_get_all_data_points - started' % __name__)
     #TODO: Need to get the options from the request.user and pass them to the controller
-    if 'company_id' in request.GET and 'project_id' in request.GET:
-        return redirect('/%s/%s/projects/%s/get_widgets' % (settings.SITE_URLS['company_prefix'], request.GET['company_id'], request.GET['project_id']))
     data_points = DataPointController.GetAllForTemplateOptions(None)
     actions = ActionController.GetAllForTemplateOptions(None)
     outputs = OutputController.GetAllForTemplateOptions(None)
