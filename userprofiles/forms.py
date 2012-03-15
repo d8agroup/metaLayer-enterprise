@@ -10,14 +10,18 @@ def validate_user(values):
         'first_name':escape(values['first_name']) if 'first_name' in values else None,
         'last_name':escape(values['last_name']) if 'last_name' in values else None,
         'is_staff':values['is_staff'] if 'is_staff' in values else False,
+        'password':escape(values['password']) if 'password' in values else None,
     }
     errors = []
     if not email_re.search(return_values['email']):
         errors.append(constants.TEMPLATE_STRINGS['manage_user']['form_error_email_regex'])
+    if not re.search(r'^\w+$', return_values['password']) or len(return_values['password']) < 6:
+        errors.append(constants.TEMPLATE_STRINGS['manage_user']['form_error_password'])
     if return_values['first_name'] and not re.search(r'^\w+$', return_values['first_name']):
         errors.append(constants.TEMPLATE_STRINGS['manage_user']['form_error_first_name'])
     if return_values['last_name'] and not re.search(r'^\w+$', return_values['last_name']):
         errors.append(constants.TEMPLATE_STRINGS['manage_user']['form_error_last_name'])
+
 
     if errors:
         return False, errors, None

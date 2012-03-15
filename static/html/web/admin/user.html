@@ -25,7 +25,7 @@
                 </div>
                 <div class="form_row">
                     <label>Users Password</label>
-                    <input type="text" disabled="disabled" value="Password will be emails to the user" />
+                    <input type="text" name='password' value="" />
                 </div>
                 <div class="form_actions two_up">
                     <a href="{% if 'next'|is_in:request.GET %}{{ request.GET.next }}{% else %}/admin{% endif %}" class="button">Cancel</a>

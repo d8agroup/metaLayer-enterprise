@@ -36,7 +36,7 @@ class UserController(object):
         if User.objects.filter(username=clean_values['username']).count():
             return False, [constants.TEMPLATE_STRINGS['manage_user']['form_error_user_exists']]
 
-        user_password = "".join([random.choice(string.letters) for i in xrange(6)])
+        user_password = clean_values['password'] #"".join([random.choice(string.letters) for i in xrange(6)])
         user = User.objects.create_user(clean_values['username'], clean_values['username'], user_password)
         if clean_values['first_name']:
             user.first_name = clean_values['first_name']
@@ -44,8 +44,8 @@ class UserController(object):
             user.last_name = clean_values['last_name']
         user.save()
 
-        email_controller = EmailController(company)
-        email_controller.send_new_user_created_email(user, user_password)
+        #email_controller = EmailController(company)
+        #email_controller.send_new_user_created_email(user, user_password)
         return True, []
 
     @classmethod

@@ -27,6 +27,10 @@
                     <input type="text" name="email" value="{{ subject_user.email }}" />
                 </div>
                 <div class="form_row">
+                    <label>{{ template_strings.manage_user.form_label_username }}</label>
+                    <input type="text" name='password' value="" />
+                </div>
+                <div class="form_row">
                     <label>{{ template_strings.manage_user.form_label_first_name }}</label>
                     <input type="text" name="first_name" value="{{ subject_user.first_name }}" />
                 </div>
