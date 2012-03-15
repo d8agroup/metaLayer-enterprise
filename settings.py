@@ -1,6 +1,6 @@
 # Django settings for enterprise project.
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 EMAIL_USE_TLS = True
