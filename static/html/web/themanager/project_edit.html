@@ -1,33 +1,32 @@
-{% extends 'web/base.html' %}
+{% extends 'web/themanager/base.html' %}
 {% load custom_tags %}
 
 {% block page_title %}{{ company.display_name }} | Edit Project | {{ project.display_name }}{% endblock %}
 
 {% block body_class %}company edit_project{% endblock %}
 
-{% block header_menu %}
-    {% if user|is_company_admin:company %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% else %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% endif %}
+{% block bread_crumbs %}
+    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" title="Go to your companies home page" class="tool_tip">home</a> &rarr;
+    <a href="{{ request.full_path }}" title="Go to the edit project page" class="tool_tip">edit project</a>
 {% endblock %}
 
-{% block page %}
+{% block manager_page %}
     <div class="page_section">
         <div class="page_section_inner">
-            <h2>{{ company.display_name }}</h2>
             <h3>{{ template_strings.manage_project.h3_edit }} {{ project.display_name }}</h3>
             {% include 'web/shared/errors.html' %}
             <form method="POST">
                 {% csrf_token %}
-                <div class="form_row">
-                    <label>{{ template_strings.manage_project.form_label_project_name }}</label>
-                    <input type="text" name="display_name" value="{{ project.display_name }}" />
-                </div>
-                <div class="form_row">
-                    <label>{{ template_strings.manage_project.form_label_project_description }}</label>
-                    <input type="text" name="description" value="{{ project.description }}" />
+                <div class="form_section project_details">
+                    <h5>{{ template_strings.manage_project.form_section_basic }}</h5>
+                    <div class="form_row">
+                        <label>{{ template_strings.manage_project.form_label_project_name }}</label>
+                        <input type="text" name="display_name" value="{{ project.display_name }}" />
+                    </div>
+                    <div class="form_row">
+                        <label>{{ template_strings.manage_project.form_label_project_description }}</label>
+                        <input type="text" name="description" value="{{ project.description }}" />
+                    </div>
                 </div>
 {#                <div class="form_row yes_no">#}
 {#                    <label>Active?</label>#}
@@ -46,68 +45,81 @@
 {#                        <label for='active_no'>no</label>#}
 {#                    </div>#}
 {#                </div>#}
-                <div class="form_row checkbox_list">
-                    <label>{{ template_strings.manage_project.form_label_project_members }}</label>
-                    {% for u in company_members %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="members"
-                                   value="{{ u.id }}"
-                                   {% if u.id|is_in:project.members %}checked="checked"{% endif %}/>
-                            {{ u.email }}
-                        </div>
-                    {% endfor %}
-                    <div class="add_item">
-                        <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new?next={{ request.get_full_path }}">{{ template_strings.manage_project.button_add_new_user }}</a>
+                <div class="form_section users">
+                    <h5>{{ template_strings.manage_project.form_section_members }}</h5>
+                    <div class="form_row checkbox_list">
+                        <label>
+                            {{ template_strings.manage_project.form_label_project_members }}
+                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new?next={{ request.get_full_path }}"
+                               class="img_button_small add tool_tip right"
+                               title='{{ template_strings.manage_project.button_add_new_user }}'>
+                                <span>
+                                    {{ template_strings.manage_project.button_add_new_user }}
+                                </span>
+                            </a>
+                        </label>
+                        {% for u in company_members %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="members"
+                                       value="{{ u.id }}"
+                                       {% if u.id|is_in:project.members %}checked="checked"{% endif %}/>
+                                {{ u.email }}
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-                <div class="form_row checkbox_list">
-                    <label>{{ template_strings.manage_project.form_label_project_data_points }}</label>
-                    {% for d in data_points %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="data_points_available"
-                                   value="{{ d.type }}"
-                                   {% if d.type|is_in:project.data_points_available %}checked="checked"{% endif %}/>
-                            {{ d.full_display_name }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>{{ template_strings.manage_project.form_label_project_actions }}</label>
-                    {% for a in actions %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="actions_available"
-                                   value="{{ a.name }}"
-                                   {% if a.name|is_in:project.actions_available %}checked="checked"{% endif %}/>
-                            {{ a.display_name_short }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>{{ template_strings.manage_project.form_label_project_outputs }}</label>
-                    {% for o in outputs %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="outputs_available"
-                                   value="{{ o.name }}"
-                                   {% if o.name|is_in:project.outputs_available %}checked="checked"{% endif %}/>
-                            {{ o.display_name_short }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>{{ template_strings.manage_project.form_label_project_visualizations }}</label>
-                    {% for v in visualizations %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="visualizations_available"
-                                   value="{{ v.name }}"
-                                   {% if v.name|is_in:project.visualizations_available %}checked="checked"{% endif %}/>
-                            {{ v.display_name_short }}
-                        </div>
-                    {% endfor %}
+                <div class="form_section configuration">
+                    <h5>{{ template_strings.manage_project.form_section_config }}</h5>
+                    <p class="help">{{ template_strings.manage_project.form_section_config_help }}</p>
+                    <div class="form_row checkbox_list">
+                        <label>{{ template_strings.manage_project.form_label_project_data_points }}</label>
+                        {% for d in data_points %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="data_points_available"
+                                       value="{{ d.type }}"
+                                       {% if d.type|is_in:project.data_points_available %}checked="checked"{% endif %}/>
+                                {{ d.full_display_name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>{{ template_strings.manage_project.form_label_project_actions }}</label>
+                        {% for a in actions %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="actions_available"
+                                       value="{{ a.name }}"
+                                       {% if a.name|is_in:project.actions_available %}checked="checked"{% endif %}/>
+                                {{ a.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>{{ template_strings.manage_project.form_label_project_outputs }}</label>
+                        {% for o in outputs %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="outputs_available"
+                                       value="{{ o.name }}"
+                                       {% if o.name|is_in:project.outputs_available %}checked="checked"{% endif %}/>
+                                {{ o.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>{{ template_strings.manage_project.form_label_project_visualizations }}</label>
+                        {% for v in visualizations %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="visualizations_available"
+                                       value="{{ v.name }}"
+                                       {% if v.name|is_in:project.visualizations_available %}checked="checked"{% endif %}/>
+                                {{ v.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="form_actions two_up">
                     <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" class="button">{{ template_strings.manage_project.form_action_cancel }}</a>

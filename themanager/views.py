@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect
-from companies.controllers import  ProjectsController, CompaniesController
+from companies.controllers import  ProjectsController, CompaniesController, ActivityRecordsController
 import constants
 from metalayercore.actions.controllers import ActionController
 from metalayercore.dashboards.controllers import DashboardsController
@@ -25,6 +25,8 @@ def landing_page(request):
                 request.POST['password'],
             )
             if passed:
+                user = UserController.GetUserByEmail(request.POST['username'])
+                ActivityRecordsController.RecordLogin(user, CompaniesController.IdentifyCompanyForUser(user))
                 return redirect
         template_data['login_form'] = {
             'errors':errors,
@@ -39,7 +41,8 @@ def logout(request):
 @ensure_company_membership
 def company_root(request):
     template_data = {
-        'projects':ProjectsController.GetCompanyProjectsForUser(request.company, request.user)
+        'projects':ProjectsController.GetCompanyProjectsForUser(request.company, request.user),
+        'company_activity':ActivityRecordsController.GetAndFormatCompanyWideActivity(request.user, request.company)
     }
     return render_to_device(
         request,
@@ -49,6 +52,7 @@ def company_root(request):
 
 @ensure_company_membership
 def new_project(request):
+    ActivityRecordsController.RecordProjectCreated(request.user, request.company)
     project = ProjectsController.CreateNewProjectInCompany(request.company)
     return redirect('/%s/%s/projects/edit/%s' % (settings.SITE_URLS['company_prefix'], request.company.id, project.project_id))
 
@@ -69,6 +73,7 @@ def edit_project(request, id):
     if request.method == 'POST':
         passed, errors = ProjectsController.UpdateProjectFromFormValues(id, request.company, request.POST)
         if passed:
+            ActivityRecordsController.RecordProjectSaved(request.user, request.company, project)
             messages.info(request, constants.TEMPLATE_STRINGS['manage_project']['message_project_saved'] % request.POST['display_name'])
             return redirect('/%s/%s' % (settings.SITE_URLS['company_prefix'], request.company.id))
         template_data['errors'] = errors
@@ -84,14 +89,15 @@ def edit_project(request, id):
 @ensure_company_membership
 def view_project(request, project_id):
     template_data = {
-        'project':ProjectsController.GetProjectById(request.company, request.user, project_id)
+        'project':ProjectsController.GetProjectById(request.company, request.user, project_id),
+        'project_activity':ActivityRecordsController.GetAndFormatProjectWideActivity(request.user, request.company, project_id)
     }
 
     if not template_data['project']:
         raise Http404
 
-    template_data['project_members'] = [UserController.GetUserByUserId(u) for u in template_data['project'].members]
-    template_data['project_insights'] = [i for i in [DashboardsController.GetDashboardById(d) for d in template_data['project'].insights] if i['active'] == True and i['deleted'] == False]
+    template_data['project_members'] = [UserController.GetUserByUserId(u) for u in request.company.administrators] + [UserController.GetUserByUserId(u) for u in template_data['project'].members]
+    template_data['project_insights'] = sorted([i for i in [DashboardsController.GetDashboardById(d) for d in template_data['project'].insights] if i['active'] == True and i['deleted'] == False], key=lambda db: db.last_saved, reverse=True)
 
     return render_to_device(
         request,
@@ -108,6 +114,7 @@ def create_project_insight(request, project_id):
 
     dc = DashboardsController(request.user)
     db = dc.create_new_dashboard_from_template(1)
+    ActivityRecordsController.RecordInsightCreated(request.user, request.company, project)
     ProjectsController.AddInsightToProject(request.company, project.project_id, db.id)
     return redirect('/dashboard/%s?next=/%s/%s/projects/%s&company_id=%s&project_id=%s' % (db.id, settings.SITE_URLS['company_prefix'], request.company.id, project_id, request.company.id, project_id))
 
@@ -120,17 +127,18 @@ def load_project_insight(request, project_id, insight_id):
 
     db = DashboardsController.GetDashboardById(insight_id)
     if db.username == request.user.username:
+        ActivityRecordsController.RecordInsightEdited(request.user, request.company, project, db)
         return redirect('/dashboard/%s?next=/%s/%s/projects/%s&company_id=%s&project_id=%s' % (db.id, settings.SITE_URLS['company_prefix'], request.company.id, project_id, request.company.id, project_id))
 
+    ActivityRecordsController.RecordInsightRemixed(request.user, request.company, project, db)
     dc = DashboardsController(request.user)
     db = dc.create_new_dashboard_from_dashboard(insight_id)
     ProjectsController.AddInsightToProject(request.company, project.project_id, db.id)
     return redirect('/dashboard/%s?next=/%s/%s/projects/%s&company_id=%s&project_id=%s' % (db.id, settings.SITE_URLS['company_prefix'], request.company.id, project_id, request.company.id, project_id))
 
-
 @ensure_company_membership
-def load_project_widgets(request, project_id):
-    project = ProjectsController.GetProjectById(request.company, request.user, project_id)
+def load_project_widgets(request):
+    project = ProjectsController.GetProjectById(request.company, request.user, request.GET['project_id'])
 
     if not project:
         raise Http404
@@ -150,7 +158,12 @@ def edit_user(request, id=None):
         if passed:
             user = UserController.GetUserByEmail(request.POST['email'])
             CompaniesController.AddUserToCompany(request.company, user)
-            message_key = 'message_user_saved' if id else 'message_user_created'
+            if id:
+                message_key = 'message_user_saved'
+                ActivityRecordsController.RecordUserSaved(request.user, request.company, secondary_user=user)
+            else:
+                message_key = 'message_user_created'
+                ActivityRecordsController.RecordUserCreated(request.user, request.company, secondary_user=user)
             messages.info(request, constants.TEMPLATE_STRINGS['manage_user'][message_key] % request.POST['email'])
             if request.GET.get('next'):
                 return redirect(request.GET['next'])

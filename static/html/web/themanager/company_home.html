@@ -1,29 +1,28 @@
-{% extends 'web/base.html' %}
+{% extends 'web/themanager/base.html' %}
 {% load custom_tags %}
 
 {% block page_title %}{{ company.display_name }} | Home {% endblock %}
 
 {% block body_class %}company home{% endblock %}
 
-{% block header_menu %}
-    {% if user|is_company_admin:company %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% else %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% endif %}
+{% block bread_crumbs %}
+    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" title="Go to your companies home page" class="tool_tip">home</a>
 {% endblock %}
 
-{% block page %}
+{% block manager_page %}
     <div class="page_section">
         <div class="page_section_inner">
-            <h2>{{ company.display_name }}</h2>
             <div class="clearfix fill_width">
                 <div class="left two_thirds">
                     {% if user|is_company_admin:company %}
                         <h3>
-                            Your Companies Projects
-                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/new" class="button right">
-                                Create a new project
+                            {{ template_strings.company_home.title_projects }}
+                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/new"
+                               class="img_button right tool_tip add"
+                               title='{{ template_strings.company_home.button_title_create_new_project }}'>
+                                <span>
+                                    Create a new project
+                                </span>
                             </a>
                         </h3>
                     {% else %}
@@ -32,11 +31,11 @@
                     <ul class="projects">
                         {% for project in projects %}
                             <li class="project corner project_on_company_home_page">
-                                <h4>{{ project.display_name }}</h4>
-                                <h5>{{ project.description }}</h5>
-                                <div class="activity_graph">
-                                    <img src="{{ STATIC_URL }}/images/themanager/mockup_activity_chart.png" />
-                                </div>
+                                <h4>{{ project.display_name }} <span class="right">{{ project.created }}</span></h4>
+                                <p>{{ project.description }}</p>
+{#                                <div class="activity_graph">#}
+{#                                    <img src="{{ STATIC_URL }}/images/themanager/mockup_activity_chart.png" />#}
+{#                                </div>#}
                                 <div class="actions">
                                     {% if user|is_company_admin:company %}
                                         <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/edit/{{ project.project_id }}">
@@ -55,8 +54,15 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="right one_third">
-                    Company wide activity list to go here
+                <div class="right one_third activity_container">
+                    <div class="activity_container_inner">
+                        <h3>Company Activity</h3>
+                        <ul>
+                            {% for activity_record in company_activity %}
+                                <li class="{{ activity_record.css_class }}">{{ activity_record.date }} {{ activity_record.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

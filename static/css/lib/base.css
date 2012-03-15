@@ -1,7 +1,7 @@
 /**********************************************************************************************************************/
 /* BASIC ELEMENT STYLING                                                                                              */
 /**********************************************************************************************************************/
-body {  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:80%; }
+body {  font-family:"Helvetica Neue",Helvetica,Arial,sans-serif; font-size:80%; padding:45px 0;}
 a { cursor:pointer; text-decoration:none; color:inherit; font-weight:bold;}
 a:hover { text-decoration:underline; }
 
@@ -21,36 +21,43 @@ a:hover { text-decoration:underline; }
 /* SITE WIDE WIDGETS                                                                                                  */
 /**********************************************************************************************************************/
 .errors { width:95%; margin:10px auto 20px; border:2px solid #F60; background-color:#FFB; padding:10px; }
-.alert { width:95%; margin:10px auto 20px; border:2px solid #05A; background-color:#9FD; padding:10px; }
+.alert { width:95%; margin:10px auto 20px; border:2px solid #05A; padding:10px; }
 .messages { width:900px; margin:10px auto; border:#d6dcd6 3px solid; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; background:#FFF; behavior:url(PIE.htc); box-shadow:0px 0px 8px #c7c7c7; -moz-box-shadow:0px 0px 8px #c7c7c7; -webkit-box-shadow:0px 0px 8px #c7c7c7;}
 .messages li { padding:20px 50px; font-size:110%; }
 .messages li.error { background:url('../../images/shared/caution.png') no-repeat 20px 13px; background-size:25px; }
 .messages li.info { background:url('../../images/shared/tick.png') no-repeat 20px 16px; background-size:22px; }
 
-form { width:90%; margin:10px auto; background-color:#FAFAFA; padding:10px; border:2px solid #DDD; }
-form .form_row { padding:10px 0; border-bottom:1px dashed #DDD; }
+form { width:90%; margin:10px auto; padding:10px; }
+form .form_row { padding:10px 0; }
 form .form_row, form .form_actions { margin:10px 0; }
-form .form_row label { font-weight:bold;}
+form .form_row label { font-weight:bold; font-size:120%;}
 form .form_row label, form .form_row input[type=text], form .form_row input[type=password] { display:inline-block; width:47%; padding:5px 0;}
 form .form_row .buttonset { display:inline-block;}
 form .form_row .buttonset label { width:inherit; padding:0;}
 form .form_row.checkbox_list { padding:5px 0;}
-form .form_row.checkbox_list label { display:block;}
+form .form_row.checkbox_list label { display:block; width:100%; border-bottom:1px dashed #AAA; padding-bottom:5px;}
 form .form_row.checkbox_list .checkbox_list_item { padding:5px; width:30%; display:inline-block;}
 form .form_row.checkbox_list .checkbox_list_item input { position:relative; top:4px;}
 form .form_actions { text-align:center;}
 form .form_actions .button { width:100%;}
 form .form_actions.two_up .button { width:48%; }
-
+form .form_section { border: 1px solid #AAA; padding:10px; margin-bottom:40px;}
+form .form_section h5 { font-size:130%; position:relative; top:-20px; background-color:#FFF; display:inline-block; padding:0 10px 0 25px;}
+form .form_section .help { font-style:italic; }
 
 /**********************************************************************************************************************/
 /* LAYOUT - HEADER                                                                                                    */
 /**********************************************************************************************************************/
-header { height:35px; width:100%; }
+header { height:35px; width:100%; position:fixed; top:0; z-index:3000;}
 header .inner { width:1000px; margin:0 auto;}
 header .header_logo { height:35px; }
 header .menu  { text-align:right; padding:10px}
 header .menu li { display:inline-block; margin-right:10px; }
+
+/**********************************************************************************************************************/
+/* LAYOUT - FOOTER                                                                                                    */
+/**********************************************************************************************************************/
+footer { height:35px; width:100%; position:fixed; bottom:0; z-index:3000;}
 
 /**********************************************************************************************************************/
 /* LAYOUT - PAGE                                                                                                      */
@@ -61,10 +68,10 @@ header .menu li { display:inline-block; margin-right:10px; }
 /**********************************************************************************************************************/
 /* LAYOUT - PAGE SECTION                                                                                              */
 /**********************************************************************************************************************/
-.page_section { margin:10px 0; box-shadow:0px 0px 8px #c7c7c7; -moz-box-shadow:0px 0px 8px #c7c7c7; -webkit-box-shadow:0px 0px 8px #c7c7c7;}
-.page_section .page_section_inner { padding:20px;  }
-.page_section h2 { font-size:200%; margin:0 0 20px; }
-.page_section h3 { font-size:150%; margin:0 0 10px; }
+.page_section { margin:10px 0 20px; }
+.page_section .page_section_inner { padding:20px; }
+.page_section h2 { font-size:200%; margin:0 0 20px; line-height:32px; }
+.page_section h3 { font-size:150%; margin:0 0 10px; line-height:32px; }
 .page_section h3 .button.right { position:relative; bottom:7px;}
 .page_section h4 { font-size:120%; margin:0 0 10px; }
 
@@ -77,31 +84,28 @@ header .menu li { display:inline-block; margin-right:10px; }
 /**********************************************************************************************************************/
 /* COMPANY PAGES                                                                                                      */
 /**********************************************************************************************************************/
-.company h2 { border-bottom:1px solid #DDD;}
 .company form { width:80%;}
 
 /**********************************************************************************************************************/
 /* COMPANY HOME PAGE                                                                                                  */
 /**********************************************************************************************************************/
 .company.home .projects { padding:20px; margin-top:30px;}
-.company.home .projects .project { height:110px; padding:20px;}
-.company.home .projects .project h4 { height:20px;}
-.company.home .projects .project h5 { height:15px;}
-.company.home .projects .project .activity_graph { height:40px; background-color:#555; margin:10px;}
-.company.home .projects .project .actions { text-align:right; }
-.company.home .projects .project .actions a { padding:0 5px;}
+.company.home .projects .project { padding:20px; margin-bottom:20px;}
+.company.home .projects .project .actions { text-align:right; padding-top:20px;}
+.company.home .projects .project .actions a { padding: 5px;}
 
 /**********************************************************************************************************************/
 /* COMPANY VIEW PROJECT PAGE                                                                                          */
 /**********************************************************************************************************************/
-.company.view_project h5 { border-bottom:1px solid #DDD; padding-bottom:5px;}
+.company.view_project h5 { border-bottom:1px solid #DDD; padding-bottom:10px; font-weight:normal;}
 .company.view_project .members { margin:10px; border-bottom:1px solid #DDD; padding-bottom:10px;}
 .company.view_project .members li { display:inline-block; padding:5px;}
 .company.view_project .insights { margin:10px;}
-.company.view_project .insights .insight { margin:10px 0; padding:10px; border-bottom:1px dashed #DDD; }
+.company.view_project .insights h4 { line-height:32px;}
+.company.view_project .insights .insight { width:90%; margin:10px auto; padding:10px; }
 .company.view_project .insights .insight .insight_image_container { float:left; }
-.company.view_project .insights .insight p { padding:5px; font-size:120%; }
-.company.view_project .insights .insight .actions { padding:10px;}
+.company.view_project .insights .insight p { padding:5px; }
+.company.view_project .insights .insight .actions { padding:10px; text-align:right;}
 
 
 /**********************************************************************************************************************/
@@ -109,7 +113,7 @@ header .menu li { display:inline-block; margin-right:10px; }
 /**********************************************************************************************************************/
 .admin .inner_section { padding:20px; }
 .admin .inner_section h4 { font-size:150%; margin:10px 0;}
-.admin .inner_section .table_height_limiter { max-height:200px; overflow:auto; border:1px solid #DDD; margin:10px 0;}
-.admin .inner_section table { width:90%; margin:10px auto;}
-.admin .inner_section table td { border-top:1px solid #DDD; border-bottom:1px solid #DDD; padding:10px 0;}
+.admin .inner_section .table_height_limiter { max-height:200px; overflow:auto; margin:10px 0;}
+.admin .inner_section table { width:90%; margin:10px auto; font-size:150%;}
+.admin .inner_section table td { border-top:1px solid #DDD; border-bottom:1px solid #DDD; padding:10px 0; vertical-align:middle; }
 .admin .inner_section table td.actions { text-align:right; width:200px;}

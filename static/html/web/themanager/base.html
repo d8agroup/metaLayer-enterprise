@@ -1,0 +1,24 @@
+{% extends 'web/base.html' %}
+{% load custom_tags %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}themes/companies/{{ theme }}/style.css"/>
+{% endblock %}
+
+{% block header_menu %}
+    {% if user|is_company_admin:company %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% else %}
+        {% include 'web/themanager/shared/header_menu_admin.html' %}
+    {% endif %}
+{% endblock %}
+
+{% block page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h2>{{ company.display_name }}</h2>
+            <p>You are here: {% block bread_crumbs %}{% endblock %}</p>
+        </div>
+    </div>
+    {% block manager_page %}{% endblock %}
+{% endblock %}

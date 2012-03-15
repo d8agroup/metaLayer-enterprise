@@ -1,0 +1,31 @@
+{% extends 'web/admin/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}Admin | Delete Company{% endblock %}
+
+{% block body_class %}admin delete_company{% endblock %}
+
+{% block bread_crumbs %}
+    <a href="/admin/" title="Go to the admin home page" class="tool_tip">home</a> &rarr;
+    <a href="/admin/" title="Go to the companies page" class="tool_tip">companies</a> &rarr;
+    <a href="{{ request.full_path }}" title="Go to the delete company page" class="tool_tip">delete company{{ company.diaplay_name }}</a>
+{% endblock %}
+
+{% block admin_page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h3>Delete company: {{ company.display_name }}</h3>
+            {% include 'web/shared/errors.html' %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form_row">
+                    <label>Are you sure you want to delete this company?</label>
+                </div>
+                <div class="form_actions two_up">
+                    <a href="/admin/" class="button">No</a>
+                    <input type="submit" value="Yes, delete this company" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

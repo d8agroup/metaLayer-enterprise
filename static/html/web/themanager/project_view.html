@@ -1,22 +1,18 @@
-{% extends 'web/base.html' %}
+{% extends 'web/themanager/base.html' %}
 {% load custom_tags %}
 
 {% block page_title %}{{ company.display_name }} | Home {% endblock %}
 
 {% block body_class %}company view_project{% endblock %}
 
-{% block header_menu %}
-    {% if user|is_company_admin:company %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% else %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% endif %}
+{% block bread_crumbs %}
+    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" title="Go to your companies home page" class="tool_tip">home</a> &rarr;
+    <a href="{{ request.full_path }}" title="Go to this projects home page" class="tool_tip">view project</a>
 {% endblock %}
 
-{% block page %}
+{% block manager_page %}
     <div class="page_section">
         <div class="page_section_inner">
-            <h2>{{ company.display_name }}</h2>
             <div class="clearfix fill_width">
                 <div class="left two_thirds">
                     <h3>{{ project.display_name }}</h3>
@@ -39,13 +35,16 @@
                         <h4>
                             {{ template_strings.view_project.insights_header }}
                             <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.project_id }}/dashboard"
-                               class="button right">
-                                {{ template_strings.view_project.insights_create_button }}
+                               class="img_button right add tool_tip"
+                               title='Click here to create a new insight'>
+                                <span>
+                                    {{ template_strings.view_project.insights_create_button }}
+                                </span>
                             </a>
                         </h4>
                         <ul class="clearfix fill_width">
                             {% for insight in project_insights %}
-                                <li class="insight clearfix fill_width">
+                                <li class="insight clearfix corner">
                                     <div class="insight_image_container">
                                         {% include 'web/themanager/shared/insight_image_crop.html' with width=200 height=120 insight=insight  %}
                                     </div>
@@ -67,8 +66,15 @@
                         </ul>
                     </div>
                 </div>
-                <div class="right one_third">
-                    Project activity list to go here
+                <div class="right one_third activity_container">
+                    <div class="activity_container_inner">
+                        <h3>{{ template_strings.view_project.heading_project_activity }}</h3>
+                        <ul>
+                            {% for activity_record in project_activity %}
+                                <li class="{{ activity_record.css_class }}">{{ activity_record.date }} {{ activity_record.message }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

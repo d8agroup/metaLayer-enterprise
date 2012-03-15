@@ -1,7 +1,7 @@
 import random
 import string
 from companies.forms import validate_company, clean_and_validate_project_form
-from companies.models import Company, Project
+from companies.models import Company, Project, ActivityRecord, ActivityDetails
 from companies.utils import user_is_company_admin
 import constants
 
@@ -18,7 +18,7 @@ class CompaniesController(object):
     def GetCompanyById(cls, id):
         try:
             company = Company.objects.get(id=id)
-        except:
+        except Company.DoesNotExist:
             return None
         return company
 
@@ -31,8 +31,10 @@ class CompaniesController(object):
         return company
 
     @classmethod
-    def GetAllCompanies(cls):
-        return Company.objects.all()
+    def GetAllCompanies(cls, include_deleted=False):
+        if include_deleted:
+            return Company.objects.all()
+        return Company.objects.filter(deleted=False)
 
     @classmethod
     def UpdateCompanyFromFormValues(cls, id, values):
@@ -62,11 +64,17 @@ class CompaniesController(object):
 
     @classmethod
     def IdentifyCompanyForUser(cls, user):
-        candidate_companies = [c for c in Company.objects.all() if user.id in c.members]
+        candidate_companies = [c for c in Company.objects.all() if user.id in c.members or user.id in c.administrators]
         if candidate_companies:
             return candidate_companies[0]
         return None
 
+    @classmethod
+    def DeleteCompanyById(cls, id):
+        company = cls.GetCompanyById(id)
+        if company:
+            company.deleted = True
+            company.save()
 
 class ProjectsController(object):
     @classmethod
@@ -76,6 +84,7 @@ class ProjectsController(object):
             projects = [p for p in projects if p.active == True]
         if not user_is_company_admin(user, company):
             projects = [p for p in projects if user.id in p.members]
+        projects = sorted(projects, key=lambda p: p.created, reverse=True)
         return projects
 
     @classmethod
@@ -122,4 +131,131 @@ class ProjectsController(object):
         if insight_id not in project.insights:
             project.insights.append(insight_id)
         company.save()
+
+class ActivityRecordsController(object):
+    @classmethod
+    def _Record_Activity(cls, activity_message_key, activity_type, company, project, user, insight=None, secondary_user=None):
+        record = ActivityRecord(user_id=user.id)
+        if company and project:
+            record.company_id = company.id
+            record.project_id = project.project_id
+            record.activity_level = 1 if user.id in company.administrators else 2
+            record.activity_details = ActivityDetails(
+                username=user.username,
+                company_display_name=company.display_name,
+                project_display_name=project.display_name,
+                activity_type=activity_type,
+                activity_message_key=activity_message_key,
+            )
+        elif company:
+            record.company_id = company.id
+            record.activity_level = 1 if user.id in company.administrators else 2
+            record.activity_details = ActivityDetails(
+                username=user.username,
+                company_display_name=company.display_name,
+                activity_type=activity_type,
+                activity_message_key=activity_message_key,
+            )
+        else:
+            record.activity_level = 0
+            record.activity_details = ActivityDetails(
+                username=user.username,
+                activity_type=activity_type,
+                activity_message_key=activity_message_key,
+            )
+        if insight:
+            record.insight_id = insight.id
+            record.activity_details.insight_name = insight.name
+        if secondary_user:
+            record.activity_details.secondary_username = secondary_user.username
+        record.save()
+
+    @classmethod
+    def _FormatActivityRecord(cls, activity_record):
+        message = constants.ACTIVITY_TEXT[activity_record.activity_details.activity_message_key]
+        replacement_pairs = (
+            ('{USERNAME}', 'username'),
+            ('{PROJECT_DISPLAY_NAME}', 'project_display_name'),
+            ('{INSIGHT_NAME}', 'insight_name'),
+            ('{SECONDARY_USERNAME}', 'secondary_username')
+        )
+        for pair in replacement_pairs:
+            try:
+                message = message.replace(pair[0], getattr(activity_record.activity_details, pair[1]))
+            except TypeError:
+                pass
+        return {
+            'css_class':activity_record.activity_details.activity_type,
+            'date':activity_record.date,
+            'message':message,
+        }
+
+    @classmethod
+    def RecordLogin(cls, user, company=None, project=None):
+        activity_type = 'user'
+        activity_message_key = 'user_login'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user)
+
+    @classmethod
+    def RecordUserSaved(cls, user, company=None, project=None, secondary_user=None):
+        activity_type = 'user'
+        activity_message_key = 'user_saved'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user, secondary_user=secondary_user)
+
+    @classmethod
+    def RecordUserCreated(cls, user, company=None, project=None, secondary_user=None):
+        activity_type = 'user'
+        activity_message_key = 'user_created'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user, secondary_user=secondary_user)
+
+    @classmethod
+    def RecordProjectCreated(cls, user, company=None, project=None):
+        activity_type = 'project'
+        activity_message_key = 'project_new'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user)
+
+    @classmethod
+    def RecordProjectSaved(cls, user, company=None, project=None):
+        activity_type = 'project'
+        activity_message_key = 'project_save'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user)
+
+    @classmethod
+    def RecordInsightCreated(cls, user, company=None, project=None):
+        activity_type = 'insight'
+        activity_message_key = 'insight_created'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user)
+
+    @classmethod
+    def RecordInsightEdited(cls, user, company=None, project=None, insight=None):
+        activity_type = 'insight'
+        activity_message_key = 'insight_edited'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user, insight)
+
+    @classmethod
+    def RecordInsightRemixed(cls, user, company=None, project=None, insight=None, secondary_user=None):
+        activity_type = 'insight'
+        activity_message_key = 'insight_remixed'
+        cls._Record_Activity(activity_message_key, activity_type, company, project, user, insight, secondary_user)
+
+    @classmethod
+    def GetAndFormatCompanyWideActivity(cls, user, company, count=10):
+        activity_level = 0 if user_is_company_admin(user, company) else 1
+        activity_records = ActivityRecord.objects.filter(company_id=company.id)
+        activity_records = [a for a in activity_records if a.activity_level > activity_level]
+        activity_records = sorted(activity_records, key=lambda a: a.date, reverse=True)
+        formatted_activity_records = [cls._FormatActivityRecord(a) for a in activity_records]
+        return formatted_activity_records
+
+    @classmethod
+    def GetAndFormatProjectWideActivity(cls, user, company, project_id, count=10):
+        activity_level = 0 if user_is_company_admin(user, company) else 1
+        activity_records = ActivityRecord.objects.filter(project_id=project_id).filter(activity_level__gte=activity_level)
+        activity_records = sorted(activity_records, key=lambda a: a.date, reverse=True)
+        formatted_activity_records = [cls._FormatActivityRecord(a) for a in activity_records[:count]]
+        return formatted_activity_records
+
+
+
+
 

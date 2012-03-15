@@ -49,6 +49,22 @@ def companies(request, id):
         context_instance=RequestContext(request)
     )
 
+def delete_company(request, id):
+    company = CompaniesController.GetCompanyById(id)
+    if request.method == 'POST':
+        CompaniesController.DeleteCompanyById(id)
+        messages.info(request, 'Company successfully deleted.')
+        return redirect(home)
+    template_data = {
+        'company':company
+    }
+    return render_to_response(
+        'web/admin/company_delete.html',
+        template_data,
+        context_instance=RequestContext(request)
+    )
+
+
 def users(request, id):
     template_data = {}
     if request.method == 'POST':

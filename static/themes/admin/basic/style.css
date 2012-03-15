@@ -1,0 +1,31 @@
+header, footer { background-color:#333; color:#FFF; box-shadow:0px 0px 8px #111; -moz-box-shadow:0px 0px 8px #111; -webkit-box-shadow:0px 0px 8px #111;}
+header .header_logo { background:url('images/logo_metalayer_small_dark.jpg') 20px 8px no-repeat; }
+body { background-image:url('images/background_page.png'); }
+
+.messages { box-shadow:0px 0px 8px #111; -moz-box-shadow:0px 0px 8px #111; -webkit-box-shadow:0px 0px 8px #111; border:none;}
+.messages li.error { background:url('images/caution.png') no-repeat 10px 10px; background-size:32px; }
+.messages li.info { background:url('images/tick.png') no-repeat 10px 10px; background-size:32px; }
+
+
+.page_section { color:#000; background-color:#FFF; box-shadow:0px 0px 8px #111; -moz-box-shadow:0px 0px 8px #111; -webkit-box-shadow:0px 0px 8px #111;  -moz-border-radius:3px; -webkit-border-radius:3px; }
+
+.admin h2 { padding-left:40px; line-height:32px;}
+.admin h3 { padding-left:40px; line-height:32px;}
+
+
+.admin h2 { background:url('images/home.png') no-repeat; }
+.admin.edit_company h3 { background:url('images/edit.png') no-repeat; }
+.admin.delete_company h3 { background:url('images/delete.png') no-repeat; }
+.admin.home .companies h3 { background:url('images/company.png') no-repeat; }
+.admin .company_details h5 { background:url('images/contact_card_small.png') no-repeat 4px 1px;}
+.admin .users h5 { background:url('images/users_small.png') no-repeat 4px 1px;}
+.admin .configuration h5 { background:url('images/configure_small.png') no-repeat 4px 1px;}
+
+
+.img_button { height:32px; width:32px; display:inline-block;}
+.img_button span { display:none;}
+.img_button.site { background:url('images/site.png') no-repeat; }
+.img_button.edit { background:url('images/edit.png') no-repeat; }
+.img_button.add { background:url('images/add.png') no-repeat; }
+.img_button.add_small { background:url('images/add_small.png') no-repeat; }
+.img_button.delete { background:url('images/delete.png') no-repeat; }

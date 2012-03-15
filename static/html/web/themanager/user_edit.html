@@ -1,22 +1,18 @@
-{% extends 'web/base.html' %}
+{% extends 'web/themanager/base.html' %}
 {% load custom_tags %}
 
 {% block page_title %}{{ company.display_name }} | Edit User{% endblock %}
 
 {% block body_class %}company edit_user{% endblock %}
 
-{% block header_menu %}
-    {% if user|is_company_admin:company %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% else %}
-        {% include 'web/themanager/shared/header_menu_admin.html' %}
-    {% endif %}
+{% block bread_crumbs %}
+    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" title="Go to your companies home page" class="tool_tip">home</a> &rarr;
+    <a href="{{ request.full_path }}" title="Go to edit user page" class="tool_tip">edit user</a>
 {% endblock %}
 
-{% block page %}
+{% block manager_page %}
     <div class="page_section">
         <div class="page_section_inner">
-            <h2>{{ company.display_name }}</h2>
             {% if subject_user.id %}
                 <h3>{{ template_strings.manage_user.h3_edit }} {{ subject_user.email }}</h3>
             {% else %}

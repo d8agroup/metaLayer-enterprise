@@ -1,87 +1,104 @@
-{% extends 'web/base.html' %}
+{% extends 'web/admin/base.html' %}
 {% load custom_tags %}
 
 {% block page_title %}Admin | Company{% endblock %}
 
-{% block body_class %}admin{% endblock %}
+{% block body_class %}admin edit_company{% endblock %}
 
-{% block header_menu %}
-    {% include 'web/admin/shared/header_menu.html' %}
+{% block bread_crumbs %}
+    <a href="/admin/" title="Go to the admin home page" class="tool_tip">home</a> &rarr;
+    <a href="/admin/" title="Go to the companies page" class="tool_tip">companies</a> &rarr;
+    <a href="{{ request.full_path }}" title="Go to the edit company page" class="tool_tip">edit company{{ company.diaplay_name }}</a>
 {% endblock %}
 
-{% block page %}
+{% block admin_page %}
     <div class="page_section">
         <div class="page_section_inner">
-            <h2>Manager this company</h2>
+            <h3>Edit this company</h3>
             {% include 'web/shared/errors.html' %}
             <form method="POST">
                 {% csrf_token %}
-                <div class="form_row">
-                    <label>Company Name</label>
-                    <input type="text" name="display_name" value="{{ company.display_name }}" />
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>Company Administrators</label>
-                    {% for u in users %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="administrators"
-                                   value="{{ u.id }}"
-                                   {% if u.id|is_in:company.administrators %}checked="checked"{% endif %}/>
-                            {{ u.email }}
-                        </div>
-                    {% endfor %}
-                    <div class="add_item">
-                        <a href="/admin/users/new?next={{ request.get_full_path }}">Add a new user</a>
+                <div class="form_section company_details">
+                    <h5>Basic Company Details</h5>
+                    <div class="form_row">
+                        <label>Company Name</label>
+                        <input type="text" name="display_name" value="{{ company.display_name }}" />
                     </div>
                 </div>
-                <div class="form_row checkbox_list">
-                    <label>Data Points Available to this Company</label>
-                    {% for d in data_points %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="data_points_available"
-                                   value="{{ d.type }}"
-                                   {% if d.type|is_in:company.data_points_available %}checked="checked"{% endif %}/>
-                            {{ d.full_display_name }}
-                        </div>
-                    {% endfor %}
+                <div class="form_section users">
+                    <h5 class="users">Users Associated With This Company</h5>
+                    <div class="form_row checkbox_list">
+                        <label>
+                            Company Administrators
+                            <a href="/admin/users/new?next={{ request.get_full_path }}"
+                               class="add_small right img_button tool_tip"
+                               title='Click to add a new administrator to this company'>
+                                <span>
+                                    Add a new user
+                                </span>
+                            </a>
+                        </label>
+                        {% for u in users %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="administrators"
+                                       value="{{ u.id }}"
+                                       {% if u.id|is_in:company.administrators %}checked="checked"{% endif %}/>
+                                {{ u.email }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="form_row checkbox_list">
-                    <label>Actions Available to this Company</label>
-                    {% for a in actions %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="actions_available"
-                                   value="{{ a.name }}"
-                                   {% if a.name|is_in:company.actions_available %}checked="checked"{% endif %}/>
-                            {{ a.display_name_short }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>Outputs Available to this Company</label>
-                    {% for o in outputs %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="outputs_available"
-                                   value="{{ o.name }}"
-                                   {% if o.name|is_in:company.outputs_available %}checked="checked"{% endif %}/>
-                            {{ o.display_name_short }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <div class="form_row checkbox_list">
-                    <label>Visualizations Available to this Company</label>
-                    {% for v in visualizations %}
-                        <div class="checkbox_list_item">
-                            <input type="checkbox"
-                                   name="visualizations_available"
-                                   value="{{ v.name }}"
-                                   {% if v.name|is_in:company.visualizations_available %}checked="checked"{% endif %}/>
-                            {{ v.display_name_short }}
-                        </div>
-                    {% endfor %}
+                <div class="form_section configuration">
+                    <h5>Widgets Available to this Company</h5>
+                    <div class="form_row checkbox_list">
+                        <label>Data Points</label>
+                        {% for d in data_points %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="data_points_available"
+                                       value="{{ d.type }}"
+                                       {% if d.type|is_in:company.data_points_available %}checked="checked"{% endif %}/>
+                                {{ d.full_display_name }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>Actions</label>
+                        {% for a in actions %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="actions_available"
+                                       value="{{ a.name }}"
+                                       {% if a.name|is_in:company.actions_available %}checked="checked"{% endif %}/>
+                                {{ a.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>Outputs</label>
+                        {% for o in outputs %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="outputs_available"
+                                       value="{{ o.name }}"
+                                       {% if o.name|is_in:company.outputs_available %}checked="checked"{% endif %}/>
+                                {{ o.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="form_row checkbox_list">
+                        <label>Visualizations</label>
+                        {% for v in visualizations %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="visualizations_available"
+                                       value="{{ v.name }}"
+                                       {% if v.name|is_in:company.visualizations_available %}checked="checked"{% endif %}/>
+                                {{ v.display_name_short }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="form_actions two_up">
                     <a href="/admin/" class="button">Cancel</a>

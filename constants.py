@@ -1,7 +1,7 @@
 TEMPLATE_STRINGS = {
     'login':{
         'header':'Login',
-        'welcome_message':'Welcome to MetaLayer, please log in with your email address and password',
+        'welcome_message':'',
         'form_label_username':'Your email address',
         'form_label_password':'Your password',
         'form_submit_button':'login',
@@ -33,6 +33,10 @@ TEMPLATE_STRINGS = {
     },
     'manage_project':{
         'h3_edit':'Edit this project:',
+        'form_section_basic':'Basic Project Details',
+        'form_section_members':'Users',
+        'form_section_config':'Insight Configuration',
+        'form_section_config_help':'The settings you choose here control the widgets that are available to project members when they start to create insights.',
         'form_label_project_name':'Project Name',
         'form_label_project_description':'Project Description',
         'form_label_project_members':'Project Members',
@@ -51,11 +55,16 @@ TEMPLATE_STRINGS = {
         'message_not_project_member':'Sorry, you are not a member of the project you tried to view.',
         'members_header':'Project Members',
         'members_this_project_has_none':'This project has no members',
+        'heading_project_activity':'Project Activity',
         'insights_header':'Project Insights',
         'insights_create_button':'Create a new insight',
         'insights_edit_button':'View in dashboard mode',
         'insights_remix_button':'Create new dashboard from this insight',
-   }
+   },
+    'company_home':{
+        'title_projects':'Your Companies Projects',
+        'button_title_create_new_project':'Click here to create a new project for your company.',
+    }
 
 }
 
@@ -63,4 +72,15 @@ MODEL_DEFAULTS = {
     'companies':{
         'default_display_name':'Please enter your company name'
     }
+}
+
+ACTIVITY_TEXT = {
+    'user_login':'{USERNAME} logged in',
+    'user_saved':'{USERNAME} updated the user {SECONDARY_USERNAME}',
+    'user_created':'{USERNAME} created the user {SECONDARY_USERNAME}',
+    'project_new':'{USERNAME} started creating a new project',
+    'project_save':'{USERNAME} updated the project {PROJECT_DISPLAY_NAME}',
+    'insight_created':'{USERNAME} created a new insight in project {PROJECT_DISPLAY_NAME}',
+    'insight_edited':'{USERNAME} started editing the insight {INSIGHT_NAME} in project {PROJECT_DISPLAY_NAME}',
+    'insight_remixed':'{USERNAME} remixed the insight {INSIGHT_NAME} by {SECONDARY_USERNAME} in project {PROJECT_DISPLAY_NAME}',
 }
