@@ -1,6 +1,6 @@
 # Django settings for enterprise project.
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 EMAIL_USE_TLS = True
@@ -21,8 +21,8 @@ DATABASES = {
         'NAME': 'ml_enterprise',
         'USER': '',
         'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'HOST': '127.0.0.1',
+        'PORT': 27017,
     }
 }
 

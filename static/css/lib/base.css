@@ -38,6 +38,7 @@ form .form_row.checkbox_list { padding:5px 0;}
 form .form_row.checkbox_list label { display:block; width:100%; border-bottom:1px dashed #AAA; padding-bottom:5px;}
 form .form_row.checkbox_list .checkbox_list_item { padding:5px; width:30%; display:inline-block;}
 form .form_row.checkbox_list .checkbox_list_item input { position:relative; top:4px;}
+form .form_row.checkbox_list .checkbox_list_item img { width:16px; height:16px; position:relative; top:4px; left:-3px;}
 form .form_actions { text-align:center;}
 form .form_actions .button { width:100%;}
 form .form_actions.two_up .button { width:48%; }

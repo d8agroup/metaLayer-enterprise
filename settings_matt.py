@@ -1,3 +1,4 @@
+DEBUG = True
 
 SITE_HOST = 'localhost:8000'
 

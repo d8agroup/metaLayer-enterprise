@@ -64,7 +64,6 @@ def delete_company(request, id):
         context_instance=RequestContext(request)
     )
 
-
 def users(request, id):
     template_data = {}
     if request.method == 'POST':

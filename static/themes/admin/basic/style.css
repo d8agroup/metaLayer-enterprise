@@ -17,9 +17,10 @@ body { background-image:url('images/background_page.png'); }
 .admin.edit_company h3 { background:url('images/edit.png') no-repeat; }
 .admin.delete_company h3 { background:url('images/delete.png') no-repeat; }
 .admin.home .companies h3 { background:url('images/company.png') no-repeat; }
-.admin .company_details h5 { background:url('images/contact_card_small.png') no-repeat 4px 1px;}
-.admin .users h5 { background:url('images/users_small.png') no-repeat 4px 1px;}
-.admin .configuration h5 { background:url('images/configure_small.png') no-repeat 4px 1px;}
+.admin .company_details h5 { background:url('images/contact_card_small.png') no-repeat 4px 1px #FFF;}
+.admin .users h5 { background:url('images/users_small.png') no-repeat 4px 1px #FFF;}
+.admin .database h5 { background:url('images/database_small.png') no-repeat 4px 1px #FFF;}
+.admin .configuration h5 { background:url('images/configure_small.png') no-repeat 4px 1px #FFF;}
 
 
 .img_button { height:32px; width:32px; display:inline-block;}
