@@ -1,5 +1,6 @@
 <VirtualHost *:80>
     DocumentRoot /usr/local/metaLayer-enterprise
+    Header set Access-Control-Allow-Origin *
     <Directory /usr/local/metaLayer-enterprise>
         Order allow,deny
         Allow from all
