@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+    DocumentRoot /usr/local/metaLayer-enterprise
+    <Directory /usr/local/metaLayer-enterprise>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    Alias /static/ /usr/local/metaLayer-enterprise/enterprise/static/
+    WSGIScriptAlias / /usr/local/metaLayer-enterprise/enterprise.wsgi
+    WSGIDaemonProcess metalayer.com processes=2 threads=10 display-name=%{GROUP}
+    WSGIProcessGroup metalayer.com
+</VirtualHost>
