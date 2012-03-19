@@ -4,3 +4,4 @@ for staff in ['jg@metalayer.com', 'cb@metalayer.com']:
     u = User.objects.create_user(staff, staff, '!!M3taM3ta')
     u.is_staff = True
     u.save()
+

@@ -166,8 +166,15 @@ VISUALIZATIONS_CONFIG = {
     ]
 }
 
+GOOGLE_ANALYTICS = {
+    'account':'',
+    'site_host':'',
+}
+
 import socket
 if socket.gethostname() in ['mattgriffiths']:
     from settings_matt import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
     from settings_dev import *
+elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
+    from settings_clienttest import *

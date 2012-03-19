@@ -1,8 +1,8 @@
 <script type="text/javascript">
 
     var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-29365069-1']);
-    _gaq.push(['_setDomainName', 'metalayer.com']);
+    _gaq.push(['_setAccount', '{{ settings.GOOGLE_ANALYTICS.account }}']);
+    _gaq.push(['_setDomainName', '{{ settings.GOOGLE_ANALYTICS.site_host }}']);
     _gaq.push(['_trackPageview']);
 
     (function() {

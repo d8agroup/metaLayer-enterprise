@@ -1,13 +1,12 @@
-{% extends 'thecommunity/base.html' %}
+{% extends 'web/base.html' %}
 
 {% block page_title %}- Sorry we cant find that page{% endblock %}
 
 {% block body_class %}error_page{% endblock %}
 
-{% block page_body %}
-<div id="error_page">
-    <div id="error_inner">
-        <img src="/static/images/thecommunity/error_404_picture.jpeg" />
+{% block page %}
+<div id="error_page" class="page_section">
+    <div id="error_inner" class="page_section_inner">
         <h1>Sorry we cant find the page you are looking for</h1>
     </div>
 </div>
