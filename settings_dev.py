@@ -1,5 +1,12 @@
+DEBUG = True
 
-SITE_HOST = '50.57.227.192'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'no-reply@metalayer.com'
+EMAIL_HOST_PASSWORD = '##M3taM3ta'
+EMAIL_PORT = 587
+
+SITE_HOST = '108.166.98.106'
 
 STATIC_HOST = SITE_HOST
 

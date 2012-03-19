@@ -169,5 +169,5 @@ VISUALIZATIONS_CONFIG = {
 import socket
 if socket.gethostname() in ['mattgriffiths']:
     from settings_matt import *
-#else:
-    #from settings_dev import *
+elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
+    from settings_dev import *
