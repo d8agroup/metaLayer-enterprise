@@ -46,11 +46,11 @@
                             {% for insight in project_insights %}
                                 <li class="insight clearfix corner">
                                     <div class="insight_image_container">
-                                        {% include 'web/themanager/shared/insight_image_crop.html' with width=200 height=120 insight=insight  %}
+                                        {% include 'web/themanager/shared/insight_image_shrink.html' with width=200 height=120 insight=insight  %}
                                     </div>
                                     <p class="insight_owner">Created by: {{ insight.username }}</p>
                                     <p class="insight_name">{{ insight.name }}</p>
-                                    <p class="insight_description">{{ insight.description }}</p>
+                                    <p class="insight_description">{{ insight.config.description }}</p>
                                     <p class="insight_last_saved">Last Used: {{ insight.last_saved_pretty }}</p>
                                     <div class="actions">
                                         <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.project_id }}/dashboard/{{ insight.id }}">

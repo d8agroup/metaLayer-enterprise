@@ -80,6 +80,7 @@
                                        name="data_points_available"
                                        value="{{ d.type }}"
                                        {% if d.type|is_in:project.data_points_available %}checked="checked"{% endif %}/>
+                                <img src='{{ d.image_small }}' />
                                 {{ d.full_display_name }}
                             </div>
                         {% endfor %}
@@ -92,6 +93,7 @@
                                        name="actions_available"
                                        value="{{ a.name }}"
                                        {% if a.name|is_in:project.actions_available %}checked="checked"{% endif %}/>
+                                <img src='{{ a.image_small }}' />
                                 {{ a.display_name_short }}
                             </div>
                         {% endfor %}
@@ -104,6 +106,7 @@
                                        name="outputs_available"
                                        value="{{ o.name }}"
                                        {% if o.name|is_in:project.outputs_available %}checked="checked"{% endif %}/>
+                                <img src='{{ o.image_small }}' />
                                 {{ o.display_name_short }}
                             </div>
                         {% endfor %}
@@ -116,6 +119,7 @@
                                        name="visualizations_available"
                                        value="{{ v.name }}"
                                        {% if v.name|is_in:project.visualizations_available %}checked="checked"{% endif %}/>
+                                <img src='{{ v.image_small }}' />
                                 {{ v.display_name_short }}
                             </div>
                         {% endfor %}
