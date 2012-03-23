@@ -1,9 +1,11 @@
 import random
 import string
-from companies.forms import validate_company, clean_and_validate_project_form
+from companies.forms import validate_company, clean_and_validate_project_form, clean_and_validate_company_api_keys_form
 from companies.models import Company, Project, ActivityRecord, ActivityDetails
 from companies.utils import user_is_company_admin
 import constants
+from metalayercore.actions.controllers import ActionController
+from metalayercore.datapoints.controllers import DataPointController
 
 class CompaniesController(object):
     @classmethod
@@ -75,6 +77,47 @@ class CompaniesController(object):
         if company:
             company.deleted = True
             company.save()
+
+    @classmethod
+    def GetCompanyAPIKeys(cls, id):
+        company = cls.GetCompanyById(id)
+        api_keys = []
+        if company:
+            for data_point_type in company.data_points_available:
+                data_point = DataPointController.LoadDataPoint(data_point_type)
+                if len([e for e in data_point.get_unconfigured_config()['elements'] if e['type'] == 'api_key']):
+                    api_key = {
+                        'type':data_point_type,
+                        'display_name':DataPointController.LoadDataPoint(data_point_type).get_unconfigured_config()['full_display_name'],
+                        'help':DataPointController.ExtractAPIKeyHelp(data_point_type)
+                    }
+                    if data_point_type in company.api_keys:
+                        api_key['api_key'] = company.api_keys[data_point_type]
+                    api_keys.append(api_key)
+            for action_name in company.actions_available:
+                action = ActionController.LoadAction(action_name)
+                if len([e for e in action.get_unconfigured_config()['elements'] if e['type'] == 'api_key']):
+                    api_key = {
+                        'type':action_name,
+                        'display_name':ActionController.LoadAction(action_name).get_unconfigured_config()['display_name_long'],
+                        'help':ActionController.ExtractAPIKeyHelp(action_name)
+                    }
+                    if action_name in company.api_keys:
+                        api_key['api_key'] = company.api_keys[action_name]
+                    api_keys.append(api_key)
+        return api_keys
+
+    @classmethod
+    def UpdateCompanyAPIKeysFromFormValues(cls, id, values):
+        company = cls.GetCompanyById(id)
+        if not company:
+            return False, [constants.TEMPLATE_STRINGS['manage_company']['form_errors_company_not_found']]
+
+        passed, errors, clean_values = clean_and_validate_company_api_keys_form(cls.GetCompanyAPIKeys(id), values)
+        company.api_keys = clean_values
+        company.save()
+
+
 
 class ProjectsController(object):
     @classmethod

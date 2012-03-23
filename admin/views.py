@@ -38,6 +38,9 @@ def companies(request, id):
         passed, errors = CompaniesController.UpdateCompanyFromFormValues(id, request.POST)
         if passed:
             messages.info(request, 'Company updated successfully')
+            if CompaniesController.GetCompanyAPIKeys(id):
+                messages.info(request, 'You can now set company level api keys')
+                return redirect(api_keys, id)
             return redirect(home)
         template_data['company'] = request.POST
         template_data['errors'] = errors
@@ -60,6 +63,27 @@ def delete_company(request, id):
     }
     return render_to_response(
         'web/admin/company_delete.html',
+        template_data,
+        context_instance=RequestContext(request)
+    )
+
+def api_keys(request, id):
+    company = CompaniesController.GetCompanyById(id)
+    if not company:
+        messages.error(request, 'Sorry, something went wrong loading the company with id: %s' % id)
+        return redirect(home)
+
+    if request.method == 'POST':
+        CompaniesController.UpdateCompanyAPIKeysFromFormValues(id, request.POST)
+        messages.info(request, 'Api Keys Saved')
+        return redirect(home)
+
+    template_data = {
+        'api_keys':CompaniesController.GetCompanyAPIKeys(id)
+    }
+
+    return render_to_response(
+        'web/admin/api_keys.html',
         template_data,
         context_instance=RequestContext(request)
     )

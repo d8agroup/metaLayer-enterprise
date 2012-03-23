@@ -12,6 +12,7 @@ class Company(models.Model):
     actions_available = ListField()
     outputs_available = ListField()
     visualizations_available = ListField()
+    api_keys = DictField()
     deleted = models.BooleanField(default=False)
 
 class Project(models.Model):

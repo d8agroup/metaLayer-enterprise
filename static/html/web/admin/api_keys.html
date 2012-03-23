@@ -1,0 +1,38 @@
+{% extends 'web/admin/base.html' %}
+{% load custom_tags %}
+
+{% block page_title %}Admin | Company | API Keys{% endblock %}
+
+{% block body_class %}admin api_keys{% endblock %}
+
+{% block bread_crumbs %}
+    <a href="/admin/" title="Go to the admin home page" class="tool_tip">home</a> &rarr;
+    <a href="{{ request.full_path }}" title="Update Company Api Keys" class="tool_tip">update API Keys</a>
+{% endblock %}
+
+
+{% block admin_page %}
+    <div class="page_section">
+        <div class="page_section_inner">
+            <h3>Set Company Level Api Keys</h3>
+            {% include 'web/shared/errors.html' %}
+            <form method="POST">
+                {% csrf_token %}
+                {% for api_key in api_keys %}
+                    <div class="form_section">
+                        <h5>{{ api_key.type }}</h5>
+                        <div class="form_row">
+                            <label>Api Key:</label>
+                            <input type="text" name='{{ api_key.type }}' value="{{ api_key.api_key }}" />
+                            <p class="help">{{ api_key.help|safe }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="form_actions two_up">
+                    <a href="/admin/" class="button">Cancel</a>
+                    <input type="submit" value="Save" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -28,7 +28,9 @@ a:hover { text-decoration:underline; }
 .messages li.info { background:url('../../images/shared/tick.png') no-repeat 20px 16px; background-size:22px; }
 
 form { width:90%; margin:10px auto; padding:10px; }
+form .help { font-style:italic; }
 form .form_row { padding:10px 0; }
+form .form_row .help { width:90%; margin:10px auto 0; }
 form .form_row, form .form_actions { margin:10px 0; }
 form .form_row label { font-weight:bold; font-size:120%;}
 form .form_row label, form .form_row input[type=text], form .form_row input[type=password] { display:inline-block; width:47%; padding:5px 0;}
@@ -44,7 +46,7 @@ form .form_actions .button { width:100%;}
 form .form_actions.two_up .button { width:48%; }
 form .form_section { border: 1px solid #AAA; padding:10px; margin-bottom:40px;}
 form .form_section h5 { font-size:130%; position:relative; top:-20px; background-color:#FFF; display:inline-block; padding:0 10px 0 25px;}
-form .form_section .help { font-style:italic; }
+
 
 /**********************************************************************************************************************/
 /* LAYOUT - HEADER                                                                                                    */

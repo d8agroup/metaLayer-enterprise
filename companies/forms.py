@@ -37,3 +37,10 @@ def clean_and_validate_project_form(values):
         errors.append(constants.TEMPLATE_STRINGS['manage_project']['form_errors_description'])
 
     return len(errors) == 0, errors, clean_values
+
+def clean_and_validate_company_api_keys_form(company_api_keys, values):
+    api_keys = {}
+    for key in values.keys():
+        if len([k for k in company_api_keys if k['type'] == key]):
+            api_keys[key] = values[key]
+    return True, [], api_keys

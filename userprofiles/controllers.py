@@ -1,10 +1,7 @@
-import random
-import string
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import constants
-from emails.controllers import EmailController
 from userprofiles.forms import validate_user
 from utils import my_import
 

@@ -158,6 +158,15 @@ def load_project_widgets(request):
     }
     return JSONResponse(return_data)
 
+def load_project_api_keys(request):
+    api_keys = [{
+        'name':k['type'],
+        'display_name':k['display_name'],
+        'api_key':k['api_key'],
+        'help_text':k['help']
+    } for k in CompaniesController.GetCompanyAPIKeys(request.company.id)]
+    return JSONResponse({ 'api_keys':api_keys })
+
 @ensure_company_membership
 def edit_user(request, id=None):
     template_data = {}

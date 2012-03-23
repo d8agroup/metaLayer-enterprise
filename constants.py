@@ -15,6 +15,9 @@ TEMPLATE_STRINGS = {
         'form_error_display_name_used':'Sorry, there is already a company in our system with that display name, please choose another',
         'form_errors_company_not_found':'Sorry we cant find that company, please contact your systems administrator.',
     },
+    'manage_company_api_keys':{
+        'message_api_keys_saved':'The api keys were updated.'
+    },
     'manage_user':{
         'h3_edit':'Edit User:',
         'h3_create':'Create a new User',
