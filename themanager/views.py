@@ -4,6 +4,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from companies.controllers import  ProjectsController, CompaniesController, ActivityRecordsController
 import constants
+from customtags.templatetags.custom_tags import is_company_admin
 from metalayercore.actions.controllers import ActionController
 from metalayercore.dashboards.controllers import DashboardsController
 from metalayercore.datapoints.controllers import DataPointController
@@ -88,6 +89,13 @@ def edit_project(request, id):
 
 @ensure_company_membership
 def view_project(request, project_id):
+    if 'delete_insight' in request.GET:
+        delete_insight = request.GET.get('delete_insight')
+        insight = DashboardsController.GetDashboardById(delete_insight)
+        if insight and (is_company_admin(request.user, request.company) or request.user.username == insight.username):
+            DashboardsController.DeleteDashboardById(delete_insight)
+            messages.info(request, constants.TEMPLATE_STRINGS['view_project']['message_insight_deleted'])
+
     template_data = {
         'project':ProjectsController.GetProjectById(request.company, request.user, project_id),
         'project_activity':ActivityRecordsController.GetAndFormatProjectWideActivity(request.user, request.company, project_id)

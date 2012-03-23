@@ -107,7 +107,8 @@ footer { height:35px; width:100%; position:fixed; bottom:0; z-index:3000;}
 .company.view_project .insights .insight .insight_image_container { float:left; margin-right:5px;}
 .company.view_project .insights .insight p { padding:5px; }
 .company.view_project .insights .insight p.insight_name { font-weight:bold; font-size:120%; }
-.company.view_project .insights .insight .actions { padding:10px 10px 0; text-align:right;}
+.company.view_project .insights .insight p.insight_last_saved { float:left; position:relative; left:-5px; }
+.company.view_project .insights .insight .actions { float:right; text-align:right; position:relative; top:10px;}
 
 
 /**********************************************************************************************************************/

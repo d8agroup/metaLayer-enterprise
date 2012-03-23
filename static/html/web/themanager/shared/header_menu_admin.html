@@ -1,4 +1,12 @@
+{% load custom_tags %}
 <ul>
+    {% if user.is_staff|is_true %}
+        <li>
+            <a href="/admin/">
+                admin
+            </a>
+        </li>
+    {% endif %}
     <li>
         <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}">
             home

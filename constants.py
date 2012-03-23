@@ -20,7 +20,7 @@ TEMPLATE_STRINGS = {
         'h3_create':'Create a new User',
         'h5_create_email_messages':'Once the user has been successfully created, they will be sent an email with their password and login instructions',
         'form_label_username':'Users Email Address',
-        'form_label_username':'Users Password',
+        'form_label_password':'Users Password',
         'form_label_first_name':'First Name',
         'form_label_last_name':'Last Name',
         'form_action_cancel':'Cancel',
@@ -55,6 +55,7 @@ TEMPLATE_STRINGS = {
     },
     'view_project':{
         'message_not_project_member':'Sorry, you are not a member of the project you tried to view.',
+        'message_insight_deleted':'Insight successfully deleted',
         'members_header':'Project Members',
         'members_this_project_has_none':'This project has no members',
         'heading_project_activity':'Project Activity',
@@ -62,6 +63,7 @@ TEMPLATE_STRINGS = {
         'insights_create_button':'Create a new insight',
         'insights_edit_button':'View in dashboard mode',
         'insights_remix_button':'Create new dashboard from this insight',
+        'insights_delete_button':'Delete this insight',
    },
     'company_home':{
         'title_projects':'Your Companies Projects',

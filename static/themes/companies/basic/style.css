@@ -44,3 +44,6 @@ body { background-image:url('images/background_page.png'); }
 .img_button.add { background:url('images/add.png') no-repeat; }
 
 .img_button_small.add { background:url('images/add_small.png') no-repeat; }
+.img_button_small.delete { background:url('images/delete_small.png') no-repeat; }
+.img_button_small.edit { background:url('images/view_small.png') no-repeat; }
+.img_button_small.remix { background:url('images/remix_small.png') no-repeat; }
