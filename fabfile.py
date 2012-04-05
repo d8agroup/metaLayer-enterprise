@@ -159,7 +159,7 @@ def codebasesetup(server_ip=None, git_managed=False):
         run('sed -i \'s/ENTER_SITE_HOST/%s/g\' /usr/local/metaLayer-enterprise/enterprise/settings.py' % server_ip)
         run('cd /usr/local/metaLayer-enterprise/enterprise && python manage.py syncdb')
         run('python -c "import compileall; compileall.compile_dir(\'/usr/local/metaLayer-enterprise/enterprise\', force=1);"')
-        run('find /usr/local/metaLayer-enterprise/enterprise -name "*.py" -delete')
+        #run('find /usr/local/metaLayer-enterprise/enterprise -name "*.py" -delete')
         with cd('/usr/local/metaLayer-enterprise/enterprise'):
             run('more /tmp/create_users | python manage.pyc shell')
         run('rm /tmp/create_users')
