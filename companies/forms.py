@@ -5,6 +5,7 @@ def validate_company(company_id, values):
     return_values = {
         'display_name': escape(values['display_name']),
         'administrators':values.getlist('administrators') if 'administrators' in values else [],
+        'members':values.getlist('members') if 'members' in values else []
     }
     for key in ['data_points_available', 'actions_available', 'outputs_available', 'visualizations_available']:
         if key in values:

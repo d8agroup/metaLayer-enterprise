@@ -27,7 +27,7 @@
                 </div>
                 <div class="form_section users">
                     <h5 class="users">Users Associated With This Company</h5>
-                    <div class="form_row checkbox_list">
+                    <div class="form_row checkbox_list hidden">
                         <label>
                             Company Administrators
                             <a href="/admin/users/new?next={{ request.get_full_path }}"
@@ -48,8 +48,29 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="form_row checkbox_list">
+                        <label>
+                            Company Members
+                            <a href="/admin/users/new?next={{ request.get_full_path }}"
+                               class="add_small right img_button tool_tip"
+                               title='Click to add a new member to this company'>
+                                <span>
+                                    Add a new user
+                                </span>
+                            </a>
+                        </label>
+                        {% for u in users %}
+                            <div class="checkbox_list_item">
+                                <input type="checkbox"
+                                       name="members"
+                                       value="{{ u.id }}"
+                                       {% if u.id|is_in:company.members %}checked="checked"{% endif %}/>
+                                {{ u.email }}
+                            </div>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="form_section database">
+                <div class="form_section database hidden">
                     <h5>Database and Search Engine Configuration</h5>
                     <div class="form_row">
                         <label>Solr Configuration</label>
@@ -64,7 +85,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form_section configuration">
+                <div class="form_section configuration hidden">
                     <h5>Widgets Available to this Company</h5>
                     <div class="form_row checkbox_list">
                         <label>Data Points</label>
