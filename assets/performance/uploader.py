@@ -5,6 +5,7 @@ total_number_of_items_to_include_in_test = 5000
 total_number_of_threads_to_use = 2
 number_of_content_items_to_include_in_each_post = 500
 post_url = 'http://localhost/aggregation/post_content'
+commit_url = 'http://localhost:8080/solr/update?commit=true'
 skip_duplicate_check = 'true'
 actions_to_apply_to_each_content_item = [
     {'name':'localsentimentanalysis'},
@@ -45,9 +46,9 @@ class Poster(threading.Thread):
             response = urllib2.urlopen(post_url, urllib.urlencode(post_data)).read()
             time_taken = datetime.datetime.now() - start_time
             self.time_taken = time_taken
-            print 'thread: %i - finished in %s  (%s)' % (self.thread_count, time_taken, response)
+            print 'package %i: - finished in %s  (%s)' % (self.thread_count, time_taken, response)
         except Exception as e:
-            print 'thread: %i - error %s' % (self.thread_count, e)
+            print 'package %i: - error %s' % (self.thread_count, e)
             self.time_taken = None
 
 def producer(q, content_packages):
@@ -90,6 +91,8 @@ producer_thread.start()
 consumer_thread.start()
 producer_thread.join()
 consumer_thread.join()
+if commit_url:
+    urllib2.urlopen(commit_url).read()
 print '******************************************************'
 print 'All threads finished in %s' % (datetime.datetime.now() - start_time)
 print 'Average time to one item = %s' % ((datetime.datetime.now() - start_time) / number_of_items_sent)
