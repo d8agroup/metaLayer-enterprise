@@ -14,6 +14,7 @@ class Company(models.Model):
     visualizations_available = ListField()
     api_keys = DictField()
     deleted = models.BooleanField(default=False)
+    theme = models.TextField()
 
 class Project(models.Model):
     project_id = models.TextField()
