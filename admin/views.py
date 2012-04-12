@@ -2,7 +2,9 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.shortcuts import render_to_response, redirect
 from django.template.context import RequestContext
-from admin.utils import get_all_available_data_points, get_all_available_actions, get_all_available_outputs, get_all_available_visualizations
+from admin.utils import get_all_available_data_points, get_all_available_actions
+from admin.utils import get_all_available_outputs, get_all_available_visualizations
+from admin.utils import get_all_available_company_themes
 from companies.controllers import CompaniesController
 from userprofiles.controllers import UserController
 
@@ -24,10 +26,14 @@ def companies(request, id):
     company = CompaniesController.GetCompanyById(id)
 
     users = User.objects.filter(is_active=True, is_staff=False)
-    sorted(users, key=lambda u: u.id in company.administrators)
+    users = sorted(users, key=lambda u: u.id in company.administrators)
+
+    themes = get_all_available_company_themes()
+    themes = sorted(themes, key=lambda t: t=='basic', reverse=True)
 
     template_data = {
         'users': users,
+        'themes': themes,
         'data_points':[d.get_unconfigured_config() for d in get_all_available_data_points()],
         'actions':[a.get_unconfigured_config() for a in get_all_available_actions()],
         'outputs':[o.get_unconfigured_config() for o in get_all_available_outputs()],

@@ -27,7 +27,9 @@
                     <div class="form_row">
                         <label>Theme</label>
                         <select name="theme">
-
+                            {% for theme in themes %}
+                                <option value="{{ theme }}" {% if theme == company.theme %}selected="SELECTED"{% endif %}>{{ theme }}</option>
+                            {% endfor %}
                         </select>
                     </div>
                 </div>

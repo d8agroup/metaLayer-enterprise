@@ -1,6 +1,7 @@
 import os
 import re
 from enterprise.utils import my_import
+from django.conf import settings
 
 def get_all_available_data_points():
     import enterprise.metalayercore.datapoints.lib as datapoints_lib
@@ -30,9 +31,17 @@ def get_all_available_visualizations():
     objects = [_dynamically_load_type('enterprise.metalayercore.visualizations.lib.%s.visualization' % d, 'Visualization') for d in modules]
     return objects
 
+def get_all_available_company_themes():
+    themes_root = settings.THEMES_ROOT
+    company_themes_root = os.path.join(themes_root, 'companies')
+    themes = os.listdir(company_themes_root)
+    return themes
+
 def _dynamically_load_type(module_name, type):
     data_point = my_import(module_name)
     data_point = getattr(data_point, type)()
     return data_point
+
+
 
 
