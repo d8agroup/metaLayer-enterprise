@@ -36,11 +36,16 @@
 <body class="{% block body_class %}{% endblock %}">
     <header class="clearfix">
         <div class="inner">
-            <div class="left one_third header_logo">
+            <div class="left one_third">
 
             </div>
-            <div class="right one_third menu">
-                {% block header_menu %}{% endblock %}
+            <div class="right one_third">
+				<ul>
+					<li style="position:relative;">
+						<div style="display:block; float:right; width:28px; height:28px; margin-top:3px; position:relative;" class="header_logo"></div>
+						<!--<div style="position:absolute;top:50px;" id="menu_dropdown">{% block header_menu %}{% endblock %}</div>-->
+					</li>
+				</ul>
             </div>
             <div class="center one_third">
 
