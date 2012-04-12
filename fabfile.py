@@ -110,7 +110,7 @@ def codebasesetup(server_ip=None, git_managed=False):
     # CODEBASE SETUP
     ####################################################################################################################
     run('apt-get update')
-    run('apt-get install git-core mercurial mongodb python-cairo python-rsvg python-pip')
+    run('apt-get install git-core mercurial mongodb python-cairo python-rsvg python-pip curl')
     run('pip install --upgrade pip')
     for package in packages['pip']:
         run('pip install %s' % package)
