@@ -66,7 +66,7 @@ def consumer(q, package_count):
         finished.append(thread.thread_count)
 
 stock_tweets = [
-        {'source': {'display_name': 'TestData', 'id': '932ef63c661d734ba7f2d11b88b815c0'}, 'link': 'http://twitter.com/LovelyDeadBear/statuses/181972701051752449', 'time': 1332209847, 'text': [{'title': u'#DoritosLocosTacos one of the best parts of my spring break - candymountain'}], 'author': {'link': 'http://twitter.com/lovelydeadbear', 'image': 'http://purl.org/net/spiurl/lovelydeadbear', 'display_name': 'lovelydeadbear'}, 'id': 'dbb3a269c5c50548ab32024ef69e0f38', 'channel': {'type': 'testdata', 'id': '85d52cc25a3e0c30262de5426b94ea09', 'sub_type': 'testdata'}}
+        {'source': {'display_name': 'TestData', 'id': '932ef63c661d734ba7f2d11b88b815c1'}, 'link': 'http://twitter.com/LovelyDeadBear/statuses/181972701051752449', 'time': 1332209847, 'text': [{'title': u'#DoritosLocosTacos one of the best parts of my spring break - candymountain'}], 'author': {'link': 'http://twitter.com/lovelydeadbear', 'image': 'http://purl.org/net/spiurl/lovelydeadbear', 'display_name': 'lovelydeadbear'}, 'id': 'dbb3a269c5c50548ab32024ef69e0f38', 'channel': {'type': 'testdata', 'id': '85d52cc25a3e0c30262de5426b94ea09', 'sub_type': 'testdata'}}
 ]
 data = []
 for x in range(total_number_of_items_to_include_in_test):
