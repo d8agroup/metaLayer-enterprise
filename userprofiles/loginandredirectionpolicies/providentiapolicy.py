@@ -12,10 +12,10 @@ def process_login_and_get_redirect(request, user):
         return None
     company = CompaniesController.IdentifyCompanyForUser(user)
     if not company:
-        raise Exception('Unable to display welcome page. User must be assigned to a company.')
+        return None
     
     if not company.projects or len(company.projects) == 0:
-        raise Exception('Unable to display welcome page. User must be assigned to a project.')
+        return None
     
     project = company.projects[0]
     
