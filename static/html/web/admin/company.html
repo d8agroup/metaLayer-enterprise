@@ -30,7 +30,7 @@
                     <div class="form_row checkbox_list hidden">
                         <label>
                             Company Administrators
-                            <a href="/admin/users/new?next={{ request.get_full_path }}"
+                            <a href="/admin/users/new?next={{ request.get_full_path }}&amp;company={{ company.id }}"
                                class="add_small right img_button tool_tip"
                                title='Click to add a new administrator to this company'>
                                 <span>
@@ -51,7 +51,7 @@
                     <div class="form_row checkbox_list">
                         <label>
                             Company Members
-                            <a href="/admin/users/new?next={{ request.get_full_path }}"
+                            <a href="/admin/users/new?next={{ request.get_full_path }}&amp;company={{ company.id }}"
                                class="add_small right img_button tool_tip"
                                title='Click to add a new member to this company'>
                                 <span>

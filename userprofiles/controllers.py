@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import constants
+from companies.controllers import CompaniesController
 from userprofiles.forms import validate_user
 from utils import my_import
 
@@ -40,6 +41,10 @@ class UserController(object):
         if clean_values['last_name']:
             user.last_name = clean_values['last_name']
         user.save()
+        
+        if clean_values['company']:
+            company = CompaniesController.GetCompanyById(clean_values['company'])
+            CompaniesController.AddUserToCompany(company, user)
 
         #email_controller = EmailController(company)
         #email_controller.send_new_user_created_email(user, user_password)

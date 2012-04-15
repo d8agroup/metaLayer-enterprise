@@ -98,6 +98,7 @@ def users(request, id):
         template_data['user'] = request.POST
     else:
         template_data['user'] = UserController.GetUserByUserId(id) if id and not id == 'new' else None
+        template_data['company'] = request.GET.get('company')
     return render_to_response(
         'web/admin/user.html',
         template_data,

@@ -11,6 +11,7 @@ def validate_user(values):
         'last_name':escape(values['last_name']) if 'last_name' in values else None,
         'is_staff':values['is_staff'] if 'is_staff' in values else False,
         'password':escape(values['password']) if 'password' in values else None,
+        'company':escape(values['company']) if 'company' in values else None
     }
     errors = []
     if not email_re.search(return_values['email']):

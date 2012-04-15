@@ -1,4 +1,4 @@
-header { background-color:#999; color:#FFF; }
+header { background-color:#424244; color:#FFF; }
 header .header_logo { background:url('images/logo_enkidu7.png') 0 0 no-repeat; }
 body { background-image:url('images/background_page.png'); }
 
@@ -47,3 +47,12 @@ body { background-image:url('images/background_page.png'); }
 .img_button_small.delete { background:url('images/delete_small.png') no-repeat; }
 .img_button_small.edit { background:url('images/view_small.png') no-repeat; }
 .img_button_small.remix { background:url('images/remix_small.png') no-repeat; }
+
+#menu_dropdown { display:none; position:absolute; top:35px; right:-12px; width: 125px; background-color:#424244;line-height:22px;padding:1em .5em .5em; .5em; -moz-border-radius:0 0 3px 3px; -webkit-border-radius:0 0 3px 3px; border-radius:0 0 3px 3px; }
+.header_logo { display:block; float:right; width:112px; height:35px; position:relative; cursor: pointer; }
+
+body.application div.panel-container { position: absolute; top:55px; left:-200px; z-index:1000; }
+body.application div.panel-container div.panel { display: table-cell; width: 200px; background-color:#999; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
+body.application div.panel-container div.tab-container { display: table-cell; vertical-align: middle; }
+body.application div.panel-container div.tab-container div.tab { height: 140px; width: 35px; background-color:#999; cursor: pointer; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
+

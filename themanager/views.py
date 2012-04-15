@@ -100,12 +100,12 @@ def view_project(request, project_id):
         'project':ProjectsController.GetProjectById(request.company, request.user, project_id),
         'project_activity':ActivityRecordsController.GetAndFormatProjectWideActivity(request.user, request.company, project_id)
     }
-
+    
     if not template_data['project']:
         raise Http404
 
     template_data['project_members'] = [UserController.GetUserByUserId(u) for u in request.company.administrators] + [UserController.GetUserByUserId(u) for u in template_data['project'].members]
-    template_data['project_insights'] = sorted([i for i in [DashboardsController.GetDashboardById(d) for d in template_data['project'].insights] if i['active'] == True and i['deleted'] == False], key=lambda db: db.last_saved, reverse=True)
+    template_data['project_insights'] = sorted([i for i in [DashboardsController.GetDashboardById(d) for d in template_data['project'].insights] if i is not None and i['active'] == True and i['deleted'] == False], key=lambda db: db.last_saved, reverse=True)
 
     return render_to_device(
         request,
@@ -175,6 +175,7 @@ def edit_user(request, id=None):
         if passed:
             user = UserController.GetUserByEmail(request.POST['email'])
             CompaniesController.AddUserToCompany(request.company, user)
+            ProjectController.CreateNewProjectInCompany()
             if id:
                 message_key = 'message_user_saved'
                 ActivityRecordsController.RecordUserSaved(request.user, request.company, secondary_user=user)

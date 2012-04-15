@@ -60,9 +60,20 @@ class CompaniesController(object):
     @classmethod
     def AddUserToCompany(cls, company, user):
         company = cls.GetCompanyById(company.id)
+        
         if user.id not in company.members:
             company.members.append(user.id)
+            
+            # create new project for which user is sole member
+            project = _create_empty_project(company)
+            project.members.append(user.id)
+            project.save()
+            
+            company.projects.append(project)
             company.save()
+        
+        else:
+            raise Exception("User is already member of company")
 
     @classmethod
     def IdentifyCompanyForUser(cls, user):
@@ -133,10 +144,7 @@ class ProjectsController(object):
     @classmethod
     def CreateNewProjectInCompany(cls, company):
         company = CompaniesController.GetCompanyById(company.id)
-        project = Project(
-            display_name='Project %i' % (len(company.projects) + 1),
-            project_id="".join([random.choice(string.letters) for i in xrange(15)])
-        )
+        project = _create_empty_project(company)
         company.projects.append(project)
         company.save()
         return project
@@ -144,6 +152,7 @@ class ProjectsController(object):
     @classmethod
     def GetProjectById(cls, company, user, id):
         company = CompaniesController.GetCompanyById(company.id)
+        
         for project in company.projects:
             if project.project_id == id:
                 if user_is_company_admin(user, company) or user.id in project.members:
@@ -298,6 +307,13 @@ class ActivityRecordsController(object):
         formatted_activity_records = [cls._FormatActivityRecord(a) for a in activity_records[:count]]
         return formatted_activity_records
 
+def _create_empty_project(company):
+    project = Project(
+        display_name='Project %i' % (len(company.projects) + 1),
+        project_id="".join([random.choice(string.letters) for i in xrange(15)])
+    )
+    
+    return project
 
 
 

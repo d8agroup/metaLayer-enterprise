@@ -29,6 +29,7 @@
                 </div>
                 <div class="form_actions two_up">
                     <a href="{% if 'next'|is_in:request.GET %}{{ request.GET.next }}{% else %}/admin{% endif %}" class="button">Cancel</a>
+					<input type="hidden" name="company" value="{{ company }}">
                     <input type="submit" value="Save" class="button" />
                 </div>
             </form>
