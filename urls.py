@@ -10,5 +10,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include('enterprise.admin.urls')),
     url(r'^dashboard/', include('enterprise.thedashboard.urls')),
     url(r'^i/', include('enterprise.imaging.urls')),
+    url(r'^o/', include('metalayercore.outputs.urls')),
     url(r'', include('enterprise.themanager.urls')),
 )
