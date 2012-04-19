@@ -75,6 +75,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "enterprise.contextprocessors.themes.context_themes",
     "enterprise.contextprocessors.settings.context_settings",
     'enterprise.contextprocessors.company.context_company',
+    'enterprise.contextprocessors.providentiaproject.context_providentiaproject',
 )
 
 
