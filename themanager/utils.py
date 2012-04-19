@@ -17,15 +17,15 @@ def ensure_company_membership(func):
     def inner_func(request, *args, **kwargs):
         user = request.user
         company = request.company
-        print 'user.id'
+        #print 'user.id'
         print user.id
-        print 'company'
+        #print 'company'
         print company.members
-        print 'not in members?'
+        #print 'not in members?'
         print user.id not in company.members
         if not user.is_staff and user.id not in company.administrators and user.id not in company.members:
-            print 'raising it'
+            #print 'raising it'
             raise Http404
-        print 'returning func'
+        #print 'returning func'
         return func(request, *args, **kwargs)
     return wraps(func)(inner_func)
