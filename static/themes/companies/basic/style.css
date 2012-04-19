@@ -78,3 +78,5 @@ body.application div.panel-container div.tab-container div.tab { height: 140px; 
 .app_dashboard .app.twitter a { background:url('images/app_twitter.png') no-repeat 40px 30px #444; }
 .app_dashboard .app.youtube a { background:url('images/app_youtube.png') no-repeat 40px 30px #444; }
 .app_dashboard .app .title { position:absolute; display:block; bottom:0; width:198px; background:#CC0000; -moz-border-radius: 0 0 10px 10px; -webkit-border-radius:0 0 10px 10px; border-radius:0 0 10px 10px; line-height:30px; color:white; }
+#feed_configuration ol { list-style: decimal; margin-left: .5em; }
+#feed_configuration input[type=text] { width: 225px; }
