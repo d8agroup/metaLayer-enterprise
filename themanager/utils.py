@@ -18,11 +18,11 @@ def ensure_company_membership(func):
         user = request.user
         company = request.company
         #print 'user.id'
-        print user.id
+        #print user.id
         #print 'company'
-        print company.members
+        #print company.members
         #print 'not in members?'
-        print user.id not in company.members
+        #print user.id not in company.members
         if not user.is_staff and user.id not in company.administrators and user.id not in company.members:
             #print 'raising it'
             raise Http404
