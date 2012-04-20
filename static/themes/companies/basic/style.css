@@ -80,3 +80,8 @@ body.application div.panel-container div.tab-container div.tab { height: 140px; 
 .app_dashboard .app .title { position:absolute; display:block; bottom:0; width:198px; background:#CC0000; -moz-border-radius: 0 0 10px 10px; -webkit-border-radius:0 0 10px 10px; border-radius:0 0 10px 10px; line-height:30px; color:white; }
 #feed_configuration ol { list-style: decimal; margin-left: .5em; }
 #feed_configuration input[type=text] { width: 225px; }
+
+table#location_dialog_data { width: 100%; }
+table#location_dialog_data tr td, table#location_dialog_data tr th { border: 1px solid #CCC; padding: 1em; margin: 1em; }
+table#location_dialog_data tr th { font-weight: bold; }
+table#location_dialog_data tr td.source { width: 100px; }
