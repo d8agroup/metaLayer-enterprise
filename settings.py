@@ -186,5 +186,7 @@ elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
     from settings_dev import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
     from settings_clienttest import *
+elif socket.gethostbyname(socket.gethostname()) in ['50.57.164.216']:
+    from settings_providentia_dev import *
 elif socket.gethostname() in ['Todd-McNeals-MacBook-Pro.local']:
     from settings_tmcneal import *
