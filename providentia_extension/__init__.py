@@ -69,7 +69,7 @@ def render_javascript_based_visualization(config, search_results_collection, sea
         geoData.setValue(%d, 2, %d);
         geoData.setFormattedValue(%d, 2, '(Click marker for details)');
         """ % (
-            i, str(f['name']),
+            i, str(f['name'].encode('ascii', 'ignore')),
             i, _MARKER_COLORS['RED'],
             i, f['count'],
             i, _MARKER_COLORS['RED'],
