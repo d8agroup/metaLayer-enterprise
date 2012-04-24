@@ -32,7 +32,7 @@ def git():
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         with settings(warn_only=True):
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all && git commit' % dir)
-            local('cd /home/matt/code/metaLayer/enterprise/%s git push' % dir)
+            local('cd /home/matt/code/metaLayer/enterprise/%s && git push' % dir)
 
 def fetchall(branch='master'):
     for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
