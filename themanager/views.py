@@ -151,10 +151,10 @@ def load_project_widgets(request):
     if not project:
         raise Http404
     return_data = {
-        'data_points':[DataPointController.LoadDataPoint(d).get_unconfigured_config() for d in request.company.data_points_available],
-        'actions':[ActionController.LoadAction(a).get_unconfigured_config() for a in request.company.actions_available],
-        'outputs':[OutputController.LoadOutput(o).get_unconfigured_config() for o in request.company.outputs_available],
-        'visualizations':[VisualizationController.LoadVisualization(v).get_unconfigured_config() for v in request.company.visualizations_available],
+        'data_points':[DataPointController.LoadDataPoint(d).get_unconfigured_config() for d in ['twittersearch', 'googlenewssearch', 'feed']],
+        'actions':[ActionController.LoadAction(a).get_unconfigured_config() for a in ['localtagging', 'yahooplacemaker', 'localsentimentanalysis', 'kloutsharedapikey']],
+        'outputs':[OutputController.LoadOutput(o).get_unconfigured_config() for o in ['jsonoutput']],
+        'visualizations':[VisualizationController.LoadVisualization(v).get_unconfigured_config() for v in ['googlebarchart', 'googlegeochart', 'googlepiechart', 'd3cloud']],
     }
     return JSONResponse(return_data)
 
