@@ -141,7 +141,7 @@ def _background_colors(config):
         background_color = '#333333'
         empty_region_color = '#CCCCCC'
     else:
-        background_color = '#FFFFFF'
+        background_color = '#F8F6F6'
         empty_region_color = '#CCCCCC'
     
     return background_color, empty_region_color
