@@ -64,7 +64,7 @@ body.login .page_section_inner h2 { display:none; }
 
 .header_logo { display:block; float:right; width:112px; height:35px; position:relative; cursor: pointer; }
 
-body.application div.panel-container { position: absolute; top:55px; left:-200px; z-index:1000; }
+body.application div.panel-container { position: absolute; top:55px; left:-200px; z-index:500; }
 body.application div.panel-container div.panel { display: table-cell; width: 200px; background-color:#999; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
 body.application div.panel-container div.tab-container { display: table-cell; vertical-align: middle; }
 body.application div.panel-container div.tab-container div.tab { height: 140px; width: 35px; background-color:#999; cursor: pointer; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
@@ -81,7 +81,9 @@ body.application div.panel-container div.tab-container div.tab { height: 140px; 
 #feed_configuration ol { list-style: decimal; margin-left: .5em; }
 #feed_configuration input[type=text] { width: 225px; }
 
-table#location_dialog_data { width: 100%; }
-table#location_dialog_data tr td, table#location_dialog_data tr th { border: 1px solid #CCC; padding: 1em; margin: 1em; }
-table#location_dialog_data tr th { font-weight: bold; }
+.ui-modal {z-index:5000;}
+#location_dialog { height:400px !important; overflow:auto; }
+table#location_dialog_data { width: 100%;  }
+table#location_dialog_data tr td, table#location_dialog_data tr th { padding: 1em; margin: 1em; }
+table#location_dialog_data tr th { display:none; }
 table#location_dialog_data tr td.source { width: 100px; }
