@@ -91,6 +91,6 @@ div.panel-container .source_image { width:40px; position:relative; top:10px; }
 .ui-modal {z-index:5000;}
 #location_dialog { height:400px !important; overflow:auto; }
 table#location_dialog_data { width: 100%;  }
-table#location_dialog_data tr td, table#location_dialog_data tr th { padding: 1em; margin: 1em; }
+table#location_dialog_data tr td, table#location_dialog_data tr th { padding:10px 0; }
 table#location_dialog_data tr th { display:none; }
-table#location_dialog_data tr td.source { width: 100px; }
+table#location_dialog_data tr td img{ float:left; padding-right:10px;  }
