@@ -71,7 +71,7 @@ body.application div.panel-container div.tab-container div.tab { height: 140px; 
 
 .app_dashboard .app { float:left; text-align:center; padding-right:35px; }
 .app_dashboard .app a { display:block; background: transparent url('/static/themes/companies/basic/images/app_icon.png') no-repeat top left; width:199px; height:209px;  -moz-border-radius: 10px; -webkit-border-radius:10px; border-radius:10px; position:relative; font-size:120%;}
-.app_dashboard .app a:hover { background-color:#DDD !important;}
+.app_dashboard .app a:hover { }
 .app_dashboard .app.map a { background:url('images/app_map.png') no-repeat 40px 30px #444; }
 .app_dashboard .app.trends a { background:url('images/app_trends.png') no-repeat 40px 30px #444; background-size:120px;}
 .app_dashboard .app.feeds a { background:url('images/app_feeds.png') no-repeat 40px 30px #444; }
