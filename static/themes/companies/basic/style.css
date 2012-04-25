@@ -1,8 +1,8 @@
 header {  }
 header .header_logo { background:url('images/logo_enkidu7.png') 0 0 no-repeat; height:60px; background-size:60px; }
 header .center { width:0px; }
-header .right { width:900px;}
-body { background-color:#F8F6F6; padding-top:80px;}
+header .right { width:300px;}
+body { background-color:#F8F6F6; padding-top:0;}
 
 body.login header { display:none; }
 body.login .page_section_inner { background:url('images/Enkidu7.png') no-repeat center 0; padding-top:40px;}
@@ -65,10 +65,17 @@ body.login .page_section_inner h2 { display:none; }
 .header_logo { display:block; float:right; width:112px; height:35px; position:relative; cursor: pointer; }
 
 body.application div.panel-container { position: absolute; top:55px; left:-200px; z-index:500; }
-body.application div.panel-container div.panel { display: table-cell; width: 200px; background-color:#999; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
+body.application div.panel-container div.panel { display: table-cell; width: 200px; background-color:#999; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; height:400px;}
 body.application div.panel-container div.tab-container { display: table-cell; vertical-align: middle; }
-body.application div.panel-container div.tab-container div.tab { height: 140px; width: 35px; background-color:#999; cursor: pointer; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; }
+body.application div.panel-container div.tab-container div.tab { height: 140px; width: 35px; background-color:#999; cursor: pointer; -moz-border-radius:0 3px 3px 0; -webkit-border-radius:0 3px 3px 0; border-radius:0 3px 3px 0; background:url('images/Enkidu7_side.png') no-repeat #999 center; background-size:30px;}
+div.panel-container div.panel {background:url('images/Enkidu7.png') no-repeat center 30px; background-size:100px; padding-top:40px;}
+div.panel-container div.panel .instructions { padding:10px 0; color:#333; font-style:italic;}
+div.panel-container div.panel input[type=text] { width:140px; padding:10px ;}
+div.panel-container div.panel select { width:140px; padding:10px ; }
+div.panel-container .source_type { padding-left:10px;}
+div.panel-container .source_image { width:40px; position:relative; top:10px; }
 
+.app_dashboard { margin-top:80px;}
 .app_dashboard .app { float:left; text-align:center; padding-right:35px; }
 .app_dashboard .app a { display:block; background: transparent url('/static/themes/companies/basic/images/app_icon.png') no-repeat top left; width:199px; height:209px;  -moz-border-radius: 10px; -webkit-border-radius:10px; border-radius:10px; position:relative; font-size:120%;}
 .app_dashboard .app a:hover { }
