@@ -2,23 +2,9 @@ DEBUG = True
 
 SOLR_CONFIG = {
     'default_page_size':100,
-    #'solr_url':'http://50.57.227.192:8080/solr',
-    'solr_url':'http://ubox3.trssllc.com:8080/solr',
+    'solr_url':'http://50.57.227.192:8080/solr',
     'solr_params':'wt=json&facet=on&sort=time+desc&rows=100&facet.mincount=1',
-    'solr_facets':{
-        'source_display_name':{
-            'display_name':'Source',
-            'enabled':True,
-            },
-        'channel_type':{
-            'display_name':'Type',
-            'enabled':True,
-            },
-        'tags':{
-            'display_name':'Tags',
-            'enabled':True,
-            }
-    }
+    'solr_facets':{}
 }
 
 EMAIL_USE_TLS = True
