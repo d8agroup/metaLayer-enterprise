@@ -125,7 +125,8 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="form_actions two_up">
+                <div class="form_actions three_up">
+                    <input type="submit" value="{{ template_strings.manage_project.form_action_delete }}" class="button" name="delete" />
                     <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}" class="button">{{ template_strings.manage_project.form_action_cancel }}</a>
                     <input type="submit" value="{{ template_strings.manage_project.form_action_save }}" class="button" />
                 </div>

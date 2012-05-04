@@ -71,7 +71,11 @@ def edit_project(request, id):
         messages.error(request, constants.TEMPLATE_STRINGS['view_project']['message_not_project_member'])
         return redirect('/%s/%s' % (settings.SITE_URLS['company_prefix'], request.company.id))
 
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST.get('delete'):
+        ProjectsController.MarkProjectAsInactive(request.company, id)
+        messages.info(request, constants.TEMPLATE_STRINGS['manage_project']['message_project_inactive'] % project.display_name)
+        return redirect('/%s/%s' % (settings.SITE_URLS['company_prefix'], request.company.id))
+    elif request.method == 'POST':
         passed, errors = ProjectsController.UpdateProjectFromFormValues(id, request.company, request.POST)
         if passed:
             ActivityRecordsController.RecordProjectSaved(request.user, request.company, project)

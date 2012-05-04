@@ -175,6 +175,13 @@ class ProjectsController(object):
             project.insights.append(insight_id)
         company.save()
 
+    @classmethod
+    def MarkProjectAsInactive(cls, company, project_id):
+        company = CompaniesController.GetCompanyById(company.id)
+        project = [p for p in company.projects if p.project_id == project_id][0]
+        project.active = False
+        company.save()
+
 class ActivityRecordsController(object):
     @classmethod
     def _Record_Activity(cls, activity_message_key, activity_type, company, project, user, insight=None, secondary_user=None):

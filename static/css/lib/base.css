@@ -44,6 +44,7 @@ form .form_row.checkbox_list .checkbox_list_item img { width:16px; height:16px; 
 form .form_actions { text-align:center;}
 form .form_actions .button { width:100%;}
 form .form_actions.two_up .button { width:48%; }
+form .form_actions.three_up .button { width:32%; }
 form .form_section { border: 1px solid #AAA; padding:10px; margin-bottom:40px;}
 form .form_section h5 { font-size:130%; position:relative; top:-20px; background-color:#FFF; display:inline-block; padding:0 10px 0 25px;}
 
