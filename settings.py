@@ -187,3 +187,5 @@ elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
     from settings_dev import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
     from settings_clienttest import *
+elif socket.gethostbyname(socket.gethostname()) in ['108.166.124.231']:
+    from settings_prod_draftfcb import *
