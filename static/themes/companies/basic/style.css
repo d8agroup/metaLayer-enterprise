@@ -27,6 +27,8 @@ body { background-image:url('images/background_page.png'); }
 .company.edit_user h3 { line-height:32px; background:url('images/users.png') no-repeat; padding-left:40px;}
 .company.edit_user h5 { font-weight:normal; font-style:italic; }
 
+.company.change_password h3 { line-height:32px; background:url('images/padlock.png') no-repeat; padding-left:40px;}
+
 .activity_container .activity_container_inner { padding:0 10px 10px; background-color:#fafafa; }
 .activity_container .activity_container_inner h3 {background:url('images/activity.png') no-repeat 0 5px; padding:5px;  padding-left:40px; }
 .activity_container .activity_container_inner ul { height:300px; overflow:auto; }

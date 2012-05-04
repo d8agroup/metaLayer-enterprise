@@ -73,6 +73,20 @@ TEMPLATE_STRINGS = {
     'company_home':{
         'title_projects':'Your Companies Projects',
         'button_title_create_new_project':'Click here to create a new project for your company.',
+    },
+    'change_password':{
+        'h3':'Change Your Password',
+        'h5':'Passwords must be at least six characters long and contain only letters, numbers and underscores',
+        'label_current_password':'Your Current Password',
+        'label_new_password_1':'Your New Password',
+        'label_new_password_2':'Your New Password Again',
+        'form_action_cancel':'Cancel',
+        'form_action_save':'Save',
+        'form_errors_incomplete':'All fields are required',
+        'form_errors_current_password':'Your current password is incorrect',
+        'form_errors_new_password_match':'The new passwords you entered do not match',
+        'form_errors_new_password_strength':'Passwords must be at least six characters long and contain only letters, numbers and underscores',
+        'messages_password_saved':'Your password has been updated',
     }
 
 }

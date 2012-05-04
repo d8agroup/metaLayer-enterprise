@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect
+import re
 from companies.controllers import  ProjectsController, CompaniesController, ActivityRecordsController
 import constants
 from customtags.templatetags.custom_tags import is_company_admin
@@ -38,6 +39,32 @@ def landing_page(request):
 def logout(request):
     UserController.LogoutUser(request)
     return redirect(landing_page)
+
+@ensure_company_membership
+def change_password(request):
+    errors = []
+    if request.method == 'POST':
+        current_password = request.POST.get('current_password')
+        new_password_1 = request.POST.get('new_password_1')
+        new_password_2 = request.POST.get('new_password_2')
+        if not current_password or not new_password_1 or not new_password_2:
+            errors.append(constants.TEMPLATE_STRINGS['change_password']['form_errors_incomplete'])
+        if not errors and not request.user.check_password(current_password):
+            errors.append(constants.TEMPLATE_STRINGS['change_password']['form_errors_current_password'])
+        if not errors and not new_password_1 == new_password_2:
+            errors.append(constants.TEMPLATE_STRINGS['change_password']['form_errors_new_password_match'])
+        if not errors and not re.search(r'^\w+$', new_password_1) or len(new_password_1) < 6:
+            errors.append(constants.TEMPLATE_STRINGS['change_password']['form_errors_new_password_strength'])
+        if not errors:
+            request.user.set_password(new_password_1)
+            request.user.save()
+            messages.info(request, constants.TEMPLATE_STRINGS['change_password']['messages_password_saved'])
+            return redirect('/%s/%s' % (settings.SITE_URLS['company_prefix'], request.company.id))
+    return render_to_device(
+        request,
+        {'errors':errors},
+        '/themanager/change_password.html'
+    )
 
 @ensure_company_membership
 def company_root(request):
