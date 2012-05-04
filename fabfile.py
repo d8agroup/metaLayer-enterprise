@@ -26,7 +26,7 @@ def clienttest():
     env.hosts = ['root@me.clienttest.web.01']
 
 def prod():
-    pass
+    env.hosts = ['root@me.prod.draftfcb.01']
 
 def git():
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
