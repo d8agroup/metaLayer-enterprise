@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import constants
-from userprofiles.forms import validate_user
+from userprofiles.forms import validate_user, validate_update_user
 from utils import my_import
 
 class UserController(object):
@@ -64,4 +64,26 @@ class UserController(object):
     @classmethod
     def LogoutUser(cls, request):
         logout(request)
+
+    @classmethod
+    def UpdateUserFromValues(cls, id, values, company):
+        passed, errors, clean_values = validate_update_user(values)
+        if not passed:
+            return False, errors
+        try:
+            user = User.objects.get(id=id)
+        except User.DoesNotExist:
+            return False, [constants.TEMPLATE_STRINGS['manage_user']['form_error_user_not_exists']]
+
+        user.username = clean_values['email']
+        user.email = clean_values['email']
+        user.first_name = clean_values['first_name']
+        user.last_name = clean_values['last_name']
+
+        if clean_values['password']:
+            user.set_password(clean_values['password'])
+
+        user.save()
+        return True, []
+
 

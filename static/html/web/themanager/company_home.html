@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block manager_page %}
-    <div class="page_section">
+    <div class="page_section projects_section">
         <div class="page_section_inner">
             <div class="clearfix fill_width">
                 <div class="left two_thirds">
@@ -67,4 +67,34 @@
             </div>
         </div>
     </div>
+    {% if user|is_company_admin:company %}
+        <div class="page_section users_section">
+            <div class="page_section_inner">
+                <h3>
+                    {{ template_strings.company_home.title_members }}
+                    <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new"
+                       class="img_button right tool_tip add"
+                       title='{{ template_strings.company_home.button_title_create_new_user}}'>
+                                <span>
+                                    Create a new member
+                                </span>
+                    </a>
+                </h3>
+                <table>
+                    {% for member in members %}
+                        <tr>
+                            <td class="user_name">{{ member.username }}</td>
+                            <td class="actions">
+                                <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/edit/{{ member.id }}"
+                                   class='img_button_small edit tool_tip'
+                                   title='{{ template_strings.company_home.button_title_edit_user}}'>
+                                    <span>Edit</span>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %}

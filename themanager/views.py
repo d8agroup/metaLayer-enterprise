@@ -70,7 +70,8 @@ def change_password(request):
 def company_root(request):
     template_data = {
         'projects':ProjectsController.GetCompanyProjectsForUser(request.company, request.user),
-        'company_activity':ActivityRecordsController.GetAndFormatCompanyWideActivity(request.user, request.company)
+        'company_activity':ActivityRecordsController.GetAndFormatCompanyWideActivity(request.user, request.company),
+        'members':CompaniesController.GetAllActiveCompanyMembers(request.company),
     }
     return render_to_device(
         request,
@@ -200,9 +201,14 @@ def load_project_api_keys(request):
 
 @ensure_company_membership
 def edit_user(request, id=None):
-    template_data = {}
+    template_data = {
+        'is_edit':bool(id is not None)
+    }
     if request.method == 'POST':
-        passed, errors = UserController.CreateNewUserFromValues(request.POST, request.company)
+        if id:
+            passed, errors = UserController.UpdateUserFromValues(id, request.POST, request.company)
+        else:
+            passed, errors = UserController.CreateNewUserFromValues(request.POST, request.company)
         if passed:
             user = UserController.GetUserByEmail(request.POST['email'])
             CompaniesController.AddUserToCompany(request.company, user)

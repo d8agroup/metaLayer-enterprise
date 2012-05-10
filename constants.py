@@ -35,6 +35,7 @@ TEMPLATE_STRINGS = {
         'form_error_first_name':'First name should only contain letter',
         'form_error_last_name':'Last name should only contain letter',
         'form_error_user_exists':'Sorry, a user with that emails address already exists',
+        'form_error_user_not_exists':'Sorry, there was an error saving that user',
     },
     'manage_project':{
         'h3_edit':'Edit this project:',
@@ -73,6 +74,9 @@ TEMPLATE_STRINGS = {
     'company_home':{
         'title_projects':'Your Companies Projects',
         'button_title_create_new_project':'Click here to create a new project for your company.',
+        'title_members':'Your Companies Members',
+        'button_title_create_new_user':'Click here to add a new member.',
+        'button_title_edit_user':'Edit this user'
     },
     'change_password':{
         'h3':'Change Your Password',

@@ -22,7 +22,7 @@ def dev():
 def stage():
     pass
 
-def clienttest():
+def demo():
     env.hosts = ['root@me.clienttest.web.01']
 
 def prod():

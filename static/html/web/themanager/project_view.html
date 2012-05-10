@@ -52,7 +52,7 @@
                                         {% if insight.username == user.username %}
                                             <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/projects/{{ project.project_id }}/dashboard/{{ insight.id }}"
                                                title='{{ template_strings.view_project.insights_edit_button }}'
-                                               class="tool_tip img_button_small edit">
+                                               class="tool_tip img_button_small view">
                                                 <span>{{ template_strings.view_project.insights_edit_button }}</span>
                                             </a>
                                         {% else %}

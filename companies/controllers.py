@@ -1,5 +1,6 @@
 import random
 import string
+from django.contrib.auth.models import User
 from companies.forms import validate_company, clean_and_validate_project_form, clean_and_validate_company_api_keys_form
 from companies.models import Company, Project, ActivityRecord, ActivityDetails
 from companies.utils import user_is_company_admin
@@ -117,6 +118,10 @@ class CompaniesController(object):
         company.api_keys = clean_values
         company.save()
 
+    @classmethod
+    def GetAllActiveCompanyMembers(cls, company):
+        company = cls.GetCompanyById(company.id)
+        return [User.objects.get(id=member_id) for member_id in company.members]
 
 
 class ProjectsController(object):

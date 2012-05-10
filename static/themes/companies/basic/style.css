@@ -8,10 +8,15 @@ body { background-image:url('images/background_page.png'); }
 
 .page_section { background-color:#FFF; box-shadow:0px 0px 8px #c7c7c7; -moz-box-shadow:0px 0px 8px #111; -webkit-box-shadow:0px 0px 8px #111; -moz-border-radius:3px; -webkit-border-radius:3px; }
 
-.company.home h3 { line-height:32px; background:url('images/project.png') no-repeat; padding-left:40px; }
+.company.home .projects_section h3 { line-height:32px; background:url('images/project.png') no-repeat; padding-left:40px; }
 .company.home .projects .project { background-image: linear-gradient(bottom, rgb(204,204,204) 14%, rgb(221,221,221) 35%, rgb(238,238,238) 70%); background-image: -o-linear-gradient(bottom, rgb(204,204,204) 14%, rgb(221,221,221) 35%, rgb(238,238,238) 70%); background-image: -moz-linear-gradient(bottom, rgb(204,204,204) 14%, rgb(221,221,221) 35%, rgb(238,238,238) 70%); background-image: -webkit-linear-gradient(bottom, rgb(204,204,204) 14%, rgb(221,221,221) 35%, rgb(238,238,238) 70%); background-image: -ms-linear-gradient(bottom, rgb(204,204,204) 14%, rgb(221,221,221) 35%, rgb(238,238,238) 70%); background-image: -webkit-gradient( linear, left bottom, left top, color-stop(0.14, rgb(204,204,204)), color-stop(0.35, rgb(221,221,221)), color-stop(0.7, rgb(238,238,238)) );}
 .company.home .projects .project h4 { line-height:16px; background:url('images/project_small.png') no-repeat; padding-left:25px;}
 .company.home .projects .empty h4 { line-height:32px; background:url('images/caution.png') no-repeat; padding-left:40px; }
+
+.company.home .users_section h3 { line-height:32px; background:url('images/users.png') no-repeat; padding-left:40px; }
+.company.home .users_section table { width:80%; margin:0 auto; }
+.company.home .users_section table td { padding:10px; }
+.company.home .users_section table td.user_name { font-size:120%;}
 
 .company.view_project h3 { line-height:32px; background:url('images/project.png') no-repeat; padding-left:40px; }
 .company.view_project h4 { line-height:32px; padding-left:40px; font-size:130%; margin-top:20px; }
@@ -47,5 +52,6 @@ body { background-image:url('images/background_page.png'); }
 
 .img_button_small.add { background:url('images/add_small.png') no-repeat; }
 .img_button_small.delete { background:url('images/delete_small.png') no-repeat; }
-.img_button_small.edit { background:url('images/view_small.png') no-repeat; }
+.img_button_small.edit { background:url('images/edit_small.png') no-repeat; }
+.img_button_small.view { background:url('images/view_small.png') no-repeat; }
 .img_button_small.remix { background:url('images/remix_small.png') no-repeat; }
