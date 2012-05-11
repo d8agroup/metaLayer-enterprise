@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-import constants
+from enterprise import constants
 from userprofiles.forms import validate_user, validate_update_user
 from utils import my_import
 
@@ -44,6 +44,11 @@ class UserController(object):
         #email_controller = EmailController(company)
         #email_controller.send_new_user_created_email(user, user_password)
         return True, []
+
+    @classmethod
+    def GetAllUsers(cls, user_subscription_filter=None):
+        users = User.objects.all()
+        return users
 
     @classmethod
     def GetUserByUserId(cls, id):
