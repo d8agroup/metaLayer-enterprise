@@ -24,6 +24,7 @@ TEMPLATE_STRINGS = {
         'h5_create_email_messages':'Once the user has been successfully created, they will be sent an email with their password and login instructions',
         'form_label_username':'Users Email Address',
         'form_label_password':'Users Password',
+        'form_label_password_edit':'Update Password or leave blank',
         'form_label_first_name':'First Name',
         'form_label_last_name':'Last Name',
         'form_action_cancel':'Cancel',

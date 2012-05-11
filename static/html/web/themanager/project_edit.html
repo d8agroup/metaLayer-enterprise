@@ -50,13 +50,13 @@
                     <div class="form_row checkbox_list">
                         <label>
                             {{ template_strings.manage_project.form_label_project_members }}
-                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new?next={{ request.get_full_path }}"
-                               class="img_button_small add tool_tip right"
-                               title='{{ template_strings.manage_project.button_add_new_user }}'>
-                                <span>
-                                    {{ template_strings.manage_project.button_add_new_user }}
-                                </span>
-                            </a>
+{#                            <a href="/{{ settings.SITE_URLS.company_prefix }}/{{ company.id }}/users/new?next={{ request.get_full_path }}"#}
+{#                               class="img_button_small add tool_tip right"#}
+{#                               title='{{ template_strings.manage_project.button_add_new_user }}'>#}
+{#                                <span>#}
+{#                                    {{ template_strings.manage_project.button_add_new_user }}#}
+{#                                </span>#}
+{#                            </a>#}
                         </label>
                         {% for u in company_members %}
                             <div class="checkbox_list_item">

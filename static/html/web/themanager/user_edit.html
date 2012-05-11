@@ -26,7 +26,11 @@
                     <input type="text" name="email" value="{{ subject_user.email }}" />
                 </div>
                 <div class="form_row">
-                    <label>{{ template_strings.manage_user.form_label_password }}</label>
+                    {% if is_edit %}
+                        <label>{{ template_strings.manage_user.form_label_password_edit }}</label>
+                    {% else %}
+                        <label>{{ template_strings.manage_user.form_label_password_ }}</label>
+                    {% endif %}
                     <input type="text" name='password' value="" />
                 </div>
                 <div class="form_row">
