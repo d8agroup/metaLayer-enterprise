@@ -77,6 +77,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "enterprise.contextprocessors.themes.context_themes",
     "enterprise.contextprocessors.settings.context_settings",
     'enterprise.contextprocessors.company.context_company',
+    'enterprise.contextprocessors.additionalhtml.context_additionalhtml',
 )
 
 
@@ -179,6 +180,10 @@ GOOGLE_ANALYTICS = {
     'account':'',
     'site_host':'',
 }
+
+ADDITIONAL_PAGE_INCLUDES = [
+    'getsatisfaction.html'
+]
 
 import socket
 if socket.gethostname() in ['mattgriffiths']:
