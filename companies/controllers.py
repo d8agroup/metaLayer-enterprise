@@ -190,6 +190,8 @@ class ProjectsController(object):
 class ActivityRecordsController(object):
     @classmethod
     def _Record_Activity(cls, activity_message_key, activity_type, company, project, user, insight=None, secondary_user=None):
+        if user.is_staff:
+            return
         record = ActivityRecord(user_id=user.id)
         if company and project:
             record.company_id = company.id
