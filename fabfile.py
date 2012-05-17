@@ -86,6 +86,7 @@ def runcommand():
     #run('ln -s /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
     #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
     #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE')
+    put('~/Documents/metaLayer/DraftFBC/Data/20120516/processing/processing.tar.gz', '/tmp')
     pass
 
 def serversetup(server_ip=None, git_managed=False):
