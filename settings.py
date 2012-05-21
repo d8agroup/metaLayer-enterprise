@@ -158,10 +158,11 @@ LOGIN_AND_REDIRECTION_POLICIES = [
     'companymemberpolicy',
 ]
 
+SOLR_PARAMS = 'wt=json&facet=on&sort=time+desc&rows=100&facet.mincount=1&stats=true'
 SOLR_CONFIG = {
     'default_page_size':100,
     'solr_url':'http://localhost:8080/solr',
-    'solr_params':'wt=json&facet=on&sort=time+desc&rows=100&facet.mincount=1',
+    'solr_params': SOLR_PARAMS,
     'solr_facets':{}
 }
 
