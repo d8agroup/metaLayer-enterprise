@@ -22,7 +22,7 @@ def _update_deployment_timestamp():
     import fileinput
     for line in fileinput.input('settings.py', inplace=1):
         if line.startswith('DEPLOYMENT_TIMESTAMP'):
-            print 'DEPLOYMENT_TIMESTAMP = %i' % int(time.time()),
+            print 'DEPLOYMENT_TIMESTAMP = %i \n' % int(time.time()),
         else:
             print line,
 
