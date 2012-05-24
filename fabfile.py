@@ -1,6 +1,8 @@
 from __future__ import with_statement
 import os
 from fabric.api import *
+import sys
+import time
 
 packages = {
     'pip':[
@@ -16,6 +18,14 @@ packages = {
     ]
 }
 
+def _update_deployment_timestamp():
+    import fileinput
+    for line in fileinput.input('settings.py', inplace=1):
+        if line.startswith('DEPLOYMENT_TIMESTAMP'):
+            print 'DEPLOYMENT_TIMESTAMP = %i' % int(time.time()),
+        else:
+            print line,
+
 def dev():
     env.hosts = ['root@me.dev']
 
@@ -29,6 +39,7 @@ def prod():
     env.hosts = ['root@me.prod.draftfcb.01']
 
 def git():
+    _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         with settings(warn_only=True):
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
@@ -204,3 +215,4 @@ def solrsetup():
     run('service tomcat6 restart')
     run('curl http://localhost:8080/solr/select/?q=*')
     run('read -p "PLEASE CHECK THE SOLR OUTPUT ABOVE"')
+
