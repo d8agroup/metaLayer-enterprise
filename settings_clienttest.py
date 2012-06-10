@@ -18,7 +18,7 @@ DYNAMIC_IMAGES_WEB_ROOT = '/static/CACHE/images/'
 
 DYNAMIC_IMAGES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/imaging/CACHE/'
 
-SENTRY_DSN = 'http://a9d2974e46d3488f8c6afd26771e3da5:4e97f687aa914069b6a0068ad4250939@108.166.111.61:9000/6'
+SENTRY_DSN = 'http://bbd4d07c292840c6a04fbbd534620271:8ca5de91ef1948b2915e1e70eef04b50@108.166.111.61:9000/2'
 
 TEMPLATE_DIRS = ( '/usr/local/metaLayer-enterprise/enterprise/static/html', )
 
