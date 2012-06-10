@@ -11,7 +11,8 @@ packages = {
         'raven==1.4.6',
         'pyyaml',
         '-U distribute',
-        'nltk'
+        'nltk',
+        'tablib==0.9.11'
     ],
     'apt-get':[
         'python-memcache',

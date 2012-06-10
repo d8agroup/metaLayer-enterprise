@@ -1,3 +1,4 @@
+from threading import Thread
 from bson.objectid import ObjectId
 from django.db.models.base import ModelBase
 from django.http import HttpResponse
@@ -6,6 +7,14 @@ from django.template.loader import get_template
 from django.template import Context
 from django.utils.encoding import force_unicode
 import datetime
+
+def async(gen):
+    def func(*args, **kwargs):
+        it = gen(*args, **kwargs)
+        result = it.next()
+        Thread(target=lambda: list(it)).start()
+        return result
+    return func
 
 def get_pretty_date(time=False):
     """
