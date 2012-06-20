@@ -8,7 +8,7 @@ EMAIL_HOST_USER = 'no-reply@metalayer.com'
 EMAIL_HOST_PASSWORD = '##M3taM3ta'
 EMAIL_PORT = 587
 
-SITE_HOST = '108.166.98.69'
+SITE_HOST = 'enterprise.demo.metalayer.com' #'108.166.98.69'
 
 STATIC_HOST = SITE_HOST
 
