@@ -1,7 +1,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DEPLOYMENT_TIMESTAMP = 1339332715 
+DEPLOYMENT_TIMESTAMP = 1340915161 
 
 ADMINS = ()
 
@@ -33,7 +33,7 @@ IMAGE_HOST = SITE_HOST
 
 DYNAMIC_IMAGES_WEB_ROOT = '/static/CACHE/images/'
 
-DYNAMIC_IMAGES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/imaging/CACHE/'
+DYNAMIC_IMAGES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE/'
 
 THEMES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/static/themes'
 
@@ -112,7 +112,7 @@ INSTALLED_APPS = (
     'enterprise.userprofiles',
     'enterprise.customtags',
     'enterprise.emails',
-    'enterprise.imaging',
+    'enterprise.metalayercore.imaging',
 )
 
 LOGGING = {

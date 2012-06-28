@@ -16,7 +16,7 @@ IMAGE_HOST = SITE_HOST
 
 DYNAMIC_IMAGES_WEB_ROOT = '/static/CACHE/images/'
 
-DYNAMIC_IMAGES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/imaging/CACHE/'
+DYNAMIC_IMAGES_ROOT = '/usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE/'
 
 SENTRY_DSN = 'http://417b835ac428418495a82d36ba29d370:8f410e4218184281b09dd13af529c00e@108.166.111.61:9000/7'
 

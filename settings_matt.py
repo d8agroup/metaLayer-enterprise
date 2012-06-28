@@ -23,7 +23,7 @@ IMAGE_HOST = SITE_HOST
 
 DYNAMIC_IMAGES_WEB_ROOT = '/static/CACHE/images/'
 
-DYNAMIC_IMAGES_ROOT = '/home/matt/code/metaLayer/enterprise/imaging/CACHE/'
+DYNAMIC_IMAGES_ROOT = '/home/matt/code/metaLayer/enterprise/metalayercore/imaging/CACHE/'
 
 THEMES_ROOT = '/home/matt/code/metaLayer/enterprise/static/themes'
 
