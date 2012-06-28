@@ -67,6 +67,8 @@ STATIC_URL = '/static/'
 
 SECRET_KEY = 'gh_uttm==e7005!ew!z5ae#&5)0nj_-*yx6659-ujc-0@4j68c'
 
+FILE_UPLOAD_MAX_MEMORY_SIZE = 0
+
 TEMPLATE_LOADERS = ( 'django.template.loaders.filesystem.Loader', )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
