@@ -95,10 +95,12 @@ def runcommand():
     #run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/html /usr/local/metaLayer-enterprise/enterprise/static/html/thedashboard')
     #run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/js /usr/local/metaLayer-enterprise/enterprise/static/js/thedashboard')
     #run('mkdir /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    #run('ln -s /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
-    #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE')
-    put('~/Documents/metaLayer/DraftFBC/Data/20120516/processing/processing.tar.gz', '/tmp')
+    run('rm /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    run('ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
+    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE')
+    run('service apache2 restart')
+    #put('~/Documents/metaLayer/DraftFBC/Data/20120516/processing/processing.tar.gz', '/tmp')
     pass
 
 def serversetup(server_ip=None, git_managed=False):
