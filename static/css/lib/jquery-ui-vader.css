@@ -92,7 +92,7 @@
 .ui-state-default .ui-icon { background-image: url(/static/images/lib/vader/ui-icons_666666_256x240.png); }
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(/static/images/lib/vader/ui-icons_c98000_256x240.png); }
 .ui-state-active .ui-icon {background-image: url(/static/images/lib/vader/ui-icons_f29a00_256x240.png); }
-.ui-state-highlight .ui-icon {background-image: url(/static/images/lib/vader/ui-icons_aaaaaa_256x240.png); }
+.ui-state-highlight .ui-icon {background-image: url(/static/images/lib/vader/ui-icons_666666_256x240.png); }
 .ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(/static/images/lib/vader/ui-icons_cd0a0a_256x240.png); }
 
 /* positioning */

@@ -4,7 +4,7 @@ DEBUG = True
 
 SOLR_CONFIG = {
     'default_page_size':100,
-    'solr_url':'http://50.57.227.192:8080/solr',
+    'solr_url':'http://108.166.59.173:8080/solr',
     'solr_params':SOLR_PARAMS,
     'solr_facets':{}
 }
