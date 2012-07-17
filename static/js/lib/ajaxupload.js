@@ -140,6 +140,10 @@
     function copyLayout(from, to){
         var box = getBox(from);
 
+        //Added ref: https://github.com/valums/ajax-upload/issues/28
+        if ($('.ui-widget-overlay').size() > 0)
+            box = $(from).position();
+
         addStyles(to, {
             position: 'absolute',
             left : box.left + 'px',
@@ -372,7 +376,7 @@
                 // in Internet Explorer
                 'direction' : 'ltr',
                 //Max zIndex supported by Opera 9.0-9.2
-                'zIndex': 2147483583
+                'zIndex': 0//2147483583
             });
 
             // Make sure that element opacity exists.
@@ -430,7 +434,18 @@
             });
 
             div.appendChild(input);
-            document.body.appendChild(div);
+
+            //Added ref: https://github.com/valums/ajax-upload/issues/28
+            //document.body.appendChild(div);
+//            if ($('.ui-widget-overlay').size() > 0)
+//                $('.ui-dialog').get(0).appendChild(div);
+//            else
+//                document.body.appendChild(div);
+            if( $( '.ui-widget-overlay' ).size() > 0 ) {
+                $( self._button ).parent().parent().get(0).appendChild( div );
+            } else {
+                document.body.appendChild(div);
+            }
 
             this._input = input;
         },

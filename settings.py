@@ -59,7 +59,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-MEDIA_ROOT = ''
+MEDIA_ROOT = '/tmp/'
 MEDIA_URL = ''
 
 STATIC_ROOT = ''

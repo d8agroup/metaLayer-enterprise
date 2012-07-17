@@ -12,7 +12,8 @@ packages = {
         'pyyaml',
         '-U distribute',
         'nltk',
-        'tablib==0.9.11'
+        'tablib==0.9.11',
+        'chardet'
     ],
     'apt-get':[
         'python-memcache',
@@ -46,6 +47,32 @@ def git():
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
             local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
             local('cd /home/matt/code/metaLayer/enterprise/%s && git push' % dir)
+
+def create_story_branch(story_name):
+    for dir in ['metalayercore', 'thedashboard', '.']:
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout -b %s' % (dir, story_name))
+
+def commit_story_branch():
+    for dir in ['metalayercore', 'thedashboard', '.']:
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
+        with settings(warn_only=True):
+            local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
+
+def rebase_story_branch():
+    for dir in ['metalayercore', 'thedashboard', '.']:
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git fetch origin master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase origin/master' % dir)
+
+def squash_and_close_story_branch(story_name):
+    for dir in ['metalayercore', 'thedashboard', '.']:
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i origin/master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin master' % dir)
+
+
+
+
 
 def fetchall(branch='master'):
     for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
