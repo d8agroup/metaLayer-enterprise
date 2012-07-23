@@ -70,10 +70,6 @@ def squash_and_close_story_branch(story_name):
         local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
         local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin master' % dir)
 
-
-
-
-
 def fetchall(branch='master'):
     for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
         with settings(warn_only=True):
@@ -134,7 +130,6 @@ def serversetup(server_ip=None, git_managed=False):
     apachesetup()
     codebasesetup(server_ip, git_managed)
     solrsetup()
-
 
 def apachesetup():
     ####################################################################################################################
