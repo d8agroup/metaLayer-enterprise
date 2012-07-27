@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 
-for staff in ['jg@metalayer.com', 'cb@metalayer.com']:
+for staff in ['jg@metalayer.com', 'cb@metalayer.com', 'rs@metalayer.com']:
     u = User.objects.create_user(staff, staff, '!!M3taM3ta')
     u.is_staff = True
     u.save()

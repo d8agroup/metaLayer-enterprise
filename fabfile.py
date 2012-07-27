@@ -13,10 +13,12 @@ packages = {
         '-U distribute',
         'nltk',
         'tablib==0.9.11',
-        'chardet'
+        'chardet',
+        'numpy'
     ],
     'apt-get':[
         'python-memcache',
+        'python-dev'
     ]
 }
 
@@ -82,10 +84,10 @@ def fetchall(branch='master'):
 
 def deploy(install_packages=False):
     if install_packages:
-        for package in packages['pip']:
-            run('pip install %s' % package)
         for package in packages['apt-get']:
             run('apt-get install %s' % package)
+        for package in packages['pip']:
+            run('pip install %s' % package)
 
     with cd('/usr/local/metaLayer-enterprise/enterprise'):
         run("git pull")
@@ -122,11 +124,11 @@ def runcommand():
     #run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/html /usr/local/metaLayer-enterprise/enterprise/static/html/thedashboard')
     #run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/js /usr/local/metaLayer-enterprise/enterprise/static/js/thedashboard')
     #run('mkdir /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    run('rm /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
-    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE')
-    run('service apache2 restart')
+    #run('rm /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    #run('ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
+    #run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE')
+    #run('service apache2 restart')
     #put('~/Documents/metaLayer/DraftFBC/Data/20120516/processing/processing.tar.gz', '/tmp')
     pass
 
@@ -153,10 +155,10 @@ def codebasesetup(server_ip=None, git_managed=False):
     run('apt-get update')
     run('apt-get install git-core mercurial mongodb python-cairo python-rsvg python-pip curl')
     run('pip install --upgrade pip')
-    for package in packages['pip']:
-        run('pip install %s' % package)
     for package in packages['apt-get']:
         run('apt-get install %s' % package)
+    for package in packages['pip']:
+        run('pip install %s' % package)
     with settings(warn_only=True):
         system_packages = run('pip freeze -l').splitlines()
         system_packages = [p.split('==')[0] for p in system_packages]
@@ -190,7 +192,7 @@ def codebasesetup(server_ip=None, git_managed=False):
             run('git checkout master')
             run('git submodule init && git submodule update')
         run('cd /usr/local/metaLayer-enterprise/enterprise && python manage.py syncdb')
-        with cd('cd /usr/local/metaLayer-enterprise/enterprise'):
+        with cd('/usr/local/metaLayer-enterprise/enterprise'):
             run('more /tmp/create_users | python manage.py shell')
         run('rm /tmp/create_users')
     else:
@@ -213,9 +215,9 @@ def codebasesetup(server_ip=None, git_managed=False):
     run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/html /usr/local/metaLayer-enterprise/enterprise/static/html/thedashboard')
     run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/js /usr/local/metaLayer-enterprise/enterprise/static/js/thedashboard')
     run('mkdir /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    run('ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
     run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/imaging/CACHE')
+    run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE')
     run('service apache2 restart')
     run('curl http://localhost')
 
@@ -227,16 +229,17 @@ def solrsetup():
     run('apt-get install tomcat6')
     with settings(warn_only=True):
         run('rm /var/solr -r')
-        run('rm /tmp/solr -r')
-    run('mkdir /tmp/solr')
+        run('rm /etc/tomcat6/Catalina/localhost/solr.xml')
+        #run('rm /tmp/solr -r')
+    #run('mkdir /tmp/solr')
     run('mkdir /var/solr')
-    with cd('/tmp/solr'):
-        run('wget http://mirror.cc.columbia.edu/pub/software/apache/lucene/solr/3.4.0/apache-solr-3.4.0.tgz')
-        run('tar xzf apache-solr-3.4.0.tgz')
-        run('cp apache-solr-3.4.0/dist/apache-solr-3.4.0.war /var/solr/solr.war')
-        run('cp apache-solr-3.4.0/example/solr/* /var/solr -r')
-    run('rm /var/solr/conf/schema.xml')
-    put('%s/assets/solr/schema.xml' % os.path.dirname(__file__), '/var/solr/conf/schema.xml', mode=0755)
+#    with cd('/tmp/solr'):
+#        run('wget http://mirror.cc.columbia.edu/pub/software/apache/lucene/solr/3.6.1/apache-solr-3.6.1.tgz')
+#        run('tar xzf apache-solr-3.6.1.tgz')
+#        run('cp apache-solr-3.6.1/dist/apache-solr-3.6.1.war /var/solr/solr.war')
+#        run('cp apache-solr-3.6.1/example/solr/* /var/solr -r')
+#    run('rm /var/solr/conf/schema.xml')
+    put('%s/assets/solr/solr_3_4_0/*' % os.path.dirname(__file__), '/var/solr/', mode=0755)
     run('chown -R tomcat6 /var/solr/')
     run("echo -e '<Context docBase=\"/var/solr/solr.war\" debug=\"0\" privileged=\"true\" allowLinking=\"true\" crossContext=\"true\">\n<Environment name=\"solr/home\" type=\"java.lang.String\" value=\"/var/solr\" override=\"true\" />\n</Context>' | tee -a /etc/tomcat6/Catalina/localhost/solr.xml")
     run("echo 'TOMCAT6_SECURITY=no' | sudo tee -a /etc/default/tomcat6")
