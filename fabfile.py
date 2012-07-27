@@ -50,9 +50,11 @@ def git():
             local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
             local('cd /home/matt/code/metaLayer/enterprise/%s && git push' % dir)
 
-def git_tag(tag, message):
+def git_tag(tag, message=None):
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git tab -a %s -m "%s"' % (dir, tag, message))
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git tag -a %s -m "%s"' % (dir, tag, message or tag))
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git push --tags')
+
 
 def create_story_branch(story_name):
     for dir in ['metalayercore', 'thedashboard', '.']:
@@ -71,13 +73,13 @@ def rebase_story_branch():
 
 def squash_and_close_story_branch(story_name):
     for dir in ['metalayercore', 'thedashboard', '.']:
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i origin/master' % dir)
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout master' % dir)
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
         if dir == '.':
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
             with settings(warn_only=True):
                 local('cd /home/matt/code/metaLayer/enterprise/%s && git commit -m "final merge of story branch %s"' % (dir, story_name))
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i origin/master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
         local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin master' % dir)
 
 def fetchall(branch='master'):
