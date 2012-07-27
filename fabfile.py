@@ -50,6 +50,10 @@ def git():
             local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
             local('cd /home/matt/code/metaLayer/enterprise/%s && git push' % dir)
 
+def git_tag(tag, message):
+    for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git tab -a %s -m "%s"' % (dir, tag, message))
+
 def create_story_branch(story_name):
     for dir in ['metalayercore', 'thedashboard', '.']:
         local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout -b %s' % (dir, story_name))
