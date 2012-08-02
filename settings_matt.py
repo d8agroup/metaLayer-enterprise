@@ -41,12 +41,12 @@ LOGGING = {
     'root': {
         'level': 'WARNING',
         'handlers': ['console'],
-        },
+    },
     'formatters': {
         'verbose': {
             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
         },
-        },
+    },
     'handlers': {
         'sentry': {
             'level': 'WARNING',
