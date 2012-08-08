@@ -12,5 +12,6 @@ urlpatterns = patterns('',
     url(r'^i/', include('metalayercore.imaging.urls')),
     url(r'^o/', include('metalayercore.outputs.urls')),
     url(r'^u/', include('metalayercore.datauploader.urls')),
+    url(r'^oauth2/', include('metalayercore.oauth2bridge.urls')),
     url(r'', include('enterprise.themanager.urls')),
 )

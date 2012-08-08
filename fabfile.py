@@ -14,7 +14,8 @@ packages = {
         'nltk',
         'tablib==0.9.11',
         'chardet',
-        'numpy'
+        'numpy',
+        'google-api-python-client==1.0c2'
     ],
     'apt-get':[
         'python-memcache',
