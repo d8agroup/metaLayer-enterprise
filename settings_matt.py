@@ -76,3 +76,11 @@ LOGGING = {
             },
         },
     }
+
+OAUTH2_SETTINGS = {
+    'GoogleOauth2Controller':{
+        'client_id':'450032264506.apps.googleusercontent.com',
+        'client_secret':'Pu-Fk1rPYFKATskh9ws1DTPI',
+        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    }
+}

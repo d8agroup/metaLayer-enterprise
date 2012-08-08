@@ -78,7 +78,7 @@ def squash_and_close_story_branch(story_name):
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
             with settings(warn_only=True):
                 local('cd /home/matt/code/metaLayer/enterprise/%s && git commit -m "final merge of story branch %s"' % (dir, story_name))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i origin/master' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i master' % dir)
         local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout master' % dir)
         local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
         local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin master' % dir)

@@ -34,3 +34,11 @@ SOLR_CONFIG = {
     'solr_facets':{}
 }
 
+OAUTH2_SETTINGS = {
+    'GoogleOauth2Controller':{
+        'client_id':'450032264506-i36s4e0mqkjnhmquq0bv2617vh44nu12.apps.googleusercontent.com',
+        'client_secret':'8fDtqnPEmhTeUD4th_lLd1RT',
+        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    }
+}
+
