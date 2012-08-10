@@ -194,6 +194,8 @@ ADDITIONAL_PAGE_INCLUDES = [
 import socket
 if socket.gethostname() in ['mattgriffiths']:
     from settings_matt import *
+if socket.gethostname() in ['rich.dev.01']:
+    from settings_rich import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
     from settings_dev import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
