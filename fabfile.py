@@ -4,6 +4,8 @@ from fabric.api import *
 import sys
 import time
 
+env['deployment_branch'] = 'master'
+
 packages = {
     'pip':[
         'python-dateutil==1.5',
@@ -33,6 +35,7 @@ def _update_deployment_timestamp():
 
 def dev():
     env.hosts = ['root@me.dev']
+    env['deployment_branch'] = 'dev'
 
 def stage():
     pass
@@ -97,7 +100,8 @@ def deploy(install_packages=False):
             run('pip install %s' % package)
 
     with cd('/usr/local/metaLayer-enterprise/enterprise'):
-        run("git pull")
+        run("git fetch")
+        run("git merge origin/%s" % env['deployment_branch'])
         run("git submodule init && git submodule update")
         run("git status")
     with settings(warn_only=True):
@@ -240,12 +244,12 @@ def solrsetup():
         #run('rm /tmp/solr -r')
     #run('mkdir /tmp/solr')
     run('mkdir /var/solr')
-#    with cd('/tmp/solr'):
-#        run('wget http://mirror.cc.columbia.edu/pub/software/apache/lucene/solr/3.6.1/apache-solr-3.6.1.tgz')
-#        run('tar xzf apache-solr-3.6.1.tgz')
-#        run('cp apache-solr-3.6.1/dist/apache-solr-3.6.1.war /var/solr/solr.war')
-#        run('cp apache-solr-3.6.1/example/solr/* /var/solr -r')
-#    run('rm /var/solr/conf/schema.xml')
+    #    with cd('/tmp/solr'):
+    #        run('wget http://mirror.cc.columbia.edu/pub/software/apache/lucene/solr/3.6.1/apache-solr-3.6.1.tgz')
+    #        run('tar xzf apache-solr-3.6.1.tgz')
+    #        run('cp apache-solr-3.6.1/dist/apache-solr-3.6.1.war /var/solr/solr.war')
+    #        run('cp apache-solr-3.6.1/example/solr/* /var/solr -r')
+    #    run('rm /var/solr/conf/schema.xml')
     put('%s/assets/solr/solr_3_4_0/*' % os.path.dirname(__file__), '/var/solr/', mode=0755)
     run('chown -R tomcat6 /var/solr/')
     run("echo -e '<Context docBase=\"/var/solr/solr.war\" debug=\"0\" privileged=\"true\" allowLinking=\"true\" crossContext=\"true\">\n<Environment name=\"solr/home\" type=\"java.lang.String\" value=\"/var/solr\" override=\"true\" />\n</Context>' | tee -a /etc/tomcat6/Catalina/localhost/solr.xml")
