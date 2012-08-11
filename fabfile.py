@@ -76,6 +76,7 @@ def rebase_story_branch():
         local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase origin/dev' % dir)
 
 def squash_and_close_story_branch(story_name):
+    _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']:
         if dir == '.':
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
