@@ -71,22 +71,22 @@ def commit_story_branch():
         with settings(warn_only=True):
             local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
 
-def rebase_story_branch():
+def rebase_story_branch(base='dev'):
     for dir in ['metalayercore', 'thedashboard', '.']:
         local('cd /home/matt/code/metaLayer/enterprise/%s && git fetch' % dir)
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase origin/dev' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase origin/%s' % (dir, base))
 
-def squash_and_close_story_branch(story_name):
+def squash_and_close_story_branch(story_name, base='dev'):
     _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']:
         if dir == '.':
             local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
             with settings(warn_only=True):
                 local('cd /home/matt/code/metaLayer/enterprise/%s && git commit -m "final merge of story branch %s"' % (dir, story_name))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i dev' % dir)
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout dev' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i %s' % (dir, base))
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout %s' % (dir, base))
         local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin dev' % dir)
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin %s' % (dir, base))
 
 def fetchall(branch='master'):
     for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
