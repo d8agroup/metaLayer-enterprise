@@ -42,6 +42,7 @@ def stage():
 
 def demo():
     env.hosts = ['root@me.clienttest.web.01']
+    env['deployment_branch'] = 'master'
 
 def prod():
     env.hosts = ['root@me.prod.draftfcb.01']
