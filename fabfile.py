@@ -58,7 +58,7 @@ def git():
 def git_tag(tag, message=None):
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         local('cd /home/matt/code/metaLayer/enterprise/%s && git tag -a %s -m "%s"' % (dir, tag, message or tag))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git push --tags')
+        local('cd /home/matt/code/metaLayer/enterprise/%s && git push --tags' % dir)
 
 
 def create_story_branch(story_name):
