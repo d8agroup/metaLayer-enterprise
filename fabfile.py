@@ -4,6 +4,8 @@ from fabric.api import *
 import sys
 import time
 
+
+env['base_directory'] = os.path.dirname(os.path.abspath(__file__))
 env['deployment_branch'] = 'master'
 
 packages = {
@@ -51,48 +53,47 @@ def git():
     _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         with settings(warn_only=True):
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git push' % dir)
+            local('cd %s/%s && git add --all' % (env['base_directory'], dir))
+            local('cd %s/%s && git commit' % (env['base_direcotry'], dir))
+            local('cd %s/%s && git push' % (env['base_directory'], dir))
 
 def git_tag(tag, message=None):
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git tag -a %s -m "%s"' % (dir, tag, message or tag))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git push --tags' % dir)
-
+        local('cd %s/%s && git tag -a %s -m "%s"' % (env['base_directory'], dir, tag, message or tag))
+        local('cd %s/%s && git push --tags' % (env['base_directory'], dir))
 
 def create_story_branch(story_name):
     for dir in ['metalayercore', 'thedashboard', '.']:
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout -b %s' % (dir, story_name))
+        local('cd %s/%s && git checkout -b %s' % (env['base_directory'], dir, story_name))
 
 def commit_story_branch():
     for dir in ['metalayercore', 'thedashboard', '.']:
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
+        local('cd %s/%s && git add --all' % (env['base_directory'], dir))
         with settings(warn_only=True):
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git commit' % dir)
+            local('cd %s/%s && git commit' % (env['base_directory'], dir))
 
 def rebase_story_branch(base='dev'):
     for dir in ['metalayercore', 'thedashboard', '.']:
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git fetch' % dir)
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase origin/%s' % (dir, base))
+        local('cd %s/%s && git fetch' % (env['base_directory'], dir))
+        local('cd %s/%s && git rebase origin/%s' % (env['base_directory'], dir, base))
 
 def squash_and_close_story_branch(story_name, base='dev'):
     _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']:
         if dir == '.':
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git add --all' % dir)
+            local('cd %s/%s && git add --all' % (env['base_directory'], dir))
             with settings(warn_only=True):
-                local('cd /home/matt/code/metaLayer/enterprise/%s && git commit -m "final merge of story branch %s"' % (dir, story_name))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git rebase -i %s' % (dir, base))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git checkout %s' % (dir, base))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git merge %s' % (dir, story_name))
-        local('cd /home/matt/code/metaLayer/enterprise/%s && git push origin %s' % (dir, base))
+                local('cd %s/%s && git commit -m "final merge of story branch %s"' % (env['base_directory'], dir, story_name))
+        local('cd %s/%s && git rebase -i %s' % (env['base_directory'], dir, base))
+        local('cd %s/%s && git checkout %s' % (env['base_directory'], dir, base))
+        local('cd %s/%s && git merge %s' % (env['base_directory'], dir, story_name))
+        local('cd %s/%s && git push origin %s' % (env['base_directory'], dir, base))
 
 def fetchall(branch='master'):
     for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
         with settings(warn_only=True):
             this_branch = dir.split('=')[1] if '=' in dir else branch
-            local('cd /home/matt/code/metaLayer/enterprise/%s && git fetch && git merge origin/%s' % (dir.split('=')[0], this_branch))
+            local('cd %s/%s && git fetch && git merge origin/%s' % (env['base_directory'], dir.split('=')[0], this_branch))
 
 def deploy(install_packages=False):
     if install_packages:
