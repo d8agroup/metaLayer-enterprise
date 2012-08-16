@@ -72,3 +72,11 @@ LOGGING = {
             },
         },
     }
+
+OAUTH2_SETTINGS = {
+    'GoogleOauth2Controller':{
+        'client_id': '450032264506-uehsil7i93jnup1pqpngsgh3vfcdd4gn.apps.googleusercontent.com',
+        'client_secret': 'ySPa_rsFzAAIpS86jobN9LOW',
+        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % 'rich.dev.metalayer.com:8000'
+    }
+}
