@@ -19,7 +19,8 @@ packages = {
         'tablib==0.9.11',
         'chardet',
         'numpy',
-        'google-api-python-client==1.0c2'
+        'google-api-python-client==1.0c2',
+        'lxml'
     ],
     'apt-get':[
         'python-memcache',
