@@ -83,5 +83,10 @@ OAUTH2_SETTINGS = {
         'client_id':'450032264506.apps.googleusercontent.com',
         'client_secret':'Pu-Fk1rPYFKATskh9ws1DTPI',
         'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    },
+    'FacebookOauth2Controller': {
+        'client_id': '457768257589473',
+        'client_secret': 'd93ba13ce81f2f578f345865aaea2269',
+        'redirect_uri':'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
     }
 }

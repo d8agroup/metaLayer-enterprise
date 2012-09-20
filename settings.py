@@ -202,3 +202,5 @@ elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
     from settings_clienttest import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.124.231']:
     from settings_prod_draftfcb import *
+elif socket.gethostname() in ['wwp.metalayer.com']:
+    from settings_prod_wwp import *
