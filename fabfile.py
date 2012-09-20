@@ -47,7 +47,7 @@ def demo():
     env['deployment_branch'] = 'master'
 
 def prod():
-    env.hosts = ['root@me.prod.draftfcb.01']
+    env.hosts = ['root@me.prod.wwp.01']
 
 def git():
     _update_deployment_timestamp()
