@@ -5,9 +5,10 @@ DEBUG = True
 SOLR_CONFIG = {
     'default_page_size':100,
     #'solr_url':'http://localhost:8983/solr/collection1',
-    'solr_url':'http://108.166.59.173:8080/solr',
+    'solr_url':'http://me.dev:8080/solr4',
     'solr_params':SOLR_PARAMS,
-    'solr_facets':{}
+    'solr_facets':{},
+    'solr_update_url':'update'
 }
 
 EMAIL_USE_TLS = True
@@ -83,5 +84,10 @@ OAUTH2_SETTINGS = {
         'client_id':'450032264506.apps.googleusercontent.com',
         'client_secret':'Pu-Fk1rPYFKATskh9ws1DTPI',
         'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    },
+    'FacebookOauth2Controller': {
+        'client_id': '457768257589473',
+        'client_secret': 'd93ba13ce81f2f578f345865aaea2269',
+        'redirect_uri':'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
     }
 }

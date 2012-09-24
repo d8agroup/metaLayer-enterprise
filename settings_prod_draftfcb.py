@@ -26,11 +26,3 @@ GOOGLE_ANALYTICS = {
     'account':'UA-31427873-1',
     'site_host':'draftfcb.metalayer.com',
 }
-
-SOLR_CONFIG = {
-    'default_page_size':100,
-    'solr_url':'http://localhost:8080/solr',
-    'solr_params':SOLR_PARAMS,
-    'solr_facets':{}
-}
-
