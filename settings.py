@@ -169,7 +169,7 @@ SOLR_CONFIG = {
     'solr_url':'http://localhost:8080/solr',
     'solr_params': SOLR_PARAMS,
     'solr_facets':{},
-    'solr_update_url':'update/json'
+    'solr_update_url':'update'
 }
 
 VISUALIZATIONS_CONFIG = {

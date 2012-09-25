@@ -27,10 +27,15 @@ GOOGLE_ANALYTICS = {
     'site_host':'wwp.metalayer.com',
 }
 
-SOLR_CONFIG = {
-    'default_page_size':100,
-    'solr_url':'http://localhost:8080/solr',
-    'solr_params':SOLR_PARAMS,
-    'solr_facets':{}
+OAUTH2_SETTINGS = {
+    'GoogleOauth2Controller':{
+        'client_id':'450032264506-i36s4e0mqkjnhmquq0bv2617vh44nu12.apps.googleusercontent.com',
+        'client_secret':'8fDtqnPEmhTeUD4th_lLd1RT',
+        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    },
+    'FacebookOauth2Controller': {
+        'client_id': '457768257589473',
+        'client_secret': 'd93ba13ce81f2f578f345865aaea2269',
+        'redirect_uri':'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
+    }
 }
-

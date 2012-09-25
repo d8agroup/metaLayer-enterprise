@@ -253,7 +253,7 @@ def solrsetup():
     #        run('cp apache-solr-3.6.1/dist/apache-solr-3.6.1.war /var/solr/solr.war')
     #        run('cp apache-solr-3.6.1/example/solr/* /var/solr -r')
     #    run('rm /var/solr/conf/schema.xml')
-    put('%s/assets/solr/solr_3_4_0/*' % os.path.dirname(__file__), '/var/solr/', mode=0755)
+    put('%s/assets/solr/solr_4_BETA/*' % os.path.dirname(__file__), '/var/solr/', mode=0755)
     run('chown -R tomcat6 /var/solr/')
     run("echo -e '<Context docBase=\"/var/solr/solr.war\" debug=\"0\" privileged=\"true\" allowLinking=\"true\" crossContext=\"true\">\n<Environment name=\"solr/home\" type=\"java.lang.String\" value=\"/var/solr\" override=\"true\" />\n</Context>' | tee -a /etc/tomcat6/Catalina/localhost/solr.xml")
     run("echo 'TOMCAT6_SECURITY=no' | sudo tee -a /etc/default/tomcat6")
