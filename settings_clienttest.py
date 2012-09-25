@@ -32,7 +32,7 @@ SOLR_CONFIG = {
     'solr_url':'http://108.166.59.173:8080/solr',
     'solr_params':SOLR_PARAMS,
     'solr_facets':{},
-    'solr_update_url':'update/json'
+    'solr_update_url':'update'
 }
 
 OAUTH2_SETTINGS = {
