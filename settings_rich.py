@@ -6,7 +6,8 @@ SOLR_CONFIG = {
     'default_page_size':100,
     'solr_url':'http://108.166.59.173:8080/solr',
     'solr_params':SOLR_PARAMS,
-    'solr_facets':{}
+    'solr_facets':{},
+    'solr_update_url':'update/json'
 }
 
 EMAIL_USE_TLS = True
@@ -15,7 +16,7 @@ EMAIL_HOST_USER = 'no-reply@metalayer.com'
 EMAIL_HOST_PASSWORD = '##M3taM3ta'
 EMAIL_PORT = 587
 
-SITE_HOST = 'mldev:8000'
+SITE_HOST = 'rich.dev.metalayer.com:8000'
 
 STATIC_HOST = SITE_HOST
 
@@ -72,3 +73,16 @@ LOGGING = {
             },
         },
     }
+
+OAUTH2_SETTINGS = {
+    'GoogleOauth2Controller':{
+        'client_id': '450032264506-uehsil7i93jnup1pqpngsgh3vfcdd4gn.apps.googleusercontent.com',
+        'client_secret': 'ySPa_rsFzAAIpS86jobN9LOW',
+        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    },
+    'FacebookOauth2Controller': {
+        'client_id': '457768257589473',
+        'client_secret': 'd93ba13ce81f2f578f345865aaea2269',
+        'redirect_uri':'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
+    }
+}

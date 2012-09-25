@@ -5,9 +5,10 @@ DEBUG = True
 SOLR_CONFIG = {
     'default_page_size':100,
     #'solr_url':'http://localhost:8983/solr/collection1',
-    'solr_url':'http://108.166.59.173:8080/solr',
+    'solr_url':'http://me.dev:8080/solr4',
     'solr_params':SOLR_PARAMS,
-    'solr_facets':{}
+    'solr_facets':{},
+    'solr_update_url':'update'
 }
 
 EMAIL_USE_TLS = True
