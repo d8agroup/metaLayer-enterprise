@@ -203,5 +203,7 @@ elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
     from settings_clienttest import *
 elif socket.gethostbyname(socket.gethostname()) in ['108.166.124.231']:
     from settings_prod_draftfcb import *
+elif socket.gethostbyname(socket.gethostname()) in ['166.78.108.13']:
+    from settings_delvdemo import *
 elif socket.gethostname() in ['me.prod.wwp.01']:
     from settings_prod_wwp import *
