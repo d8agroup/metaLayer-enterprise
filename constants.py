@@ -1,6 +1,6 @@
 TEMPLATE_STRINGS = {
     'login':{
-        'header':'Login',
+        'header':'MetaLayer Delv - Login',
         'welcome_message':'',
         'form_label_username':'Your email address',
         'form_label_password':'Your password',
