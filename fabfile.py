@@ -44,7 +44,7 @@ def stage():
     pass
 
 def demo():
-    env.hosts = ['root@me.clienttest.web.01']
+    env.hosts = ['root@delv.demo.metalayer.com']
     env['deployment_branch'] = 'master'
 
 def prod():
@@ -54,9 +54,9 @@ def git():
     _update_deployment_timestamp()
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         with settings(warn_only=True):
-            local('cd %s/%s && git add --all' % (env['base_directory'], dir))
-            local('cd %s/%s && git commit' % (env['base_direcotry'], dir))
-            local('cd %s/%s && git push' % (env['base_directory'], dir))
+            local('cd %s && git add --all' % (dir))
+            local('cd %s && git commit' % (dir))
+            local('cd %s && git push' % (dir))
 
 def git_tag(tag, message=None):
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
