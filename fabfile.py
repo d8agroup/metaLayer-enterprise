@@ -9,7 +9,7 @@ env['base_directory'] = os.path.dirname(os.path.abspath(__file__))
 env['deployment_branch'] = 'master'
 
 packages = {
-    'pip':[
+    'pip': [
         'python-dateutil==1.5',
         'feedparser==5.1',
         'raven==1.4.6',
@@ -22,50 +22,60 @@ packages = {
         'google-api-python-client==1.0c2',
         'facepy',
     ],
-    'apt-get':[
+    'apt-get': [
         'python-memcache',
         'python-dev'
     ]
 }
 
+
 def _update_deployment_timestamp():
     import fileinput
+
     for line in fileinput.input('settings.py', inplace=1):
         if line.startswith('DEPLOYMENT_TIMESTAMP'):
             print 'DEPLOYMENT_TIMESTAMP = %i \n' % int(time.time()),
         else:
             print line,
 
+
 def dev():
     env.hosts = ['root@me.dev']
     env['deployment_branch'] = 'dev'
 
+
 def stage():
     pass
+
 
 def demo():
     env.hosts = ['root@delv.demo.metalayer.com']
     env['deployment_branch'] = 'master'
 
+
 def prod():
     env.hosts = ['root@me.prod.wwp.01']
 
+
 def git():
     _update_deployment_timestamp()
-    for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
+    for dir in ['metalayercore', 'thedashboard', '.']:
         with settings(warn_only=True):
-            local('cd %s && git add --all' % (dir))
-            local('cd %s && git commit' % (dir))
-            local('cd %s && git push' % (dir))
+            local('cd %s && git add --all' % dir)
+            local('cd %s && git commit' % dir)
+            local('cd %s && git push' % dir)
+
 
 def git_tag(tag, message=None):
     for dir in ['metalayercore', 'thedashboard', '.']: #'compressor', 'chargifyapi',
         local('cd %s/%s && git tag -a %s -m "%s"' % (env['base_directory'], dir, tag, message or tag))
         local('cd %s/%s && git push --tags' % (env['base_directory'], dir))
 
+
 def create_story_branch(story_name):
     for dir in ['metalayercore', 'thedashboard', '.']:
         local('cd %s/%s && git checkout -b %s' % (env['base_directory'], dir, story_name))
+
 
 def commit_story_branch():
     for dir in ['metalayercore', 'thedashboard', '.']:
@@ -73,10 +83,12 @@ def commit_story_branch():
         with settings(warn_only=True):
             local('cd %s/%s && git commit' % (env['base_directory'], dir))
 
+
 def rebase_story_branch(base='dev'):
     for dir in ['metalayercore', 'thedashboard', '.']:
         local('cd %s/%s && git fetch' % (env['base_directory'], dir))
         local('cd %s/%s && git rebase origin/%s' % (env['base_directory'], dir, base))
+
 
 def squash_and_close_story_branch(story_name, base='dev'):
     _update_deployment_timestamp()
@@ -84,17 +96,21 @@ def squash_and_close_story_branch(story_name, base='dev'):
         if dir == '.':
             local('cd %s/%s && git add --all' % (env['base_directory'], dir))
             with settings(warn_only=True):
-                local('cd %s/%s && git commit -m "final merge of story branch %s"' % (env['base_directory'], dir, story_name))
+                local('cd %s/%s && git commit -m "final merge of story branch %s"' % (
+                    env['base_directory'], dir, story_name))
         local('cd %s/%s && git rebase -i %s' % (env['base_directory'], dir, base))
         local('cd %s/%s && git checkout %s' % (env['base_directory'], dir, base))
         local('cd %s/%s && git merge %s' % (env['base_directory'], dir, story_name))
         local('cd %s/%s && git push origin %s' % (env['base_directory'], dir, base))
 
+
 def fetchall(branch='master'):
-    for dir in ['metalayercore', 'thedashboard',  '.']: #'compressor=develop', 'chargifyapi',
+    for dir in ['metalayercore', 'thedashboard', '.']: #'compressor=develop', 'chargifyapi',
         with settings(warn_only=True):
             this_branch = dir.split('=')[1] if '=' in dir else branch
-            local('cd %s/%s && git fetch && git merge origin/%s' % (env['base_directory'], dir.split('=')[0], this_branch))
+            local('cd %s/%s && git fetch && git merge origin/%s' % (
+                env['base_directory'], dir.split('=')[0], this_branch))
+
 
 def deploy(install_packages=False):
     if install_packages:
@@ -112,8 +128,10 @@ def deploy(install_packages=False):
         run("service apache2 restart")
         run("service nginx restart")
 
+
 def recycle():
     run('service apache2 restart')
+
 
 def runcommand():
     #methd used for ad hoc commands that need to be run
@@ -147,10 +165,12 @@ def runcommand():
     #put('~/Documents/metaLayer/DraftFBC/Data/20120516/processing/processing.tar.gz', '/tmp')
     pass
 
+
 def serversetup(server_ip=None, git_managed=False):
     apachesetup()
     codebasesetup(server_ip, git_managed)
     solrsetup()
+
 
 def apachesetup():
     ####################################################################################################################
@@ -161,7 +181,9 @@ def apachesetup():
     run('rm /etc/apache2/sites-enabled/*')
     run('a2enmod headers')
     run('service apache2 restart')
-    put('%s/assets/apache2/vhost' % os.path.dirname(__file__), '/etc/apache2/sites-enabled/metaLayer-enterprise', mode=0755)
+    put('%s/assets/apache2/vhost' % os.path.dirname(__file__), '/etc/apache2/sites-enabled/metaLayer-enterprise',
+        mode=0755)
+
 
 def codebasesetup(server_ip=None, git_managed=False):
     ####################################################################################################################
@@ -193,7 +215,8 @@ def codebasesetup(server_ip=None, git_managed=False):
         run('mkdir /tmp/metaLayer-enterprise')
         run('mkdir /usr/local/metaLayer-enterprise')
         run('mkdir /usr/local/metaLayer-enterprise/enterprise')
-    put('%s/assets/apache2/wsgi' % os.path.dirname(__file__), '/usr/local/metaLayer-enterprise/enterprise.wsgi', mode=0755)
+    put('%s/assets/apache2/wsgi' % os.path.dirname(__file__), '/usr/local/metaLayer-enterprise/enterprise.wsgi',
+        mode=0755)
     put('%s/assets/users/create_users' % os.path.dirname(__file__), '/tmp/create_users', mode=0755)
 
     with settings(warn_only=True):
@@ -218,23 +241,30 @@ def codebasesetup(server_ip=None, git_managed=False):
         run('cp /tmp/metaLayer-enterprise/* /usr/local/metaLayer-enterprise/enterprise/ -r')
         run('sed -i \'s/ENTER_SITE_HOST/%s/g\' /usr/local/metaLayer-enterprise/enterprise/settings.py' % server_ip)
         run('cd /usr/local/metaLayer-enterprise/enterprise && python manage.py syncdb')
-        run('python -c "import compileall; compileall.compile_dir(\'/usr/local/metaLayer-enterprise/enterprise\', force=1);"')
+        run(
+            'python -c "import compileall; compileall.compile_dir(\'/usr/local/metaLayer-enterprise/enterprise\', force=1);"')
         #run('find /usr/local/metaLayer-enterprise/enterprise -name "*.py" -delete')
         with cd('/usr/local/metaLayer-enterprise/enterprise'):
             run('more /tmp/create_users | python manage.pyc shell')
         run('rm /tmp/create_users')
 
     run('rm /tmp/metaLayer-enterprise -r')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/css /usr/local/metaLayer-enterprise/enterprise/static/css/thedashboard')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/images /usr/local/metaLayer-enterprise/enterprise/static/images/thedashboard')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/html /usr/local/metaLayer-enterprise/enterprise/static/html/thedashboard')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/js /usr/local/metaLayer-enterprise/enterprise/static/js/thedashboard')
+    run(
+        'ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/css /usr/local/metaLayer-enterprise/enterprise/static/css/thedashboard')
+    run(
+        'ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/images /usr/local/metaLayer-enterprise/enterprise/static/images/thedashboard')
+    run(
+        'ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/html /usr/local/metaLayer-enterprise/enterprise/static/html/thedashboard')
+    run(
+        'ln -s /usr/local/metaLayer-enterprise/enterprise/thedashboard/static/js /usr/local/metaLayer-enterprise/enterprise/static/js/thedashboard')
     run('mkdir /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
-    run('ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
+    run(
+        'ln -s /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE /usr/local/metaLayer-enterprise/enterprise/static/CACHE/images')
     run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/static/CACHE')
     run('chmod a+rw /usr/local/metaLayer-enterprise/enterprise/metalayercore/imaging/CACHE')
     run('service apache2 restart')
     run('curl http://localhost')
+
 
 def solrsetup():
     ####################################################################################################################
@@ -256,7 +286,8 @@ def solrsetup():
     #    run('rm /var/solr/conf/schema.xml')
     put('%s/assets/solr/solr_4_BETA/*' % os.path.dirname(__file__), '/var/solr/', mode=0755)
     run('chown -R tomcat6 /var/solr/')
-    run("echo -e '<Context docBase=\"/var/solr/solr.war\" debug=\"0\" privileged=\"true\" allowLinking=\"true\" crossContext=\"true\">\n<Environment name=\"solr/home\" type=\"java.lang.String\" value=\"/var/solr\" override=\"true\" />\n</Context>' | tee -a /etc/tomcat6/Catalina/localhost/solr.xml")
+    run(
+        "echo -e '<Context docBase=\"/var/solr/solr.war\" debug=\"0\" privileged=\"true\" allowLinking=\"true\" crossContext=\"true\">\n<Environment name=\"solr/home\" type=\"java.lang.String\" value=\"/var/solr\" override=\"true\" />\n</Context>' | tee -a /etc/tomcat6/Catalina/localhost/solr.xml")
     run("echo 'TOMCAT6_SECURITY=no' | sudo tee -a /etc/default/tomcat6")
     run('sed -i \'s/set -e/set -e\\nJAVA_OPTS="$JAVA_OPTS -Dsolr.home=\/var\/solr"/g\' /etc/init.d/tomcat6')
     run('service tomcat6 restart')

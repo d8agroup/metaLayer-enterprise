@@ -2,13 +2,24 @@ from settings import SOLR_PARAMS
 
 DEBUG = True
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django_mongodb_engine',
+        'NAME': 'ml_enterprise',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': 'delv.demo.metalayer.com',
+        'PORT': 27017,
+    }
+}
+
 SOLR_CONFIG = {
-    'default_page_size':100,
+    'default_page_size': 100,
     #'solr_url':'http://localhost:8983/solr/collection1',
-    'solr_url':'http://108.166.59.173:8080/solr',
-    'solr_params':SOLR_PARAMS,
-    'solr_facets':{},
-    'solr_update_url':'update'
+    'solr_url': 'http://delv.demo.metalayer.com:8080/solr',
+    'solr_params': SOLR_PARAMS,
+    'solr_facets': {},
+    'solr_update_url': 'update'
 }
 
 EMAIL_USE_TLS = True
@@ -53,7 +64,7 @@ LOGGING = {
         'sentry': {
             'level': 'WARNING',
             'class': 'raven.contrib.django.handlers.SentryHandler',
-            },
+        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -65,29 +76,29 @@ LOGGING = {
             'level': 'WARNING',
             'handlers': ['console'],
             'propagate': False,
-            },
+        },
         'raven': {
             'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
-            },
+        },
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['console'],
             'propagate': False,
-            },
         },
-    }
+    },
+}
 
 OAUTH2_SETTINGS = {
-    'GoogleOauth2Controller':{
-        'client_id':'450032264506.apps.googleusercontent.com',
-        'client_secret':'Pu-Fk1rPYFKATskh9ws1DTPI',
-        'redirect_uri':'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
+    'GoogleOauth2Controller': {
+        'client_id': '450032264506.apps.googleusercontent.com',
+        'client_secret': 'Pu-Fk1rPYFKATskh9ws1DTPI',
+        'redirect_uri': 'http://%s/oauth2/google_oauth2_callback' % SITE_HOST
     },
     'FacebookOauth2Controller': {
         'client_id': '457768257589473',
         'client_secret': 'd93ba13ce81f2f578f345865aaea2269',
-        'redirect_uri':'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
+        'redirect_uri': 'http://%s/oauth2/facebook_oauth2_callback' % SITE_HOST
     }
 }
