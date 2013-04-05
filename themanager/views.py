@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import Http404
 from django.shortcuts import redirect
 import re
-from companies.controllers import  ProjectsController, CompaniesController, ActivityRecordsController
+from companies.controllers import ProjectsController, CompaniesController, ActivityRecordsController
 import constants
 from customtags.templatetags.custom_tags import is_company_admin
 from metalayercore.actions.controllers import ActionController

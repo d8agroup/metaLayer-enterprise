@@ -13,6 +13,9 @@ DATABASES = {
     }
 }
 
+CACHES = {}
+
+
 SOLR_CONFIG = {
     'default_page_size': 100,
     #'solr_url':'http://localhost:8983/solr/collection1',
@@ -36,15 +39,15 @@ IMAGE_HOST = SITE_HOST
 
 DYNAMIC_IMAGES_WEB_ROOT = '/static/CACHE/images/'
 
-DYNAMIC_IMAGES_ROOT = '/home/matt/code/metaLayer/enterprise/metalayercore/imaging/CACHE/'
+DYNAMIC_IMAGES_ROOT = '/home/griff/code/metaLayer/enterprise/metalayercore/imaging/CACHE/'
 
-THEMES_ROOT = '/home/matt/code/metaLayer/enterprise/static/themes'
+THEMES_ROOT = '/home/griff/code/metaLayer/enterprise/static/themes'
 
 SENTRY_DSN = 'http://cb24eedee3b149c0966cb312dedcbd8c:598474230fe84813bfd9d0da84098d2e@108.166.111.61:9000/5'
 
-TEMPLATE_DIRS = ( '/home/matt/code/metaLayer/enterprise/static/html', )
+TEMPLATE_DIRS = ( '/home/griff/code/metaLayer/enterprise/static/html', )
 
-STATICFILES_DIRS = ( '/home/matt/code/metaLayer/enterprise/static/', )
+STATICFILES_DIRS = ( '/home/griff/code/metaLayer/enterprise/static/', )
 
 STATICFILES_FINDERS = ( 'django.contrib.staticfiles.finders.FileSystemFinder', )
 

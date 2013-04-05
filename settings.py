@@ -193,7 +193,7 @@ ADDITIONAL_PAGE_INCLUDES = [
 ]
 
 import socket
-if socket.gethostname() in ['mattgriffiths']:
+if socket.gethostname() in ['mattgriffiths', 'GRIFF-LINUX2']:
     from settings_matt import *
 if socket.gethostname() in ['rich.dev.01']:
     from settings_rich import *
