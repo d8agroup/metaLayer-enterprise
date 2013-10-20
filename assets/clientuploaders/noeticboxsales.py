@@ -11,7 +11,7 @@ from dateutil import tz
 from dateutil import parser as dateutil_parser
 
 
-FILE = "/home/griff/Documents/-MetaLayer/-NoeticBox/shoptiques_data_20_lines.csv"
+FILE = "/home/griff/Documents/-MetaLayer/-NoeticBox/shoptiques_data_full.csv"
 POST_URL = 'http://delv.demo.metalayer.com/aggregation/post_content'
 COMMIT_URL = 'http://delv.demo.metalayer.com:8080/solr/update?commit=true'
 
@@ -19,7 +19,7 @@ lines = [l for l in csv.reader(open(FILE, 'r'))]
 
 headers = lines[0]
 
-rows = lines[1:10]
+rows = lines[1766:]
 
 for row in rows:
     user_id = row[0]
@@ -27,7 +27,7 @@ for row in rows:
     email = row[2]
     first_name = row[3]
     surname = row[4]
-    date_in_cart = row[5]
+    date_in_cart = dateutil_parser.parse(row[5])
     status = row[6]
     product_url = row[7].replace('http://www.shoptiques.com/products/', '')
     product_amount = row[8]
@@ -43,7 +43,7 @@ for row in rows:
     order_total = row[18]
     order_item_count = row[19]
 
-    channel_key = 'noeticboxsales_v01'
+    channel_key = 'noeticboxsales'
     obj = {
         'id': md5("%f" % (time.time() + randint(0, 1000000))).hexdigest(),
         'text': [{'title': "Order Number:%s, Product:%s, Email:%s" % (order_id, product_url, email)}],

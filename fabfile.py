@@ -23,10 +23,12 @@ packages = {
         'facepy',
     ],
     'apt-get':[
+        'build-essential',
         'python-memcache',
         'python-dev'
     ]
 }
+
 
 def _update_deployment_timestamp():
     import fileinput
@@ -148,6 +150,7 @@ def runcommand():
     pass
 
 def serversetup(server_ip=None, git_managed=False):
+    # Tested and works well on Ubuntu 10.04
     apachesetup()
     codebasesetup(server_ip, git_managed)
     solrsetup()
@@ -170,6 +173,7 @@ def codebasesetup(server_ip=None, git_managed=False):
     run('apt-get update')
     run('apt-get install git-core mercurial mongodb python-cairo python-rsvg python-pip curl')
     run('pip install --upgrade pip')
+    run('pip install --upgrade setuptools')
     for package in packages['apt-get']:
         run('apt-get install %s' % package)
     for package in packages['pip']:
@@ -178,11 +182,11 @@ def codebasesetup(server_ip=None, git_managed=False):
         system_packages = run('pip freeze -l').splitlines()
         system_packages = [p.split('==')[0] for p in system_packages]
         if 'Django' not in system_packages:
-            run('pip install hg+https://bitbucket.org/wkornewald/django-nonrel')
+            run('pip install hg+https://bitbucket.org/wkornewald/django-nonrel@be48c152abc6b15e45155e2bbcfd69c665ccb536#egg=Django-dev')
         if 'djangotoolbox' not in system_packages:
-            run('pip install hg+https://bitbucket.org/wkornewald/djangotoolbox')
+            run('pip install hg+https://bitbucket.org/wkornewald/djangotoolbox@a8cdf61ba9c0cdc7cbbbd37d693e9a222d9a8e5f#egg=djangotoolbox-dev')
         if 'django-mongodb-engine' not in system_packages:
-            run('pip install git+git://github.com/django-nonrel/mongodb-engine')
+            run('pip install git+git://github.com/django-nonrel/mongodb-engine@52257b5d90dcfaa564e708264a9cfe591d301fe6#egg=django_mongodb_engine-dev')
     with settings(warn_only=True):
         run('ssh-keygen -t rsa')
     run('more ~/.ssh/id_rsa.pub')
@@ -245,7 +249,7 @@ def solrsetup():
     with settings(warn_only=True):
         run('rm /var/solr -r')
         run('rm /etc/tomcat6/Catalina/localhost/solr.xml')
-        #run('rm /tmp/solr -r')
+        #run('rm /tmp/solr -r')fab
     #run('mkdir /tmp/solr')
     run('mkdir /var/solr')
     #    with cd('/tmp/solr'):

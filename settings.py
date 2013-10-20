@@ -1,7 +1,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-DEPLOYMENT_TIMESTAMP = 1358967866 
+DEPLOYMENT_TIMESTAMP = 1382291990 
 
 ADMINS = ()
 
@@ -207,3 +207,5 @@ elif socket.gethostname() in ['delv.demo.01']:
     from settings_delvdemo import *
 elif socket.gethostname() in ['me.prod.wwp.01']:
     from settings_prod_wwp import *
+elif socket.gethostname() in ['dashboard.clean']:
+    from settings_demod8a import *
