@@ -1,6 +1,6 @@
 from settings import SOLR_PARAMS
 
-DEBUG = False
+DEBUG = True
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
