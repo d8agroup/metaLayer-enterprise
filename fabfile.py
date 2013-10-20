@@ -21,6 +21,7 @@ packages = {
         'numpy',
         'google-api-python-client==1.0c2',
         'facepy',
+        'twython'
     ],
     'apt-get':[
         'build-essential',

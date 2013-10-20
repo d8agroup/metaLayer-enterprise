@@ -40,3 +40,9 @@ OAUTH2_SETTINGS = {
     }
 }
 
+twython_config = {
+    'app_key': 'EUBV3YyMdOMAx2HuRqlJg',
+    'app_secret': 'TqoDLZvAqj3rRsF3H9HcUqFxousgnNngCCBKUkMzVQ',
+    'oauth_token': '17284436-pTCgNkJOZUn9jwSnaYQa2EZXzSyESyyLItV88Mq8',
+    'oauth_secret': 'xDcHwBwukQXiQf3reMzYbIZfcI5zfNhVyW6I7GMo9J4'
+}
