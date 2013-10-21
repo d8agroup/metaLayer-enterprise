@@ -8,7 +8,7 @@ EMAIL_HOST_USER = 'no-reply@metalayer.com'
 EMAIL_HOST_PASSWORD = '##M3taM3ta'
 EMAIL_PORT = 587
 
-SITE_HOST = 'demo.mux.d8a.com' #'108.166.120.112'
+SITE_HOST = 'demo.mux.d8a.com' #'162.242.162.145'
 
 STATIC_HOST = SITE_HOST
 

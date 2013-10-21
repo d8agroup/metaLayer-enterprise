@@ -210,5 +210,5 @@ elif socket.gethostname() in ['me.prod.wwp.01']:
     from settings_prod_wwp import *
 elif socket.gethostname() in ['dashboard.clean']:
     from settings_demod8a import *
-elif socket.gethostname() in ['jon.testing']:
+elif socket.gethostname() in ['muxboard.demo']:
     from settings_demod8a import *
