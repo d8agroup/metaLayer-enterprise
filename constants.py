@@ -1,10 +1,10 @@
 TEMPLATE_STRINGS = {
     'login':{
-        'header':'MetaLayer Delv - Login',
+        'header':'Mux Board - Login',
         'welcome_message':'',
-        'form_label_username':'Your email address',
-        'form_label_password':'Your password',
-        'form_submit_button':'login',
+        'form_label_username':'Your Email Address',
+        'form_label_password':'Your Password',
+        'form_submit_button':'Login',
         'form_errors_no_username_or_password':'You must provide a username and password.',
         'form_errors_incorrect_username_or_password':'Sorry we didn\'t recognize that username and password combo.',
         'form_errors_user_inactive':'Sorry, your account is not currently active.',
