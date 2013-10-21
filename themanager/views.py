@@ -29,7 +29,7 @@ def landing_page(request):
             if passed:
                 user = UserController.GetUserByEmail(request.POST['username'])
                 ActivityRecordsController.RecordLogin(user, CompaniesController.IdentifyCompanyForUser(user))
-                return _redirect redirect('/company/50fed64025f0fc4588a64c70/projects/IAuIbtFzmqdMfZT/dashboard')
+                return _redirect('/company/50fed64025f0fc4588a64c70/projects/IAuIbtFzmqdMfZT/dashboard')
         template_data['login_form'] = {
             'errors':errors,
             'username':request.POST.get('username')
