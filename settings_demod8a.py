@@ -40,7 +40,7 @@ OAUTH2_SETTINGS = {
     }
 }
 
-twython_config = {
+TWYTHON_CONFIG = {
     'app_key': 'EUBV3YyMdOMAx2HuRqlJg',
     'app_secret': 'TqoDLZvAqj3rRsF3H9HcUqFxousgnNngCCBKUkMzVQ',
     'oauth_token': '17284436-pTCgNkJOZUn9jwSnaYQa2EZXzSyESyyLItV88Mq8',
