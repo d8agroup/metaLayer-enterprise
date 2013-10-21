@@ -192,6 +192,7 @@ ADDITIONAL_PAGE_INCLUDES = [
     'getsatisfaction.html'
 ]
 
+# Get Server Name
 import socket
 if socket.gethostname() in ['mattgriffiths']:
     from settings_matt import *
@@ -208,4 +209,6 @@ elif socket.gethostname() in ['delv.demo.01']:
 elif socket.gethostname() in ['me.prod.wwp.01']:
     from settings_prod_wwp import *
 elif socket.gethostname() in ['dashboard.clean']:
+    from settings_demod8a import *
+elif socket.gethostname() in ['jon.testing']:
     from settings_demod8a import *
