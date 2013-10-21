@@ -27,6 +27,7 @@ GOOGLE_ANALYTICS = {
     'site_host':'metalayer.com',
 }
 
+#OAUTH Settings for Google and Facebook
 OAUTH2_SETTINGS = {
     'GoogleOauth2Controller':{
         'client_id':'450032264506-i36s4e0mqkjnhmquq0bv2617vh44nu12.apps.googleusercontent.com',
@@ -40,6 +41,7 @@ OAUTH2_SETTINGS = {
     }
 }
 
+# Configure Twython
 twython_config = {
     'app_key': 'EUBV3YyMdOMAx2HuRqlJg',
     'app_secret': 'TqoDLZvAqj3rRsF3H9HcUqFxousgnNngCCBKUkMzVQ',
