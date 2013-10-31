@@ -1,6 +1,6 @@
 TEMPLATE_STRINGS = {
     'login':{
-        'header':'Mux Board - Login',
+        'header':'Upstream Analytics - Login',
         'welcome_message':'',
         'form_label_username':'Your E-mail Address',
         'form_label_password':'Your Password',
@@ -73,9 +73,9 @@ TEMPLATE_STRINGS = {
         'insights_delete_button':'Delete this insight',
    },
     'company_home':{
-        'title_projects':'Your Companies Projects',
+        'title_projects':'Your Company\'s Projects',
         'button_title_create_new_project':'Click here to create a new project for your company.',
-        'title_members':'Your Companies Members',
+        'title_members':'Your Company\'s Members',
         'button_title_create_new_user':'Click here to add a new member.',
         'button_title_edit_user':'Edit this user'
     },
