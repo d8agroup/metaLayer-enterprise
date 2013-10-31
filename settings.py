@@ -188,10 +188,6 @@ GOOGLE_ANALYTICS = {
     'site_host':'',
 }
 
-ADDITIONAL_PAGE_INCLUDES = [
-    'getsatisfaction.html'
-]
-
 # Get Server Name
 import socket
 #if socket.gethostname() in ['mattgriffiths']:
