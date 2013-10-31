@@ -6,14 +6,14 @@ TEMPLATE_STRINGS = {
         'form_label_password':'Your Password',
         'form_submit_button':'Login',
         'form_errors_no_username_or_password':'You must provide a username and password.',
-        'form_errors_incorrect_username_or_password':'Sorry we didn\'t recognize that username and password.',
+        'form_errors_incorrect_username_or_password':'That username and password is not recognized.',
         'form_errors_user_inactive':'Sorry, your account is not currently active.',
-        'form_errors_user_type_not_supported':'For some reason we can\'t create your user account. Please contact your system administrator.'
+        'form_errors_user_type_not_supported':'Something went wrong, please contact your system administrator.'
     },
     'manage_company':{
-        'form_error_display_name':'You must enter the company\'s display name.',
-        'form_error_display_name_used':'Sorry, there is already a company in our system with that display name, please choose a different name.',
-        'form_errors_company_not_found':'Sorry, we can\'t find that company. Please contact your system administrator.',
+        'form_error_display_name':'Enter the Company name.',
+        'form_error_display_name_used':'There is already a company in our system with that name, please choose a different name.',
+        'form_errors_company_not_found':'We cant find that company. Please contact your system administrator.',
     },
     'manage_company_api_keys':{
         'message_api_keys_saved':'The API keys were updated.'
@@ -22,14 +22,14 @@ TEMPLATE_STRINGS = {
         'h3_edit':'Edit User:',
         'h3_create':'Create New User',
         'h5_create_email_messages':'Once the user has been successfully created, they will be sent an e-mail with their password and login instructions.',
-        'form_label_username':'E-mail address.',
-        'form_label_password':'Password.',
-        'form_label_password_edit':'Update password or leave blank.',
+        'form_label_username':'E-mail address',
+        'form_label_password':'Password',
+        'form_label_password_edit':'Update password or leave blank',
         'form_label_first_name':'First Name',
         'form_label_last_name':'Last Name',
         'form_action_cancel':'Cancel',
         'form_action_save':'Save',
-        'message_user_created':'The user: %s was created.',
+        'message_user_created':'The user: %s was created',
         'message_user_saved':'The user: %s was saved.',
         'form_error_email_regex':'The e-mail address you entered is not a valid e-mail.',
         'form_error_password':'The password must be letters and numbers only and at least six characters long.',
@@ -73,9 +73,9 @@ TEMPLATE_STRINGS = {
         'insights_delete_button':'Delete this insight',
    },
     'company_home':{
-        'title_projects':'Your Company\'s Projects',
+        'title_projects':'Company Projects',
         'button_title_create_new_project':'Click here to create a new project for your company.',
-        'title_members':'Your Company\'s Members',
+        'title_members':'Company Members',
         'button_title_create_new_user':'Click here to add a new member.',
         'button_title_edit_user':'Edit this user'
     },
