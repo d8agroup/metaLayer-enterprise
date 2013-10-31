@@ -8,7 +8,7 @@ EMAIL_HOST_USER = 'no-reply@metalayer.com'
 EMAIL_HOST_PASSWORD = '##M3taM3ta'
 EMAIL_PORT = 587
 
-SITE_HOST = 'demo.mux.d8a.com' #'162.242.162.145'
+SITE_HOST = 'alpha.upstream-analytics.com' #'162.209.90.27'
 
 STATIC_HOST = SITE_HOST
 
@@ -43,8 +43,8 @@ OAUTH2_SETTINGS = {
 
 # Configure Twython
 twython_config = {
-    'app_key': 'EUBV3YyMdOMAx2HuRqlJg',
-    'app_secret': 'TqoDLZvAqj3rRsF3H9HcUqFxousgnNngCCBKUkMzVQ',
-    'oauth_token': '17284436-pTCgNkJOZUn9jwSnaYQa2EZXzSyESyyLItV88Mq8',
-    'oauth_secret': 'xDcHwBwukQXiQf3reMzYbIZfcI5zfNhVyW6I7GMo9J4'
+    'app_key': '4ZmCib5T4O0hJ2JFlmwQ',
+    'app_secret': '6787BrC0h4KsUSNkujeaZbCoyFsBpBDTlHfmmk4lJdc',
+    'oauth_token': '8208232-hw7cbLuXaWNb3MfGkjlJF9YI73eihcIcVrC9Kukseb',
+    'oauth_secret': 'SuYb7LZtB50pthj5SlJRhOJr20Lk0b4489NQnSPtTwCs2'
 }
