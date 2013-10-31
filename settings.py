@@ -194,21 +194,23 @@ ADDITIONAL_PAGE_INCLUDES = [
 
 # Get Server Name
 import socket
-if socket.gethostname() in ['mattgriffiths']:
-    from settings_matt import *
-if socket.gethostname() in ['rich.dev.01']:
-    from settings_rich import *
-elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
-    from settings_dev import *
-elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
-    from settings_clienttest import *
-elif socket.gethostbyname(socket.gethostname()) in ['108.166.124.231']:
-    from settings_prod_draftfcb import *
-elif socket.gethostname() in ['delv.demo.01']:
-    from settings_delvdemo import *
-elif socket.gethostname() in ['me.prod.wwp.01']:
-    from settings_prod_wwp import *
-elif socket.gethostname() in ['dashboard.clean']:
+#if socket.gethostname() in ['mattgriffiths']:
+#    from settings_matt import *
+#if socket.gethostname() in ['rich.dev.01']:
+#    from settings_rich import *
+if socket.gethostname() in ['upstream.box']:
     from settings_demod8a import *
-elif socket.gethostname() in ['muxboard.demo']:
+#elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.106']:
+#    from settings_dev import *
+#elif socket.gethostbyname(socket.gethostname()) in ['108.166.98.69']:
+#    from settings_clienttest import *
+elif socket.gethostbyname(socket.gethostname()) in ['162.209.90.27']:
     from settings_demod8a import *
+#elif socket.gethostname() in ['delv.demo.01']:
+#    from settings_delvdemo import *
+#elif socket.gethostname() in ['me.prod.wwp.01']:
+#    from settings_prod_wwp import *
+#elif socket.gethostname() in ['dashboard.clean']:
+#    from settings_demod8a import *
+#elif socket.gethostname() in ['muxboard.demo']:
+#    from settings_demod8a import *
